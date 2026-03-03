@@ -8,17 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* (نفس التنسيقات السابقة) */
+        .quiz-container { max-width: 800px; margin: 100px auto 2rem; padding: 0 2rem; }
         .quiz-header { text-align: center; margin-bottom: 3rem; }
         .quiz-header h1 { font-size: 3rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .quiz-card { background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow); max-width: 600px; margin: 0 auto; }
+        .quiz-card { background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-lg); border: 2px solid var(--border-light); }
         [data-theme="dark"] .quiz-card { background: var(--bg-card); }
+        .quiz-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); }
+        .progress-bar { width: 100%; height: 8px; background: var(--border-light); border-radius: var(--radius-full); overflow: hidden; margin: 1rem 0; }
+        .progress-fill { height: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); transition: width 0.3s ease; }
         .question-text { font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: var(--radius-lg); text-align: center; }
-        .option-item { padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius-md); margin-bottom: 1rem; cursor: pointer; transition: var(--transition); }
-        .option-item:hover { border-color: var(--primary); background: #f1f5f9; }
-        [data-theme="dark"] .option-item:hover { background: var(--bg-secondary); }
+        .options-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
+        .option-item { padding: 1.25rem; border: 2px solid var(--border-light); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 1rem; background: var(--bg-primary); }
+        [data-theme="dark"] .option-item { background: var(--bg-secondary); }
+        .option-item:hover { border-color: var(--primary); transform: translateY(-2px); }
         .option-item.selected { border-color: var(--primary); background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1)); }
-        .btn-next { padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: var(--radius-full); cursor: pointer; font-size: 1.1rem; margin-top: 1rem; }
-        .result-card { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 2rem; border-radius: var(--radius-lg); text-align: center; }
+        .option-prefix { width: 35px; height: 35px; border-radius: 50%; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-footer { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 2rem; border-top: 2px solid var(--border-light); }
+        .nav-btn { padding: 0.75rem 1.5rem; border: none; border-radius: var(--radius-full); font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .nav-prev { background: var(--bg-tertiary); color: var(--text-primary); }
+        .nav-next { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .result-card { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius-lg); padding: 3rem; color: white; text-align: center; }
+        .result-score { font-size: 5rem; font-weight: 800; margin: 1rem 0; }
+        .result-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0; }
+        .result-stat { background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: var(--radius-md); }
+        .result-actions { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .result-btn { padding: 1rem 2rem; border: 2px solid white; background: transparent; color: white; border-radius: var(--radius-full); cursor: pointer; transition: var(--transition); }
+        .result-btn:hover { background: white; color: var(--primary); }
     </style>
 </head>
 <body>
@@ -31,61 +48,137 @@
                 <li><a href="stories.html">القصص</a></li>
                 <li><a href="quiz.html" class="active">الاختبارات</a></li>
             </ul>
-            <div class="theme-toggle">...</div>
+            <div class="theme-toggle" id="themeToggle">
+                <button class="theme-btn active" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+                <button class="theme-btn" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="quiz-container">
         <div class="quiz-header">
             <h1>📝 اختبر نفسك</h1>
+            <p>أجب على الأسئلة واكتشف مستواك</p>
         </div>
 
-        <div id="quizContainer" class="quiz-card">
-            <!-- الأسئلة تظهر هنا -->
+        <div id="quizCard" class="quiz-card">
+            <!-- يتم تعبئته بالجافاسكريبت -->
         </div>
     </div>
 
+    <!-- استيراد ملف الأسئلة -->
     <script src="quiz-data.js"></script>
     <script src="theme.js"></script>
     <script>
+        // المتغيرات العامة
         let currentQuestion = 0;
+        let userAnswers = new Array(QUIZ.length).fill(null);
+        let quizCompleted = false;
         let score = 0;
-        let userAnswers = [];
+
+        document.addEventListener('DOMContentLoaded', loadQuestion);
 
         function loadQuestion() {
-            let q = QUIZ[currentQuestion];
-            let html = `<div class="question-text">${q.question}</div>`;
-            q.options.forEach((opt, i) => {
-                html += `<div class="option-item" onclick="selectOption(${i})">${opt}</div>`;
+            if (quizCompleted) {
+                showResult();
+                return;
+            }
+
+            const q = QUIZ[currentQuestion];
+            const progress = ((currentQuestion + 1) / QUIZ.length) * 100;
+
+            let html = `
+                <div class="quiz-info">
+                    <span class="progress-text">السؤال ${currentQuestion + 1} من ${QUIZ.length}</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="question-text">${q.question}</div>
+                <div class="options-grid" id="optionsGrid">
+            `;
+
+            q.options.forEach((opt, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                html += `
+                    <div class="option-item ${isSelected ? 'selected' : ''}" onclick="selectOption(${index})">
+                        <span class="option-prefix">${String.fromCharCode(65 + index)}</span>
+                        <span>${opt}</span>
+                    </div>
+                `;
             });
-            html += `<button class="btn-next" onclick="nextQuestion()">التالي</button>`;
-            document.getElementById('quizContainer').innerHTML = html;
+
+            html += `</div>`;
+
+            html += `
+                <div class="question-footer">
+                    <button class="nav-btn nav-prev" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>
+                        <i class="fas fa-arrow-right"></i> السابق
+                    </button>
+                    <button class="nav-btn nav-next" onclick="nextQuestion()">
+                        ${currentQuestion === QUIZ.length - 1 ? 'إنهاء' : 'التالي'} 
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('quizCard').innerHTML = html;
         }
 
         function selectOption(index) {
-            document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
-            event.target.classList.add('selected');
             userAnswers[currentQuestion] = index;
+            // إعادة تحميل السؤال لتحديث التحديد
+            loadQuestion();
         }
 
         function nextQuestion() {
-            if (userAnswers[currentQuestion] === QUIZ[currentQuestion].correct) score++;
-            currentQuestion++;
-            if (currentQuestion < QUIZ.length) loadQuestion();
-            else showResult();
+            if (userAnswers[currentQuestion] === null) {
+                alert('الرجاء اختيار إجابة أولاً');
+                return;
+            }
+            if (currentQuestion < QUIZ.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                // احتساب النتيجة
+                score = userAnswers.reduce((acc, ans, idx) => {
+                    return acc + (ans === QUIZ[idx].correct ? 1 : 0);
+                }, 0);
+                quizCompleted = true;
+                loadQuestion(); // يؤدي إلى showResult
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
         }
 
         function showResult() {
-            document.getElementById('quizContainer').innerHTML = `
+            const percentage = Math.round((score / QUIZ.length) * 100);
+            document.getElementById('quizCard').innerHTML = `
                 <div class="result-card">
                     <h2>نتيجتك</h2>
-                    <p style="font-size:3rem">${score}/${QUIZ.length}</p>
-                    <button class="btn-next" onclick="location.reload()">حاول مرة أخرى</button>
+                    <div class="result-score">${percentage}%</div>
+                    <div class="result-details">
+                        <div class="result-stat">
+                            <div class="result-stat-value">${score}</div>
+                            <div>إجابات صحيحة</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value">${QUIZ.length - score}</div>
+                            <div>إجابات خاطئة</div>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="result-btn" onclick="location.reload()">إعادة الاختبار</button>
+                        <button class="result-btn" onclick="window.location.href='lessons.html'">الدروس</button>
+                    </div>
                 </div>
             `;
         }
-
-        loadQuestion();
     </script>
 </body>
 </html>
