@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineLingua | الملف الشخصي</title>
+    
+    <!-- حماية الصفحة -->
+    <script type="module" src="auth-check.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* إخفاء شريط التنقل مؤقتاً */
+        .navbar {
+            display: none;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: 100px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-avatar {
+            position: relative;
+        }
+
+        .profile-avatar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+        }
+
+        .avatar-edit {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: white;
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .avatar-edit:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-title h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title p {
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .card-header i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .info-row:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .info-label {
+            width: 120px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .info-value {
+            flex: 1;
+            color: var(--text-primary);
+        }
+
+        .edit-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0 0.5rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .info-row:hover .edit-btn {
+            opacity: 1;
+        }
+
+        .stats-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-mini-card {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .stat-mini-card .number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-mini-card .label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            transition: width 0.3s ease;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .badge-item {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .badge-item.locked {
+            opacity: 0.4;
+            filter: grayscale(1);
+        }
+
+        .badge-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .edit-mode .info-value {
+            display: none;
+        }
+
+        .edit-mode .edit-input {
+            display: block !important;
+        }
+
+        .edit-input {
+            display: none;
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .edit-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-film"></i>
+                <span>CineLingua</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">الرئيسية</a></li>
+                <li><a href="lessons.html">الكلمات</a></li>
+                <li><a href="stories.html">القصص</a></li>
+                <li><a href="quiz.html">الاختبارات</a></li>
+                <li><a href="profile.html" class="active">الملف الشخصي</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="theme-toggle" id="themeToggle"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <!-- الهيدر -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="https://ui-avatars.com/api/?name=مستخدم&background=6366f1&color=fff&size=200" alt="User" id="avatar">
+                <div class="avatar-edit" onclick="editAvatar()">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+            <div class="profile-title">
+                <h1 id="userFullName">مستخدم CineLingua</h1>
+                <p>
+                    <i class="fas fa-crown"></i>
+                    <span id="userLevel">مستوى مبتدئ</span>
+                </p>
+                <p>
+                    <i class="fas fa-calendar"></i>
+                    عضو منذ <span id="memberSince">اليوم</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- الشبكة -->
+        <div class="profile-grid">
+            <!-- المعلومات الشخصية -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <i class="fas fa-user-circle"></i>
+                    <h2>المعلومات الشخصية</h2>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">الاسم الأول</span>
+                    <span class="info-value" id="displayFirstName">أحمد</span>
+                    <input type="text" class="edit-input" id="editFirstName" value="أحمد">
+                    <button class="edit-btn" onclick="editField('firstName')">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">اسم العائلة</span>
+                    <span class="info-value" id="displayLastName">محمد</span>
+                    <input type="text" class="edit-input" id="editLastName" value="محمد">
+                    <button class="edit-btn" onclick="editField('lastName')">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">البريد</span>
+                    <span class="info-value" id="displayEmail">user@example.com</span>
+                    <input type="email" class="edit-input" id="editEmail" value="user@example.com">
+                    <button class="edit-btn" onclick="editField('email')">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                </div>
+
+                <button class="btn-save" onclick="saveProfile()" id="saveBtn" style="display: none;">
+                    حفظ التغييرات
+                </button>
+            </div>
+
+            <!-- الإحصائيات -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h2>إحصائيات سريعة</h2>
+                </div>
+                
+                <div class="stats-mini-grid">
+                    <div class="stat-mini-card">
+                        <div class="number" id="statWords">0</div>
+                        <div class="label">كلمة محفوظة</div>
+                    </div>
+                    <div class="stat-mini-card">
+                        <div class="number" id="statStories">0</div>
+                        <div class="label">قصص مقروءة</div>
+                    </div>
+                    <div class="stat-mini-card">
+                        <div class="number" id="statQuizzes">0</div>
+                        <div class="label">اختبارات</div>
+                    </div>
+                    <div class="stat-mini-card">
+                        <div class="number" id="statStreak">0</div>
+                        <div class="label">أيام متتالية</div>
+                    </div>
+                </div>
+
+                <div class="card-header" style="margin-top: 2rem;">
+                    <i class="fas fa-tasks"></i>
+                    <h2>تقدم التعلم</h2>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>الكلمات</span>
+                        <span id="progressWords">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressWordsBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>القصص</span>
+                        <span id="progressStories">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressStoriesBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>الاختبارات</span>
+                        <span id="progressQuizzes">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressQuizzesBar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الشارات -->
+            <div class="profile-card" style="grid-column: span 2;">
+                <div class="card-header">
+                    <i class="fas fa-medal"></i>
+                    <h2>الشارات والإنجازات</h2>
+                </div>
+
+                <div class="badges-grid" id="badgesGrid">
+                    <!-- تتحط هنا -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './assets/js/firebase-config.js';
+        import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { updateEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        let currentUser = null;
+        let userData = null;
+        let editing = false;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = 'index.html';
+            } else {
+                currentUser = user;
+                await loadUserData();
+            }
+        });
+
+        async function loadUserData() {
+            const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+            if (userDoc.exists()) {
+                userData = userDoc.data();
+                displayUserData();
+            }
+        }
+
+        function displayUserData() {
+            // الاسم
+            document.getElementById('userFullName').textContent = `${userData.firstName} ${userData.lastName}`;
+            document.getElementById('displayFirstName').textContent = userData.firstName;
+            document.getElementById('displayLastName').textContent = userData.lastName;
+            document.getElementById('displayEmail').textContent = currentUser.email;
+            
+            // حقول التعديل
+            document.getElementById('editFirstName').value = userData.firstName;
+            document.getElementById('editLastName').value = userData.lastName;
+            document.getElementById('editEmail').value = currentUser.email;
+
+            // المستوى
+            document.getElementById('userLevel').textContent = `مستوى ${userData.level || 'مبتدئ'}`;
+
+            // تاريخ العضوية
+            if (userData.createdAt) {
+                const date = new Date(userData.createdAt);
+                document.getElementById('memberSince').textContent = date.toLocaleDateString('ar-EG');
+            }
+
+            // الإحصائيات
+            const savedWords = userData.savedWords?.length || 0;
+            const readStories = userData.readStories?.length || 0;
+            const quizResults = userData.quizResults?.length || 0;
+            const streak = userData.streak || 0;
+
+            document.getElementById('statWords').textContent = savedWords;
+            document.getElementById('statStories').textContent = readStories;
+            document.getElementById('statQuizzes').textContent = quizResults;
+            document.getElementById('statStreak').textContent = streak;
+
+            // نسب التقدم
+            const wordsProgress = Math.min((savedWords / 100) * 100, 100);
+            const storiesProgress = Math.min((readStories / 20) * 100, 100);
+            const quizzesProgress = Math.min((quizResults / 30) * 100, 100);
+
+            document.getElementById('progressWords').textContent = Math.round(wordsProgress) + '%';
+            document.getElementById('progressWordsBar').style.width = wordsProgress + '%';
+            document.getElementById('progressStories').textContent = Math.round(storiesProgress) + '%';
+            document.getElementById('progressStoriesBar').style.width = storiesProgress + '%';
+            document.getElementById('progressQuizzes').textContent = Math.round(quizzesProgress) + '%';
+            document.getElementById('progressQuizzesBar').style.width = quizzesProgress + '%';
+
+            // الشارات
+            displayBadges(savedWords, readStories, quizResults, streak);
+        }
+
+        function displayBadges(words, stories, quizzes, streak) {
+            const badges = [
+                { name: 'أول كلمة', icon: 'fa-star', condition: words >= 1, desc: 'احفظ أول كلمة' },
+                { name: 'مجتهد', icon: 'fa-fire', condition: streak >= 7, desc: '7 أيام متتالية' },
+                { name: 'قارئ', icon: 'fa-book-open', condition: stories >= 5, desc: 'اقرأ 5 قصص' },
+                { name: 'مختبر', icon: 'fa-question-circle', condition: quizzes >= 10, desc: 'اختبر 10 مرات' },
+                { name: 'متقدم', icon: 'fa-crown', condition: userData.level === 'متقدم', desc: 'وصل للمستوى المتقدم' },
+                { name: 'كنز', icon: 'fa-gem', condition: words >= 50, desc: 'احفظ 50 كلمة' }
+            ];
+
+            const grid = document.getElementById('badgesGrid');
+            grid.innerHTML = badges.map(b => `
+                <div class="badge-item ${b.condition ? '' : 'locked'}">
+                    <i class="fas ${b.icon}"></i>
+                    <span>${b.name}</span>
+                    <small style="display:block; font-size:0.7rem; color:var(--text-tertiary);">${b.desc}</small>
+                </div>
+            `).join('');
+        }
+
+        window.editField = function(field) {
+            editing = true;
+            document.getElementById('saveBtn').style.display = 'block';
+            
+            // إظهار حقل التعديل
+            if (field === 'firstName') {
+                document.getElementById('displayFirstName').style.display = 'none';
+                document.getElementById('editFirstName').style.display = 'block';
+            } else if (field === 'lastName') {
+                document.getElementById('displayLastName').style.display = 'none';
+                document.getElementById('editLastName').style.display = 'block';
+            } else if (field === 'email') {
+                document.getElementById('displayEmail').style.display = 'none';
+                document.getElementById('editEmail').style.display = 'block';
+            }
+        };
+
+        window.saveProfile = async function() {
+            if (!editing) return;
+
+            const firstName = document.getElementById('editFirstName').value;
+            const lastName = document.getElementById('editLastName').value;
+            const newEmail = document.getElementById('editEmail').value;
+
+            try {
+                // تحديث Firestore
+                await updateDoc(doc(db, "users", currentUser.uid), {
+                    firstName: firstName,
+                    lastName: lastName
+                });
+
+                // تحديث البريد في Authentication
+                if (newEmail !== currentUser.email) {
+                    await updateEmail(currentUser, newEmail);
+                }
+
+                // تحديث العرض
+                document.getElementById('displayFirstName').textContent = firstName;
+                document.getElementById('displayLastName').textContent = lastName;
+                document.getElementById('displayEmail').textContent = newEmail;
+                document.getElementById('userFullName').textContent = `${firstName} ${lastName}`;
+
+                // إخفاء حقول التعديل
+                document.getElementById('displayFirstName').style.display = 'block';
+                document.getElementById('displayLastName').style.display = 'block';
+                document.getElementById('displayEmail').style.display = 'block';
+                document.getElementById('editFirstName').style.display = 'none';
+                document.getElementById('editLastName').style.display = 'none';
+                document.getElementById('editEmail').style.display = 'none';
+                
+                document.getElementById('saveBtn').style.display = 'none';
+                editing = false;
+
+                alert('تم حفظ التغييرات بنجاح');
+            } catch (error) {
+                console.error(error);
+                alert('حدث خطأ في حفظ التغييرات');
+            }
+        };
+
+        window.editAvatar = function() {
+            alert('تغيير الصورة الشخصية سيتم تفعيله قريباً');
+        };
+    </script>
+    <script src="translations.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>
