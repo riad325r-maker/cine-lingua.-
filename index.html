@@ -3,342 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineLingua | أتقن الإنجليزية عبر السينما</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-    
+    <title>CineLingua | تعلم الإنجليزية بذكاء</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --glass: rgba(255, 255, 255, 0.85);
-            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #6366f1; --primary-dark: #4f46e5; --secondary: #ec4899; --dark: #0f172a; --light: #f8fafc;
+            --gray: #64748b; --success: #22c55e; --danger: #ef4444; --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* --- Navbar --- */
-        .navbar {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0.8rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            opacity: 0.8;
-        }
-
-        .nav-menu a:hover, .nav-menu a.active {
-            opacity: 1;
-            color: var(--primary);
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at top right, #e0e7ff, transparent),
-                        radial-gradient(circle at bottom left, #fce7f3, transparent);
-            padding: 0 2rem;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 5;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .hero h1 span {
-            color: var(--primary);
-            position: relative;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--gray);
-            margin-bottom: 2.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* --- Buttons --- */
-        .btn-group {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-bottom: 4rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 1rem;
-            text-decoration: none;
-            font-weight: 800;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.6);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* --- Stats --- */
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem 2.5rem;
-            border-radius: 1.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-        }
-
-        /* --- Features --- */
-        .features {
-            max-width: 1200px;
-            margin: -5rem auto 5rem;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 3.5rem 2.5rem;
-            border-radius: 2.5rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 1px solid #f1f5f9;
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--primary);
-        }
-
-        .feature-card i {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-radius: 4rem 4rem 0 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .hero-stats { flex-direction: column; }
-            .btn-group { flex-direction: column; gap: 1rem; }
-        }
+        [data-theme="dark"] { --bg-primary: #0f172a; --bg-card: #1e293b; --bg-secondary: #334155; --text-primary: #f8fafc; --text-secondary: #cbd5e1; --border: #334155; }
+        body { background-color: var(--light); color: var(--dark); transition: all 0.3s; }
+        [data-theme="dark"] body { background-color: var(--bg-primary); color: var(--text-primary); }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        [data-theme="dark"] .navbar { background: var(--bg-card); border-bottom: 1px solid var(--border); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .nav-menu { display: flex; gap: 2rem; list-style: none; }
+        .nav-menu a { text-decoration: none; color: var(--dark); font-weight: 500; transition: color 0.3s; }
+        [data-theme="dark"] .nav-menu a { color: var(--text-primary); }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--primary); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 60px; padding: 2rem; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: all 0.3s; display: inline-block; }
+        .btn-primary { background: white; color: var(--primary); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.3); }
+        .btn-outline { border: 2px solid white; color: white; background: transparent; }
+        .btn-outline:hover { background: white; color: var(--primary); }
+        .hero-stats { display: flex; gap: 3rem; justify-content: center; }
+        .stat-number { font-size: 2rem; font-weight: bold; display: block; }
+        .features { max-width: 1200px; margin: 4rem auto; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 2rem; border-radius: 1rem; text-align: center; box-shadow: var(--shadow); transition: all 0.3s; }
+        [data-theme="dark"] .feature-card { background: var(--bg-card); color: var(--text-primary); }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .feature-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .footer { background: var(--dark); color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
+        [data-theme="dark"] .footer { background: #020617; }
+        .theme-toggle { display: flex; gap: 0.5rem; background: #f1f5f9; padding: 0.25rem; border-radius: 2rem; }
+        [data-theme="dark"] .theme-toggle { background: #334155; }
+        .theme-btn { padding: 0.5rem 1rem; border: none; background: transparent; border-radius: 2rem; cursor: pointer; color: #64748b; transition: all 0.3s; }
+        .theme-btn.active { background: var(--primary); color: white; }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">
-                <i class="fas fa-clapperboard"></i>
-                <span>CineLingua</span>
-            </a>
+            <div class="logo"><i class="fas fa-film"></i><span>CineLingua</span></div>
             <ul class="nav-menu">
-                <li><a href="#" class="active">الرئيسية</a></li>
-                <li><a href="#">مكتبة الأفلام</a></li>
-                <li><a href="#">القصص القصيرة</a></li>
-                <li><a href="#">اختبر مستواك</a></li>
+                <li><a href="index.html" class="active">الرئيسية</a></li>
+                <li><a href="lessons.html">الكلمات</a></li>
+                <li><a href="stories.html">القصص</a></li>
+                <li><a href="quiz.html">الاختبارات</a></li>
             </ul>
-            <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">ابدأ الآن</a>
+            <div class="theme-toggle" id="themeToggle">
+                <button class="theme-btn active" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+                <button class="theme-btn" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>تعلم الإنجليزية <br><span>بمتعة السينما</span></h1>
-            <p>لا تتعلم من الكتب المملة.. تعلم من حوارات الأفلام الحقيقية، القصص التفاعلية، ونظام ذكاء اصطناعي يحلل نطقك بدقة.</p>
-            
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">تصفح الدروس مجاناً</a>
-                <a href="#" class="btn btn-outline">كيف يعمل النظام؟</a>
+        <div class="hero-content" data-aos="fade-up">
+            <h1>تعلم الإنجليزية بذكاء مع CineLingua</h1>
+            <p>منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، جمل، قصص، واختبارات تفاعلية</p>
+            <div class="hero-buttons">
+                <a href="lessons.html" class="btn btn-primary">ابدأ التعلم</a>
+                <a href="#features" class="btn btn-outline">كيف يعمل؟</a>
             </div>
-
             <div class="hero-stats">
-                <div class="stat-card">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">كلمة مفتاحية</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">120+</span>
-                    <span class="stat-label">مقطع فيلم</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">5K+</span>
-                    <span class="stat-label">متعلم نشط</span>
-                </div>
+                <div><span class="stat-number">500+</span> كلمة</div>
+                <div><span class="stat-number">50+</span> قصة</div>
+                <div><span class="stat-number">1000+</span> متعلم</div>
             </div>
         </div>
     </section>
 
-    <div class="features">
-        <div class="feature-card">
-            <i class="fas fa-brain"></i>
-            <h3>تكرار متباعد</h3>
-            <p>نظام ذكي يذكرك بالكلمات التي أوشكت على نسيانها في الوقت المثالي.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-microphone-lines"></i>
-            <h3>تحليل النطق</h3>
-            <p>تحدث وسيقوم الذكاء الاصطناعي بتصحيح مخارج حروفك فوراً.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-film"></i>
-            <h3>سياق حقيقي</h3>
-            <p>تعلم الكلمات كما تُنطق في أفلام هوليوود والمواقف الحقيقية.</p>
-        </div>
-    </div>
+    <section class="features" id="features">
+        <div class="feature-card" data-aos="fade-up"><i class="fas fa-robot"></i><h3>توصيات ذكية</h3><p>نظامنا يحلل مستواك ويقترح المحتوى المناسب</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-microphone"></i><h3>تدرب على النطق</h3><p>استمع للنطق الصحيح للكلمات والجمل</p></div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-chart-line"></i><h3>تتبع تقدمك</h3><p>اعرف كم كلمة تعلمت وأزمنة أتقنت</p></div>
+    </section>
 
-    
+    <footer class="footer"><p>© 2024 CineLingua. جميع الحقوق محفوظة</p></footer>
 
-    <footer>
-        <div class="footer-content">
-            <h2 style="margin-bottom: 1rem;">CineLingua</h2>
-            <p style="opacity: 0.7; margin-bottom: 2rem;">جميع الحقوق محفوظة © 2026 - صنع بشغف لعشاق اللغات</p>
-            <div class="social-links" style="display: flex; justify-content: center; gap: 1.5rem; font-size: 1.5rem;">
-                <i class="fab fa-twitter" style="cursor: pointer;"></i>
-                <i class="fab fa-instagram" style="cursor: pointer;"></i>
-                <i class="fab fa-youtube" style="cursor: pointer;"></i>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // تغيير مظهر الهيدر عند النزول
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.padding = '0.5rem 2rem';
-                navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-            } else {
-                navbar.style.padding = '0.8rem 2rem';
-                navbar.style.boxShadow = 'none';
-            }
-        });
-    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="translations.js"></script>
+    <script src="theme.js"></script>
+    <script>AOS.init({duration:1000,once:true});</script>
 </body>
 </html>
-
