@@ -640,6 +640,24 @@
         let currentCategory = 'all';
         let currentSearchQuery = '';
         let viewingSaved = false;
+        let selectedVoice = null;
+
+        // تحميل الأصوات وتجهيزها
+        window.speechSynthesis.onvoiceschanged = function() {
+            const voices = window.speechSynthesis.getVoices();
+            // البحث عن صوت قوقل الأمريكي
+            selectedVoice = voices.find(voice => 
+                voice.lang === 'en-US' && 
+                (voice.name.includes('Google') || voice.name.includes('google'))
+            );
+            
+            // إذا ما لقينا قوقل، نستخدم أول صوت أمريكي
+            if (!selectedVoice) {
+                selectedVoice = voices.find(voice => voice.lang === 'en-US');
+            }
+            
+            console.log('✅ الصوت المستخدم:', selectedVoice?.name || 'الصوت الافتراضي');
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             generateCategoryFilters();
@@ -843,10 +861,18 @@
             applyFilters();
         }
 
-        // نطق الكلمة
+        // نطق الكلمة - نسخة مطورة بصوت قوقل الواضح
         function playWord(word) {
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = 'en-US';
+            utterance.rate = 0.9;      // أبطأ شوي عشان الوضوح
+            utterance.volume = 1;       // أعلى صوت
+            
+            // استخدام صوت قوقل المحفوظ
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+            
             window.speechSynthesis.speak(utterance);
         }
 
