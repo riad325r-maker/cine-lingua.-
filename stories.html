@@ -710,12 +710,9 @@
 
     <script src="stories-data.js"></script>
     <script>
-        // بيانات القصص
-        const STORIES_DATA = {
-            beginner: typeof BEGINNER_STORIES !== 'undefined' ? BEGINNER_STORIES : [],
-            intermediate: typeof INTERMEDIATE_STORIES !== 'undefined' ? INTERMEDIATE_STORIES : [],
-            advanced: typeof ADVANCED_STORIES !== 'undefined' ? ADVANCED_STORIES : []
-        };
+        // التحقق من تحميل البيانات
+        console.log('📚 STORIES_DATA:', STORIES_DATA);
+        console.log('📊 عدد القصص:', STORIES_DATA.length);
 
         // المتغيرات
         let savedStories = JSON.parse(localStorage.getItem('savedStories')) || [];
@@ -737,9 +734,7 @@
 
         // حساب إجمالي القصص
         function updateTotalStories() {
-            const total = (STORIES_DATA.beginner?.length || 0) +
-                (STORIES_DATA.intermediate?.length || 0) +
-                (STORIES_DATA.advanced?.length || 0);
+            const total = STORIES_DATA.length || 0;
             document.getElementById('totalStories').textContent = total;
             document.getElementById('savedCount').textContent = savedStories.length;
         }
@@ -772,9 +767,9 @@
             let stories = [];
 
             if (currentLevel === 'all') {
-                stories = [...STORIES_DATA.beginner, ...STORIES_DATA.intermediate, ...STORIES_DATA.advanced];
+                stories = STORIES_DATA;
             } else {
-                stories = STORIES_DATA[currentLevel] || [];
+                stories = STORIES_DATA.filter(story => story.level === currentLevel);
             }
 
             currentDisplayStories = stories;
@@ -948,8 +943,7 @@
                 return;
             }
 
-            const allStories = [...STORIES_DATA.beginner, ...STORIES_DATA.intermediate, ...STORIES_DATA.advanced];
-            const savedStoriesList = allStories.filter(story => savedStories.includes(story.id));
+            const savedStoriesList = STORIES_DATA.filter(story => savedStories.includes(story.id));
 
             currentDisplayStories = savedStoriesList;
             currentPage = 1;
@@ -1001,4 +995,4 @@
         setTheme(savedTheme);
     </script>
 </body>
-                </html>
+                    </html>
