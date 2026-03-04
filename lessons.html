@@ -8,7 +8,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* إضافة تنسيقات القائمة والثيم */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-secondary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            transition: all 0.3s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        [data-theme="dark"] body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* شريط التنقل */
         .navbar {
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -17,11 +58,12 @@
             top: 0;
             z-index: 1000;
         }
+
         [data-theme="dark"] .navbar {
             background: var(--bg-card);
             border-bottom: 1px solid var(--border);
         }
-        
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -30,7 +72,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -39,8 +81,7 @@
             font-weight: bold;
             color: var(--primary);
         }
-        
-        /* زر القائمة */
+
         .menu-toggle {
             background: none;
             border: none;
@@ -50,32 +91,33 @@
             display: none;
             transition: all 0.3s;
         }
-        
+
         .menu-toggle:hover {
             transform: scale(1.1);
         }
-        
-        /* القائمة العلوية */
+
         .nav-menu {
             display: flex;
             gap: 2rem;
             list-style: none;
         }
-        
+
         .nav-menu a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
         }
+
         [data-theme="dark"] .nav-menu a {
             color: var(--text-primary);
         }
-        .nav-menu a:hover, .nav-menu a.active {
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
             color: var(--primary);
         }
-        
-        /* زر الثيم */
+
         .theme-toggle {
             display: flex;
             gap: 0.5rem;
@@ -83,9 +125,11 @@
             padding: 0.25rem;
             border-radius: 2rem;
         }
+
         [data-theme="dark"] .theme-toggle {
             background: #334155;
         }
+
         .theme-btn {
             padding: 0.5rem 1rem;
             border: none;
@@ -95,17 +139,17 @@
             color: #64748b;
             transition: all 0.3s;
         }
+
         .theme-btn.active {
             background: var(--primary);
             color: white;
         }
-        
-        /* استعلامات للشاشات الصغيرة */
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
             }
-            
+
             .nav-menu {
                 display: none;
                 position: absolute;
@@ -118,68 +162,399 @@
                 gap: 0.5rem;
                 box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
             }
-            
+
             [data-theme="dark"] .nav-menu {
                 background: var(--bg-card);
             }
-            
+
             .nav-menu.show {
                 display: flex;
             }
-            
+
             .nav-menu li {
                 width: 100%;
                 text-align: center;
             }
-            
+
             .nav-menu a {
                 display: block;
                 padding: 0.75rem;
                 border-radius: 0.5rem;
             }
-            
+
             .nav-menu a:hover {
                 background: #f1f5f9;
             }
-            
+
             [data-theme="dark"] .nav-menu a:hover {
                 background: var(--bg-secondary);
             }
         }
 
-        /* التنسيقات الأصلية */
-        .container { max-width: 1200px; margin: 100px auto 2rem; padding: 0 2rem; }
-        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
-        .page-header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stats-badge { display: flex; gap: 1rem; background-color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius-full); border: 1px solid var(--border); }
-        [data-theme="dark"] .stats-badge { background: var(--bg-card); border-color: var(--border-light); }
-        .search-box { max-width: 600px; margin: 0 auto 2rem; position: relative; }
-        .search-box input { width: 100%; padding: 1rem 1rem 1rem 3rem; border: 2px solid var(--border); border-radius: var(--radius-full); background: white; font-size: 1rem; transition: var(--transition); }
-        [data-theme="dark"] .search-box input { background: var(--bg-card); border-color: var(--border-light); color: var(--text-primary); }
-        .search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray); }
-        .filter-section { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; align-items: center; }
-        .level-tabs { display: flex; gap: 0.5rem; background: white; padding: 0.5rem; border-radius: var(--radius-full); border: 1px solid var(--border); }
-        [data-theme="dark"] .level-tabs { background: var(--bg-card); border-color: var(--border-light); }
-        .level-tab { padding: 0.75rem 1.5rem; border: none; background: transparent; border-radius: var(--radius-full); cursor: pointer; font-weight: 600; color: var(--gray); transition: var(--transition); }
-        .level-tab.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
-        .words-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
-        .word-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); border: 2px solid transparent; transition: var(--transition); cursor: pointer; }
-        [data-theme="dark"] .word-card { background: var(--bg-card); }
-        .word-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
-        .word-card.saved { border-color: var(--success); background: linear-gradient(135deg, rgba(22, 163, 74, 0.05), rgba(34, 197, 94, 0.1)); }
-        .word-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .word-text { font-size: 2rem; font-weight: 800; color: var(--primary); }
-        .word-arabic { font-size: 1.25rem; color: var(--gray); background: #f1f5f9; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); }
-        [data-theme="dark"] .word-arabic { background: var(--bg-secondary); color: var(--text-secondary); }
-        .word-pronunciation { background: #f1f5f9; padding: 0.5rem 1rem; border-radius: var(--radius-full); font-size: 0.875rem; margin: 1rem 0; width: fit-content; color: var(--gray); }
-        [data-theme="dark"] .word-pronunciation { background: var(--bg-secondary); color: var(--text-secondary); }
-        .word-example { background: #f8fafc; padding: 1rem; border-radius: var(--radius-md); margin: 1rem 0; border-right: 4px solid var(--primary); }
-        [data-theme="dark"] .word-example { background: var(--bg-secondary); }
-        .word-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
-        .action-btn { flex: 1; padding: 0.75rem; border: none; border-radius: var(--radius-md); background: #f1f5f9; color: var(--dark); cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        [data-theme="dark"] .action-btn { background: var(--bg-secondary); color: var(--text-primary); }
-        .action-btn:hover { background: var(--primary); color: white; }
-        .action-btn.saved { background: var(--success); color: white; }
+        /* التنسيقات الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stats-badge {
+            display: flex;
+            gap: 1rem;
+            background-color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        [data-theme="dark"] .stats-badge {
+            background: var(--bg-card);
+            border-color: var(--border);
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--border);
+            border-radius: 2rem;
+            background: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        [data-theme="dark"] .search-box input {
+            background: var(--bg-card);
+            border-color: var(--border);
+            color: var(--text-primary);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        /* الفلاتر */
+        .filters-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 60px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        [data-theme="dark"] .filter-tabs {
+            background: var(--bg-card);
+            border-color: var(--border);
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: transparent;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .filter-tab:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        /* تنسيقات التصنيف (أصغر) */
+        .category-group {
+            margin-top: 0.5rem;
+        }
+
+        .category-tabs {
+            background: #f8fafc !important;
+            padding: 0.25rem !important;
+            max-width: 100%;
+        }
+
+        .category-tab {
+            padding: 0.4rem 1rem !important;
+            font-size: 0.85rem !important;
+        }
+
+        [data-theme="dark"] .category-tabs {
+            background: #1e293b !important;
+        }
+
+        /* زر المحفوظات */
+        .saved-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3);
+        }
+
+        .saved-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+        }
+
+        .saved-badge {
+            background: white;
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* شبكة الكلمات */
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .word-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        [data-theme="dark"] .word-card {
+            background: var(--bg-card);
+        }
+
+        .word-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .word-card.saved {
+            border-color: var(--success);
+            background: linear-gradient(135deg, rgba(22, 163, 74, 0.05), rgba(34, 197, 94, 0.1));
+        }
+
+        .word-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .word-text {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .word-arabic {
+            font-size: 1.25rem;
+            color: var(--gray);
+            background: #f1f5f9;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+        }
+
+        [data-theme="dark"] .word-arabic {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+        }
+
+        .word-pronunciation {
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            margin: 1rem 0;
+            width: fit-content;
+            color: var(--gray);
+        }
+
+        [data-theme="dark"] .word-pronunciation {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+        }
+
+        .word-example {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            border-right: 4px solid var(--primary);
+        }
+
+        [data-theme="dark"] .word-example {
+            background: var(--bg-secondary);
+        }
+
+        .example-arabic {
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .word-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 1rem;
+            background: #f1f5f9;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        [data-theme="dark"] .action-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .action-btn.saved {
+            background: var(--success);
+            color: white;
+        }
+
+        /* رسالة عدم وجود نتائج */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            font-size: 1.2rem;
+            grid-column: 1 / -1;
+        }
+
+        /* صفحة المحفوظات الفارغة */
+        .empty-saved {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: var(--shadow);
+            grid-column: 1 / -1;
+        }
+
+        [data-theme="dark"] .empty-saved {
+            background: var(--bg-card);
+        }
+
+        .empty-saved i {
+            font-size: 4rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .empty-saved h3 {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-saved p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -189,20 +564,18 @@
                 <i class="fas fa-film"></i>
                 <span>CineLingua</span>
             </div>
-            
-            <!-- زر القائمة (يظهر في الجوال) -->
+
             <button class="menu-toggle" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
-            
-            <!-- القائمة العلوية -->
+
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">الرئيسية</a></li>
                 <li><a href="lessons.html" class="active">الكلمات</a></li>
                 <li><a href="stories.html">القصص</a></li>
                 <li><a href="quiz.html">الاختبارات</a></li>
             </ul>
-            
+
             <div class="theme-toggle" id="themeToggle">
                 <button class="theme-btn active" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
                 <button class="theme-btn" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
@@ -224,11 +597,35 @@
             <input type="text" id="searchInput" placeholder="ابحث عن كلمة...">
         </div>
 
-        <div class="filter-section">
-            <div class="level-tabs">
-                <button class="level-tab active" onclick="loadLevel('beginner')">مبتدئ</button>
-                <button class="level-tab" onclick="loadLevel('intermediate')">متوسط</button>
-                <button class="level-tab" onclick="loadLevel('advanced')">متقدم</button>
+        <!-- الفلاتر -->
+        <div class="filters-container">
+            <!-- السطر الأول: فلاتر المستوى + زر المحفوظات -->
+            <div class="filter-row">
+                <!-- فلتر المستوى -->
+                <div class="filter-group">
+                    <span class="filter-label">المستوى:</span>
+                    <div class="filter-tabs" id="levelFilters">
+                        <button class="filter-tab active" onclick="filterByLevel('all')">الكل</button>
+                        <button class="filter-tab" onclick="filterByLevel('beginner')">مبتدئ</button>
+                        <button class="filter-tab" onclick="filterByLevel('intermediate')">متوسط</button>
+                        <button class="filter-tab" onclick="filterByLevel('advanced')">متقدم</button>
+                    </div>
+                </div>
+
+                <!-- زر الكلمات المحفوظة -->
+                <button class="saved-btn" onclick="showSavedWords()">
+                    <i class="fas fa-bookmark"></i>
+                    <span>الكلمات المحفوظة</span>
+                    <span class="saved-badge" id="savedBadge">0</span>
+                </button>
+            </div>
+
+            <!-- السطر الثاني: فلتر التصنيف (بحجم أصغر) -->
+            <div class="filter-group category-group">
+                <span class="filter-label">التصنيف:</span>
+                <div class="filter-tabs category-tabs" id="categoryFilters">
+                    <!-- التصنيفات حتتولد تلقائياً من البيانات بالجافاسكريبت -->
+                </div>
             </div>
         </div>
 
@@ -236,35 +633,158 @@
     </div>
 
     <script src="words-data.js"></script>
-    <script src="translations.js"></script>
-    <script src="theme.js"></script>
     <script>
+        // البيانات والمتغيرات
         let savedWords = JSON.parse(localStorage.getItem('savedWords')) || [];
-        let currentLevel = 'beginner';
-        let currentWords = [];
+        let currentLevel = 'all';
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+        let viewingSaved = false;
 
         document.addEventListener('DOMContentLoaded', () => {
+            generateCategoryFilters();
             updateTotalWords();
-            loadLevel('beginner');
+            document.getElementById('savedBadge').textContent = savedWords.length;
+            applyFilters();
         });
 
+        // توليد أزرار التصنيفات من البيانات الفعلية
+        function generateCategoryFilters() {
+            const categories = new Set();
+            
+            // جمع كل التصنيفات من جميع المستويات
+            for (let level in WORDS_DATA) {
+                WORDS_DATA[level].forEach(word => {
+                    if (word.category) categories.add(word.category);
+                });
+            }
+            
+            // ترتيب التصنيفات أبجدياً
+            const sortedCategories = Array.from(categories).sort();
+            
+            // بناء أزرار التصنيفات
+            const categoryContainer = document.getElementById('categoryFilters');
+            categoryContainer.innerHTML = '<button class="filter-tab category-tab active" onclick="filterByCategory(\'all\')">📋 الكل</button>';
+            
+            sortedCategories.forEach(category => {
+                // اختيار إيموجي مناسب حسب التصنيف
+                let emoji = '📌';
+                if (category.includes('تحيات')) emoji = '👋';
+                else if (category.includes('أدب')) emoji = '🤝';
+                else if (category.includes('أساسيات')) emoji = '🔤';
+                else if (category.includes('تعارف')) emoji = '👥';
+                else if (category.includes('علاقات')) emoji = '💞';
+                else if (category.includes('عائلة')) emoji = '👨‍👩‍👧';
+                else if (category.includes('مكان')) emoji = '🏠';
+                else if (category.includes('مواصلات')) emoji = '🚗';
+                else if (category.includes('طعام')) emoji = '🍔';
+                else if (category.includes('أفعال')) emoji = '🏃';
+                else if (category.includes('أدوات')) emoji = '✏️';
+                else if (category.includes('وظائف')) emoji = '💼';
+                else if (category.includes('مشاعر')) emoji = '😊';
+                else if (category.includes('صفات')) emoji = '⭐';
+                else if (category.includes('طبيعة')) emoji = '🌿';
+                else if (category.includes('أثاث')) emoji = '🪑';
+                else if (category.includes('ناس')) emoji = '🧑';
+                else if (category.includes('سفر')) emoji = '✈️';
+                else if (category.includes('عمل')) emoji = '💼';
+                else if (category.includes('ظرف')) emoji = '⏱️';
+                else if (category.includes('دراسة')) emoji = '📚';
+                else if (category.includes('روابط')) emoji = '🔗';
+                else if (category.includes('أكاديمي')) emoji = '🎓';
+                else if (category.includes('عام')) emoji = '📌';
+                
+                categoryContainer.innerHTML += `<button class="filter-tab category-tab" onclick="filterByCategory('${category}')">${emoji} ${category}</button>`;
+            });
+        }
+
+        // حساب إجمالي الكلمات
         function updateTotalWords() {
-            const total = (WORDS_DATA.beginner?.length || 0) + (WORDS_DATA.intermediate?.length || 0) + (WORDS_DATA.advanced?.length || 0);
+            const total = (WORDS_DATA.beginner?.length || 0) +
+                (WORDS_DATA.intermediate?.length || 0) +
+                (WORDS_DATA.advanced?.length || 0);
             document.getElementById('totalWords').textContent = total;
             document.getElementById('savedCount').textContent = savedWords.length;
         }
 
-        function loadLevel(level) {
+        // فلتر المستوى
+        function filterByLevel(level) {
+            if (viewingSaved) exitSavedView();
+
             currentLevel = level;
-            document.querySelectorAll('.level-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            currentWords = getWordsByLevel(level);
-            displayWords(currentWords);
+
+            document.querySelectorAll('#levelFilters .filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.includes(level === 'all' ? 'الكل' :
+                    level === 'beginner' ? 'مبتدئ' :
+                        level === 'intermediate' ? 'متوسط' : 'متقدم')) {
+                    tab.classList.add('active');
+                }
+            });
+
+            applyFilters();
         }
 
+        // فلتر التصنيف
+        function filterByCategory(category) {
+            if (viewingSaved) exitSavedView();
+
+            currentCategory = category;
+
+            document.querySelectorAll('#categoryFilters .filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+                // إزالة الإيموجي والمسافات للمقارنة
+                const tabText = tab.textContent.replace(/[^\p{L}\s]/gu, '').trim();
+                if (tabText === category || (category === 'all' && tabText === 'الكل')) {
+                    tab.classList.add('active');
+                }
+            });
+
+            applyFilters();
+        }
+
+        // تطبيق جميع الفلاتر
+        function applyFilters() {
+            if (viewingSaved) {
+                showSavedWords();
+                return;
+            }
+
+            let words = [];
+
+            // تصفية بالمستوى
+            if (currentLevel === 'all') {
+                words = [...WORDS_DATA.beginner, ...WORDS_DATA.intermediate, ...WORDS_DATA.advanced];
+            } else {
+                words = WORDS_DATA[currentLevel] || [];
+            }
+
+            // تصفية بالتصنيف
+            if (currentCategory !== 'all') {
+                words = words.filter(word => word.category === currentCategory);
+            }
+
+            // تصفية بالبحث
+            if (currentSearchQuery.length >= 2) {
+                const query = currentSearchQuery.toLowerCase();
+                words = words.filter(item =>
+                    item.word.toLowerCase().includes(query) ||
+                    item.arabic.includes(query)
+                );
+            }
+
+            displayWords(words);
+        }
+
+        // عرض الكلمات
         function displayWords(words) {
             const grid = document.getElementById('wordsGrid');
+
+            if (words.length === 0) {
+                grid.innerHTML = '<div class="no-results">❌ لا توجد كلمات مطابقة للبحث</div>';
+                return;
+            }
+
             grid.innerHTML = words.map(item => {
                 const isSaved = savedWords.includes(item.id);
                 return `
@@ -281,7 +801,7 @@
                         <div class="word-actions">
                             <button class="action-btn" onclick="playWord('${item.word}')"><i class="fas fa-volume-up"></i> استماع</button>
                             <button class="action-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave(${item.id})">
-                                <i class="fas ${isSaved ? 'fa-bookmark' : 'fa-bookmark-o'}"></i> ${isSaved ? 'محفوظة' : 'حفظ'}
+                                <i class="fas fa-bookmark"></i> ${isSaved ? 'محفوظة' : 'حفظ'}
                             </button>
                         </div>
                     </div>
@@ -289,12 +809,48 @@
             }).join('');
         }
 
+        // عرض الكلمات المحفوظة
+        function showSavedWords() {
+            if (savedWords.length === 0) {
+                const grid = document.getElementById('wordsGrid');
+                grid.innerHTML = `
+                    <div class="empty-saved">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>لا توجد كلمات محفوظة</h3>
+                        <p>احفظ الكلمات التي تريد مراجعتها لاحقاً</p>
+                        <button class="back-btn" onclick="exitSavedView()">
+                            <i class="fas fa-arrow-right"></i> العودة للكلمات
+                        </button>
+                    </div>
+                `;
+                viewingSaved = true;
+                document.querySelector('.saved-btn').style.background = 'var(--success)';
+                return;
+            }
+
+            const allWords = [...WORDS_DATA.beginner, ...WORDS_DATA.intermediate, ...WORDS_DATA.advanced];
+            const savedWordsList = allWords.filter(word => savedWords.includes(word.id));
+
+            displayWords(savedWordsList);
+            viewingSaved = true;
+            document.querySelector('.saved-btn').style.background = 'var(--success)';
+        }
+
+        // الخروج من عرض المحفوظات
+        function exitSavedView() {
+            viewingSaved = false;
+            document.querySelector('.saved-btn').style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            applyFilters();
+        }
+
+        // نطق الكلمة
         function playWord(word) {
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = 'en-US';
             window.speechSynthesis.speak(utterance);
         }
 
+        // حفظ/إلغاء حفظ الكلمة
         function toggleSave(wordId) {
             if (savedWords.includes(wordId)) {
                 savedWords = savedWords.filter(id => id !== wordId);
@@ -303,27 +859,51 @@
             }
             localStorage.setItem('savedWords', JSON.stringify(savedWords));
             document.getElementById('savedCount').textContent = savedWords.length;
-            displayWords(currentWords);
+            document.getElementById('savedBadge').textContent = savedWords.length;
+
+            if (viewingSaved) {
+                showSavedWords();
+            } else {
+                applyFilters();
+            }
         }
 
+        // البحث
         document.getElementById('searchInput').addEventListener('input', (e) => {
-            const query = e.target.value;
-            if (query.length < 2) { displayWords(currentWords); return; }
-            const results = searchWords(query);
-            displayWords(results);
+            if (viewingSaved) exitSavedView();
+            currentSearchQuery = e.target.value;
+            if (currentSearchQuery.length === 0 || currentSearchQuery.length >= 2) {
+                applyFilters();
+            }
         });
 
-        // دالة إظهار/إخفاء القائمة
+        // دوال القائمة
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
 
-        // إغلاق القائمة عند النقر على رابط
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navMenu').classList.remove('show');
             });
         });
+
+        // دالة الثيم
+        window.setTheme = function(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if ((theme === 'light' && btn.innerHTML.includes('sun')) || 
+                    (theme === 'dark' && btn.innerHTML.includes('moon'))) {
+                    btn.classList.add('active');
+                }
+            });
+        };
+
+        // تحميل الثيم المحفوظ
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
     </script>
 </body>
-</html>
+    </html>
