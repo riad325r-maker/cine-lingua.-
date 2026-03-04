@@ -5,7 +5,7 @@ const TENSES_DATA = [
         name: "Present Simple",
         nameAr: "المضارع البسيط",
         level: "beginner",
-        icon: "🕐",
+        icon: "",
         form: "Subject + Verb (s/es) + Object",
         keywords: ["always", "usually", "often", "sometimes", "never", "every day", "every week"],
         explanation: `يستخدم المضارع البسيط للتعبير عن:
@@ -64,7 +64,7 @@ const TENSES_DATA = [
         name: "Present Continuous",
         nameAr: "المضارع المستمر",
         level: "beginner",
-        icon: "🔄",
+        icon: "",
         form: "Subject + am/is/are + Verb-ing",
         keywords: ["now", "right now", "at the moment", "today", "this week", "currently"],
         explanation: `يستخدم المضارع المستمر للتعبير عن:
@@ -123,7 +123,7 @@ const TENSES_DATA = [
         name: "Present Perfect",
         nameAr: "المضارع التام",
         level: "intermediate",
-        icon: "✅",
+        icon: "",
         form: "Subject + have/has + Past Participle (V3)",
         keywords: ["just", "already", "yet", "ever", "never", "since", "for", "recently"],
         explanation: `يستخدم المضارع التام للتعبير عن:
@@ -182,7 +182,7 @@ const TENSES_DATA = [
         name: "Present Perfect Continuous",
         nameAr: "المضارع التام المستمر",
         level: "advanced",
-        icon: "⏳",
+        icon: "",
         form: "Subject + have/has + been + Verb-ing",
         keywords: ["for", "since", "all day", "recently", "lately"],
         explanation: `يستخدم المضارع التام المستمر للتعبير عن:
@@ -240,7 +240,7 @@ const TENSES_DATA = [
         name: "Past Simple",
         nameAr: "الماضي البسيط",
         level: "beginner",
-        icon: "📅",
+        icon: "",
         form: "Subject + Verb (V2) + Object",
         keywords: ["yesterday", "last week", "ago", "in 2020", "when I was young"],
         explanation: `يستخدم الماضي البسيط للتعبير عن:
@@ -358,7 +358,7 @@ const TENSES_DATA = [
         name: "Past Perfect",
         nameAr: "الماضي التام",
         level: "advanced",
-        icon: "⏪",
+        icon: "",
         form: "Subject + had + Past Participle (V3)",
         keywords: ["before", "after", "by the time", "already", "never", "until then"],
         explanation: `يستخدم الماضي التام للتعبير عن:
@@ -416,7 +416,7 @@ const TENSES_DATA = [
         name: "Past Perfect Continuous",
         nameAr: "الماضي التام المستمر",
         level: "advanced",
-        icon: "⏳⏪",
+        icon: "",
         form: "Subject + had + been + Verb-ing",
         keywords: ["for", "since", "before", "until", "all day", "for hours"],
         explanation: `يستخدم الماضي التام المستمر للتعبير عن:
@@ -474,7 +474,7 @@ const TENSES_DATA = [
         name: "Future Simple",
         nameAr: "المستقبل البسيط",
         level: "beginner",
-        icon: "🔮",
+        icon: "",
         form: "Subject + will + Verb (base form)",
         keywords: ["tomorrow", "next week", "soon", "in the future", "later"],
         explanation: `يستخدم المستقبل البسيط للتعبير عن:
@@ -534,7 +534,7 @@ const TENSES_DATA = [
         name: "Future Continuous",
         nameAr: "المستقبل المستمر",
         level: "intermediate",
-        icon: "🔄🔮",
+        icon: "",
         form: "Subject + will + be + Verb-ing",
         keywords: ["at this time tomorrow", "this time next week", "in the future"],
         explanation: `يستخدم المستقبل المستمر للتعبير عن:
@@ -592,7 +592,7 @@ const TENSES_DATA = [
         name: "Future Perfect",
         nameAr: "المستقبل التام",
         level: "advanced",
-        icon: "✅🔮",
+        icon: "",
         form: "Subject + will + have + Past Participle (V3)",
         keywords: ["by", "by the time", "before", "in two years"],
         explanation: `يستخدم المستقبل التام للتعبير عن:
@@ -650,7 +650,7 @@ const TENSES_DATA = [
         name: "Future Perfect Continuous",
         nameAr: "المستقبل التام المستمر",
         level: "advanced",
-        icon: "⏳✅🔮",
+        icon: "",
         form: "Subject + will + have + been + Verb-ing",
         keywords: ["by", "for", "by the time", "for years"],
         explanation: `يستخدم المستقبل التام المستمر للتعبير عن:
