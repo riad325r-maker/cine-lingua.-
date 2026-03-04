@@ -299,7 +299,7 @@ const TENSES_DATA = [
         name: "Past Continuous",
         nameAr: "الماضي المستمر",
         level: "intermediate",
-        icon: "🕰️",
+        icon: "",
         form: "Subject + was/were + Verb-ing",
         keywords: ["while", "when", "at 8pm last night", "at that time", "all day yesterday"],
         explanation: `يستخدم الماضي المستمر للتعبير عن:
