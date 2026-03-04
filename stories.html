@@ -201,7 +201,7 @@
         .modal-translation {
             background: #f1f5f9; padding: 1.5rem; border-radius: 1rem; margin: 1.5rem 0;
             border-right: 4px solid var(--primary); line-height: 1.8;
-            display: none; /* مخفية افتراضياً */
+            display: none;
         }
         [data-theme="dark"] .modal-translation { background: var(--bg-secondary); }
         .modal-translation.show { display: block; }
@@ -229,7 +229,7 @@
         }
 
         .options {
-            display: grid; gap: 0.75rem; margin-bottom: 1rem;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;
         }
 
         .option {
@@ -315,28 +315,28 @@
 
     <div class="container">
         <div class="page-header">
-            <h1>📖 قصص قصيرة</h1>
-            <p>اقرأ القصة ثم أجب على الأسئلة لتثبت فهمك</p>
-            <div class="progress-badge" id="progressText">🚀 0 / 15 قصة مقروءة</div>
+            <h1>📖 Short Stories</h1>
+            <p>Read the story, then answer the questions to test your understanding</p>
+            <div class="progress-badge" id="progressText">🚀 0 / 15 Stories Read</div>
         </div>
 
         <div class="level-filter">
-            <button class="filter-btn active" onclick="filterStories('all')">الكل</button>
-            <button class="filter-btn" onclick="filterStories('مبتدئ')">مبتدئ</button>
-            <button class="filter-btn" onclick="filterStories('متوسط')">متوسط</button>
-            <button class="filter-btn" onclick="filterStories('متقدم')">متقدم</button>
+            <button class="filter-btn active" onclick="filterStories('all')">All</button>
+            <button class="filter-btn" onclick="filterStories('مبتدئ')">Beginner</button>
+            <button class="filter-btn" onclick="filterStories('متوسط')">Intermediate</button>
+            <button class="filter-btn" onclick="filterStories('متقدم')">Advanced</button>
         </div>
 
         <div id="storiesList" class="stories-grid"></div>
     </div>
 
-    <!-- المودال - وضع ملء الشاشة -->
+    <!-- Full Screen Modal -->
     <div class="story-modal" id="storyModal">
         <div class="modal-container" id="modalContainer"></div>
     </div>
 
     <footer class="footer">
-        <p>© 2024 CineLingua. جميع الحقوق محفوظة</p>
+        <p>© 2024 CineLingua. All rights reserved</p>
     </footer>
 
     <script src="stories-data.js"></script>
@@ -350,7 +350,7 @@
         function updateProgress() {
             const total = STORIES_DATA.beginner.length + STORIES_DATA.intermediate.length + STORIES_DATA.advanced.length;
             const count = completedStories.length;
-            document.getElementById('progressText').innerHTML = `🚀 ${count} / ${total} قصة مقروءة`;
+            document.getElementById('progressText').innerHTML = `🚀 ${count} / ${total} Stories Read`;
         }
 
         function filterStories(level) {
@@ -375,7 +375,7 @@
                 const preview = story.content.length > 120 ? story.content.substring(0, 120) + '...' : story.content;
                 return `
                 <div class="story-card ${isCompleted ? 'completed' : ''}">
-                    ${isCompleted ? '<div class="completed-badge"><i class="fas fa-check-circle"></i> تمت القراءة</div>' : ''}
+                    ${isCompleted ? '<div class="completed-badge"><i class="fas fa-check-circle"></i> Read</div>' : ''}
                     <div class="story-image">
                         <img src="${story.image || 'https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400'}" alt="${story.title}">
                     </div>
@@ -384,7 +384,7 @@
                         <p class="story-preview">${preview}</p>
                         <div class="story-footer">
                             <span class="difficulty-tag">${story.difficulty}</span>
-                            <button class="read-btn" onclick="openStory(${story.id})">اقرأ القصة</button>
+                            <button class="read-btn" onclick="openStory(${story.id})">Read Story</button>
                         </div>
                     </div>
                 </div>
@@ -412,7 +412,7 @@
             if (currentStory.questions && currentStory.questions.length > 0) {
                 questionsHTML = `
                     <div class="questions-section">
-                        <h3><i class="fas fa-question-circle"></i> Questions (Answer all)</h3>
+                        <h3><i class="fas fa-question-circle"></i> Comprehension Questions</h3>
                         ${currentStory.questions.map((q, idx) => `
                             <div class="question-item" id="q-${idx}">
                                 <div class="question-text">${idx+1}. ${q.question}</div>
@@ -425,11 +425,11 @@
                                     `).join('')}
                                 </div>
                                 <div class="explanation" id="exp-${idx}">
-                                    ${q.explanation || `The correct answer is: ${q.options[q.correct]}`}
+                                    ${q.explanation || `Correct answer: ${q.options[q.correct]}`}
                                 </div>
                             </div>
                         `).join('')}
-                        <button class="btn-check" onclick="checkAnswers()">Check My Answers</button>
+                        <button class="btn-check" onclick="checkAnswers()">Check Answers</button>
                     </div>
                 `;
             }
@@ -447,7 +447,7 @@
                 </div>
                 
                 <button class="translation-btn" onclick="toggleTranslation()">
-                    <i class="fas fa-language"></i> Show Translation
+                    <i class="fas fa-language"></i> Show Arabic Translation
                 </button>
                 
                 <div class="modal-translation" id="storyTranslation">
