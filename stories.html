@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineLingua | قصص قصيرة</title>
+    <title>CineLingua | Short Stories</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,6 @@
         body { background: var(--light); color: var(--dark); transition: all 0.3s; }
         [data-theme="dark"] body { background: var(--bg-primary); color: var(--text-primary); }
 
-        /* شريط التنقل */
         .navbar {
             background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed; width: 100%; top: 0; z-index: 1000;
@@ -37,14 +36,12 @@
         
         .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary); }
         
-        /* زر القائمة */
         .menu-toggle {
             background: none; border: none; font-size: 1.8rem; color: var(--primary);
             cursor: pointer; display: none; transition: all 0.3s;
         }
         .menu-toggle:hover { transform: scale(1.1); }
         
-        /* القائمة العلوية */
         .nav-menu {
             display: flex; gap: 2rem; list-style: none;
         }
@@ -54,7 +51,6 @@
         [data-theme="dark"] .nav-menu a { color: var(--text-primary); }
         .nav-menu a:hover, .nav-menu a.active { color: var(--primary); }
         
-        /* زر الثيم */
         .theme-toggle {
             display: flex; gap: 0.5rem; background: #f1f5f9; padding: 0.25rem; border-radius: 2rem;
         }
@@ -153,7 +149,7 @@
         }
         .read-btn:hover { transform: translateX(-5px); box-shadow: 0 5px 15px rgba(99,102,241,0.4); }
 
-        /* المودال - وضع ملء الشاشة */
+        /* Full Screen Modal */
         .story-modal {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: white; z-index: 2000; opacity: 0; visibility: hidden;
@@ -189,7 +185,6 @@
             white-space: pre-line;
         }
 
-        /* زر الترجمة */
         .translation-btn {
             background: var(--primary); color: white; border: none;
             padding: 0.75rem 1.5rem; border-radius: 2rem; font-size: 1rem;
@@ -206,7 +201,7 @@
         [data-theme="dark"] .modal-translation { background: var(--bg-secondary); }
         .modal-translation.show { display: block; }
 
-        /* قسم الأسئلة */
+        /* Questions Section */
         .questions-section {
             margin: 3rem 0; padding: 2rem; background: #f8fafc;
             border-radius: 1.5rem; border: 2px solid var(--border);
@@ -300,10 +295,10 @@
             </button>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="lessons.html">الكلمات</a></li>
-                <li><a href="stories.html" class="active">القصص</a></li>
-                <li><a href="quiz.html">الاختبارات</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="lessons.html">Words</a></li>
+                <li><a href="stories.html" class="active">Stories</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
             </ul>
             
             <div class="theme-toggle" id="themeToggle">
@@ -330,7 +325,6 @@
         <div id="storiesList" class="stories-grid"></div>
     </div>
 
-    <!-- Full Screen Modal -->
     <div class="story-modal" id="storyModal">
         <div class="modal-container" id="modalContainer"></div>
     </div>
@@ -408,6 +402,7 @@
             const isCompleted = completedStories.includes(id);
             userAnswers = {};
 
+            // التحقق من وجود أسئلة
             let questionsHTML = '';
             if (currentStory.questions && currentStory.questions.length > 0) {
                 questionsHTML = `
