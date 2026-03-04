@@ -101,13 +101,13 @@
         }
         .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
-        .hero-buttons { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap; }
         .btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: all 0.3s; display: inline-block; }
         .btn-primary { background: white; color: var(--primary); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.3); }
         .btn-outline { border: 2px solid white; color: white; background: transparent; }
         .btn-outline:hover { background: white; color: var(--primary); }
-        .hero-stats { display: flex; gap: 3rem; justify-content: center; }
+        .hero-stats { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; }
         .stat-number { font-size: 2rem; font-weight: bold; display: block; }
         
         /* قسم الأزرار الكبيرة */
@@ -128,14 +128,14 @@
         
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
         
         .menu-card {
             background: white;
             border-radius: 1.5rem;
-            padding: 2.5rem 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             box-shadow: var(--shadow);
             transition: all 0.3s;
@@ -144,6 +144,9 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         [data-theme="dark"] .menu-card {
@@ -158,38 +161,40 @@
         }
         
         .menu-icon {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2.5rem;
+            margin: 0 auto 1.2rem;
+            font-size: 2.2rem;
             color: white;
         }
         
         .menu-card h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
             color: var(--primary);
         }
         
         .menu-card p {
             color: var(--gray);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+            font-size: 1rem;
+            flex-grow: 1;
         }
         
         .menu-stats {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 1rem;
+            margin-top: 0.5rem;
             padding-top: 1rem;
             border-top: 2px solid var(--border);
+            flex-wrap: wrap;
         }
         
         .menu-stats span {
@@ -197,12 +202,12 @@
             align-items: center;
             gap: 0.5rem;
             color: var(--gray);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
         
         .menu-stats i {
             color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         
         /* قسم المميزات */
@@ -211,7 +216,7 @@
             margin: 4rem auto;
             padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
         .feature-card {
@@ -316,7 +321,15 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -334,13 +347,13 @@
                 <i class="fas fa-bars"></i>
             </button>
             
-            <!-- القائمة العلوية -->
+            <!-- القائمة العلوية (مرتبة) -->
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="active">الرئيسية</a></li>
                 <li><a href="lessons.html">الكلمات</a></li>
                 <li><a href="stories.html">القصص</a></li>
-                <li><a href="quiz.html">الاختبارات</a></li>
                 <li><a href="tenses.html">الأزمنة</a></li>
+                <li><a href="quiz.html">الاختبارات</a></li>
             </ul>
             
             <div class="theme-toggle" id="themeToggle">
@@ -353,14 +366,16 @@
     <section class="hero">
         <div class="hero-content" data-aos="fade-up">
             <h1>تعلم الإنجليزية بذكاء مع CineLingua</h1>
-            <p>منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، جمل، قصص، واختبارات تفاعلية</p>
+            <p>منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية</p>
             <div class="hero-buttons">
                 <a href="#menu" class="btn btn-primary">استعرض المحتوى</a>
                 <a href="#features" class="btn btn-outline">كيف يعمل؟</a>
             </div>
             <div class="hero-stats">
                 <div><span class="stat-number">1000+</span> كلمة</div>
-                <div><span class="stat-number">50+</span> قصة</div> 
+                <div><span class="stat-number">30+</span> قصة</div>
+                <div><span class="stat-number">12</span> زمن</div>
+                <div><span class="stat-number">6</span> اختبارات</div>
             </div>
         </div>
     </section>
@@ -384,10 +399,21 @@
             <a href="stories.html" class="menu-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="menu-icon"><i class="fas fa-book-open"></i></div>
                 <h3>القصص</h3>
-                <p>اقرأ قصصاً قصيرة ممتعة وحسّن فهمك للغة الإنجليزية</p>
+                <p>اقرأ قصصاً قصيرة ممتعة مع أسئلة تفاعلية وحسّن فهمك للغة</p>
                 <div class="menu-stats">
-                    <span><i class="fas fa-layer-group"></i> 60+ قصه</span>
-                    <span><i class="fas fa-question-circle"></i> أسئلة تفاعلية مع كل قصه</span>
+                    <span><i class="fas fa-layer-group"></i> 30 قصة</span>
+                    <span><i class="fas fa-question-circle"></i> أسئلة تفاعلية</span>
+                </div>
+            </a>
+
+            <!-- بطاقة الأزمنة -->
+            <a href="tenses.html" class="menu-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="menu-icon"><i class="fas fa-clock"></i></div>
+                <h3>الأزمنة</h3>
+                <p>تعلم أزمنة اللغة الإنجليزية مع شرح مبسط وأمثلة وتمارين تفاعلية</p>
+                <div class="menu-stats">
+                    <span><i class="fas fa-layer-group"></i> 12 زمن</span>
+                    <span><i class="fas fa-tasks"></i> تمارين تفاعلية</span>
                 </div>
             </a>
 
@@ -395,9 +421,9 @@
             <a href="quiz.html" class="menu-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="menu-icon"><i class="fas fa-question-circle"></i></div>
                 <h3>الاختبارات</h3>
-                <p>اختبر مستواك واكتشف نقاط قوتك وضعفك</p>
+                <p>اختبر مستواك واكتشف نقاط قوتك وضعفك من خلال اختبارات متنوعة</p>
                 <div class="menu-stats">
-                    <span><i class="fas fa-layer-group"></i> 100 سؤال</span>
+                    <span><i class="fas fa-layer-group"></i> 6 اختبارات</span>
                     <span><i class="fas fa-chart-line"></i> تحليل النتائج</span>
                 </div>
             </a>
@@ -409,17 +435,22 @@
         <div class="feature-card" data-aos="fade-up">
             <i class="fas fa-robot"></i>
             <h3>توصيات ذكية</h3>
-            <p>نظامنا يحلل مستواك ويقترح المحتوى المناسب</p>
+            <p>نظامنا يحلل مستواك ويقترح المحتوى المناسب لك</p>
         </div>
         <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
             <i class="fas fa-microphone"></i>
             <h3>تدرب على النطق</h3>
-            <p>استمع للنطق الصحيح للكلمات والجمل</p>
+            <p>استمع للنطق الصحيح للكلمات والجمل بصوت واضح</p>
         </div>
         <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
             <i class="fas fa-chart-line"></i>
             <h3>تتبع تقدمك</h3>
-            <p>اعرف كم كلمة تعلمت وأزمنة أتقنت</p>
+            <p>اعرف كم كلمة تعلمت وكم قصة قرأت ونتائج اختباراتك</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="250">
+            <i class="fas fa-bookmark"></i>
+            <h3>احفظ ما تتعلمه</h3>
+            <p>احفظ الكلمات والقصص والأزمنة المفضلة لتراجعها لاحقاً</p>
         </div>
     </section>
 
@@ -428,8 +459,6 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="translations.js"></script>
-    <script src="theme.js"></script>
     <script>
         AOS.init({duration:1000,once:true});
         
@@ -444,6 +473,23 @@
                 document.getElementById('navMenu').classList.remove('show');
             });
         });
+
+        // دالة الثيم
+        window.setTheme = function(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if ((theme === 'light' && btn.innerHTML.includes('sun')) || 
+                    (theme === 'dark' && btn.innerHTML.includes('moon'))) {
+                    btn.classList.add('active');
+                }
+            });
+        };
+
+        // تحميل الثيم المحفوظ
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
     </script>
 </body>
-</html>
+    </html>
