@@ -404,6 +404,83 @@
 
         .menu-stats i { color: var(--primary); font-size: 0.85rem; }
 
+        /* ===== DOWNLOAD BANNER (جديد) ===== */
+        .download-banner {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .download-banner-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2rem;
+            padding: 2.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .download-banner-content {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .download-banner-content h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-banner-content p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .download-banner-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .download-banner-stat {
+            text-align: center;
+        }
+
+        .download-banner-stat .stat {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .download-banner-stat .label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .download-banner-btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .download-banner-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
         /* ===== FEATURES ===== */
         .features-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
 
@@ -432,11 +509,73 @@
         .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
         .feature-card p  { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; }
 
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .cta-card {
+            background: var(--bg-card);
+            border-radius: 2rem;
+            padding: 3rem;
+            border: 2px solid var(--border);
+        }
+
+        .cta-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .cta-btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .cta-btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--bg-card); border-top: 1px solid var(--border);
-            text-align: center; padding: 1.75rem 2rem; margin-top: 4rem;
-            color: var(--text-secondary); font-size: 0.88rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 1.75rem 2rem;
+            margin-top: 4rem;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
         }
     </style>
 </head>
@@ -470,6 +609,7 @@
                 <li><a href="stories.html">القصص</a></li>
                 <li><a href="tenses.html">الأزمنة</a></li>
                 <li><a href="quiz.html">الاختبارات</a></li>
+                <li><a href="download.html">تحميل التطبيق</a></li>
             </ul>
             <div class="nav-right">
                 <div class="theme-toggle">
@@ -488,7 +628,7 @@
             <p>منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية</p>
             <div class="hero-buttons">
                 <a href="#menu" class="btn btn-primary"><i class="fas fa-play"></i> ابدأ الآن</a>
-                <a href="#features" class="btn btn-outline"><i class="fas fa-info-circle"></i> كيف يعمل؟</a>
+                <a href="download.html" class="btn btn-outline"><i class="fas fa-download"></i> تحميل التطبيق</a>
             </div>
             <div class="hero-stats">
                 <div class="hero-stat">
@@ -511,7 +651,7 @@
         </div>
     </section>
 
-    <!-- PROGRESS BANNER (يظهر فقط للعائدين) -->
+    <!-- PROGRESS BANNER (للعائدين) -->
     <div class="progress-banner" id="progressBanner">
         <div class="progress-card" data-aos="fade-up">
             <div class="progress-card-left">
@@ -550,7 +690,6 @@
             <p>محتوى متدرج من المبتدئ إلى المتقدم</p>
         </div>
         <div class="menu-grid">
-
             <a href="lessons.html" class="menu-card" data-aos="fade-up">
                 <div class="menu-icon"><i class="fas fa-book"></i></div>
                 <h3>الكلمات</h3>
@@ -566,7 +705,6 @@
                     <span><i class="fas fa-font"></i> 1000+ كلمة</span>
                 </div>
             </a>
-
             <a href="stories.html" class="menu-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="menu-icon"><i class="fas fa-book-open"></i></div>
                 <h3>القصص</h3>
@@ -582,7 +720,6 @@
                     <span><i class="fas fa-question-circle"></i> أسئلة تفاعلية</span>
                 </div>
             </a>
-
             <a href="tenses.html" class="menu-card" data-aos="fade-up" data-aos-delay="150">
                 <div class="menu-icon"><i class="fas fa-clock"></i></div>
                 <h3>الأزمنة</h3>
@@ -598,7 +735,6 @@
                     <span><i class="fas fa-tasks"></i> تمارين تفاعلية</span>
                 </div>
             </a>
-
             <a href="quiz.html" class="menu-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="menu-icon"><i class="fas fa-question-circle"></i></div>
                 <h3>الاختبارات</h3>
@@ -614,7 +750,34 @@
                     <span><i class="fas fa-chart-line"></i> تحليل النتائج</span>
                 </div>
             </a>
+        </div>
+    </section>
 
+    <!-- DOWNLOAD BANNER (جديد) -->
+    <section class="download-banner" data-aos="fade-up">
+        <div class="download-banner-card">
+            <div class="download-banner-content">
+                <h3>حمّل تطبيق CineLingua</h3>
+                <p>نسخة أندرويد APK - شارك التطبيق مع أصدقائك</p>
+                <div class="download-banner-stats">
+                    <div class="download-banner-stat">
+                        <span class="stat">3.2 MB</span>
+                        <span class="label">حجم الملف</span>
+                    </div>
+                    <div class="download-banner-stat">
+                        <span class="stat">1.0.0</span>
+                        <span class="label">الإصدار</span>
+                    </div>
+                    <div class="download-banner-stat">
+                        <span class="stat">5.0+</span>
+                        <span class="label">أندرويد</span>
+                    </div>
+                </div>
+            </div>
+            <a href="download.html" class="download-banner-btn">
+                <i class="fas fa-download"></i>
+                صفحة التحميل
+            </a>
         </div>
     </section>
 
@@ -644,6 +807,24 @@
                 <div class="feature-icon"><i class="fas fa-fire"></i></div>
                 <h3>نظام الـ Streak</h3>
                 <p>حافظ على تقدمك اليومي وابنِ عادة تعلم منتظمة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section" data-aos="fade-up">
+        <div class="cta-card">
+            <h2>ابدأ رحلة تعلم الإنجليزية الآن</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">اختر طريقتك المفضلة لتبدأ التعلم</p>
+            <div class="cta-buttons">
+                <a href="#menu" class="cta-btn cta-btn-primary">
+                    <i class="fas fa-play"></i>
+                    ابدأ التعلم مجاناً
+                </a>
+                <a href="download.html" class="cta-btn cta-btn-secondary">
+                    <i class="fas fa-download"></i>
+                    تحميل التطبيق
+                </a>
             </div>
         </div>
     </section>
@@ -682,7 +863,6 @@
             const saved   = JSON.parse(localStorage.getItem('savedWords'))   || [];
             const streak  = JSON.parse(localStorage.getItem('streak'))       || { count: 0 };
 
-            // Show progress banner only if user has activity
             if (learned.length > 0 || saved.length > 0) {
                 document.getElementById('progressBanner').classList.add('show');
                 document.getElementById('pb-learned').textContent = learned.length;
@@ -690,7 +870,6 @@
                 document.getElementById('pb-streak').innerHTML =
                     `<i class="fas fa-fire" style="font-size:1rem;margin-left:0.2rem"></i> ${streak.count}`;
 
-                // Greeting based on time of day
                 const hour = new Date().getHours();
                 let greeting = 'أهلاً بعودتك!';
                 if (hour < 12)      greeting = 'صباح النور!';
@@ -698,14 +877,12 @@
                 else                greeting = 'مساء النور!';
                 document.getElementById('greetingText').textContent = greeting;
 
-                // Sub message
                 let sub = 'واصل تقدمك من حيث توقفت';
                 if (streak.count >= 7)  sub = `${streak.count} أيام متتالية — استمر!`;
                 else if (streak.count >= 3) sub = 'أنت في المسار الصحيح!';
                 document.getElementById('greetingSubtext').textContent = sub;
             }
 
-            // Words card progress (out of 1000 as placeholder total)
             const wordsTotal = 1000;
             const wordsPct   = Math.min(Math.round((learned.length / wordsTotal) * 100), 100);
             document.getElementById('words-progress').style.width = wordsPct + '%';
@@ -721,16 +898,10 @@
         const installBtn = document.getElementById('installBtn');
         const installClose = document.getElementById('installClose');
 
-        // Check if app is already installed (standalone mode)
-        if (window.matchMedia('(display-mode: standalone)').matches || 
-            window.navigator.standalone === true) {
-            // App is installed, hide banner
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
             console.log('App is running in standalone mode');
         } else {
-            // Check if user has seen the banner before
             const hasSeenBanner = localStorage.getItem('installBannerSeen');
-            
-            // Show banner after 5 seconds if not installed and not seen before
             if (!hasSeenBanner) {
                 setTimeout(() => {
                     installBanner.classList.add('show');
@@ -738,37 +909,22 @@
             }
         }
 
-        // Listen for beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            
-            // Show the install banner
             installBanner.classList.add('show');
         });
 
-        // Handle install button click
         installBtn.addEventListener('click', async () => {
             if (!deferredPrompt) return;
-            
-            // Show the install prompt
             deferredPrompt.prompt();
-            
-            // Wait for the user to respond to the prompt
             const { outcome } = await deferredPrompt.userChoice;
             console.log(`User response to the install prompt: ${outcome}`);
-            
-            // We no longer need the prompt. Clear it up.
             deferredPrompt = null;
-            
-            // Hide the banner
             installBanner.classList.remove('show');
-            
-            // Mark that user has seen the banner
             localStorage.setItem('installBannerSeen', 'true');
         });
 
-        // Handle close button
         installClose.addEventListener('click', () => {
             installBanner.classList.remove('show');
             localStorage.setItem('installBannerSeen', 'true');
@@ -787,11 +943,10 @@
             });
         }
 
-        // Detect when app is installed
         window.addEventListener('appinstalled', (evt) => {
             console.log('✅ CineLingua was installed successfully');
             installBanner.classList.remove('show');
         });
     </script>
 </body>
-</html>
+    </html>
