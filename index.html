@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineLingua | تعلم الإنجليزية بذكاء</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CineLingua">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/qvb6sB72/1772652611575.png">
+    
+    <!-- Existing Meta Tags -->
     <meta property="og:title" content="CineLingua | تعلم الإنجليزية بذكاء">
     <meta property="og:description" content="منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية">
     <meta property="og:image" content="https://i.postimg.cc/qvb6sB72/1772652611575.png">
@@ -20,6 +26,11 @@
     <meta name="twitter:description" content="منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية">
     <meta name="twitter:image" content="https://i.postimg.cc/qvb6sB72/1772652611575.png">
     <meta name="description" content="منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,6 +66,88 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             transition: background 0.3s, color 0.3s;
         }
+
+        /* Install Banner */
+        .install-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--primary);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+            direction: rtl;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .install-banner.show { display: flex; }
+
+        .install-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .install-content { flex-grow: 1; }
+
+        .install-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .install-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .install-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .install-close:hover { color: var(--primary); }
+
+        .install-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            white-space: nowrap;
+            margin-left: 0.5rem;
+        }
+
+        .install-btn:hover { transform: scale(1.05); }
 
         /* ===== NAVBAR ===== */
         .navbar {
@@ -349,6 +442,23 @@
 </head>
 <body>
 
+    <!-- INSTALL BANNER -->
+    <div class="install-banner" id="installBanner">
+        <div class="install-icon">
+            <i class="fas fa-film"></i>
+        </div>
+        <div class="install-content">
+            <h4>ثبّت تطبيق CineLingua</h4>
+            <p>تعلم الإنجليزية بسهولة من شاشتك الرئيسية</p>
+        </div>
+        <button class="install-btn" id="installBtn">
+            <i class="fas fa-download"></i> تثبيت
+        </button>
+        <button class="install-close" id="installClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
@@ -604,6 +714,84 @@
         }
 
         loadProgress();
+
+        // ===== PWA INSTALLATION =====
+        let deferredPrompt;
+        const installBanner = document.getElementById('installBanner');
+        const installBtn = document.getElementById('installBtn');
+        const installClose = document.getElementById('installClose');
+
+        // Check if app is already installed (standalone mode)
+        if (window.matchMedia('(display-mode: standalone)').matches || 
+            window.navigator.standalone === true) {
+            // App is installed, hide banner
+            console.log('App is running in standalone mode');
+        } else {
+            // Check if user has seen the banner before
+            const hasSeenBanner = localStorage.getItem('installBannerSeen');
+            
+            // Show banner after 5 seconds if not installed and not seen before
+            if (!hasSeenBanner) {
+                setTimeout(() => {
+                    installBanner.classList.add('show');
+                }, 5000);
+            }
+        }
+
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show the install banner
+            installBanner.classList.add('show');
+        });
+
+        // Handle install button click
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            // Show the install prompt
+            deferredPrompt.prompt();
+            
+            // Wait for the user to respond to the prompt
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            
+            // We no longer need the prompt. Clear it up.
+            deferredPrompt = null;
+            
+            // Hide the banner
+            installBanner.classList.remove('show');
+            
+            // Mark that user has seen the banner
+            localStorage.setItem('installBannerSeen', 'true');
+        });
+
+        // Handle close button
+        installClose.addEventListener('click', () => {
+            installBanner.classList.remove('show');
+            localStorage.setItem('installBannerSeen', 'true');
+        });
+
+        // ===== SERVICE WORKER REGISTRATION =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Detect when app is installed
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('✅ CineLingua was installed successfully');
+            installBanner.classList.remove('show');
+        });
     </script>
 </body>
 </html>
