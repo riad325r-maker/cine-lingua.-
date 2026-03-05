@@ -519,7 +519,7 @@
                 <li><a href="stories.html">القصص</a></li>
                 <li><a href="tenses.html">الأزمنة</a></li>
                 <li><a href="quiz.html">الاختبارات</a></li>
-                <li><a href="download.html" class="active">تحميل</a></li>
+                <li><a href="download.html" class="active">تحميل التطبيق</a></li>
             </ul>
             <div class="nav-right">
                 <div class="theme-toggle">
@@ -623,7 +623,7 @@
                 <div class="update-checker">
                     <div class="update-status">
                         <i class="fas fa-sync-alt"></i>
-                        <span id="updateMessage">أنت تستخدم آخر إصدار ✅</span>
+                        <span id="updateMessage">أنت تستخدم آخر إصدار</span>
                     </div>
                     <button class="update-btn" onclick="checkForUpdates()">
                         <i class="fas fa-search"></i> التحقق من تحديثات
@@ -697,7 +697,7 @@
             code: 1,
             date: "2026-03-05",
             // ⚠️ غير هذا الرابط إلى رابط ملف APK الخاص بك ⚠️
-            apkUrl: "https://riad325r-maker.github.io/cine-lingua.-/downloads/cinelingua-v1.0.0.apk",
+            apkUrl: "https://riad325r-maker.github.io/cine-lingua.-/cinelingua-v1.0.0.apk",
             size: "3.2 MB",
             changes: [
                 "إطلاق التطبيق الرسمي",
@@ -756,12 +756,12 @@
             const downloadBtn = document.getElementById('downloadBtn');
 
             if (APP_VERSION.current !== lastSeenVersion) {
-                updateMessage.innerHTML = `<span style="color:#22c55e;">✨ يتوفر إصدار جديد! الإصدار ${APP_VERSION.current}</span>`;
+                updateMessage.innerHTML = `<span style="color:#22c55e;"> يتوفر إصدار جديد! الإصدار ${APP_VERSION.current}</span>`;
                 downloadBtn.classList.add('pulse-animation');
                 localStorage.setItem('appVersion', APP_VERSION.current);
                 showUpdateNotification();
             } else {
-                updateMessage.innerHTML = '<span style="color:var(--text-secondary);">✅ أنت تستخدم آخر إصدار</span>';
+                updateMessage.innerHTML = '<span style="color:var(--text-secondary);"> أنت تستخدم آخر إصدار</span>';
                 downloadBtn.classList.remove('pulse-animation');
             }
         }
