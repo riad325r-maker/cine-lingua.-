@@ -995,7 +995,7 @@
                                 <i class="fas fa-volume-up"></i> استماع
                             </button>
                             <button class="action-btn slow" onclick="playWordSuperSlow('${escapedWord}')">
-                                <i class="fas fa-ear-listen"></i> واضح
+                                <i class="fas fa-ear-listen"></i> استماع بصوت اوضح
                             </button>
                             <button class="action-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave(${item.id})">
                                 <i class="fas fa-bookmark"></i> ${isSaved ? 'محفوظة' : 'حفظ'}
@@ -1137,7 +1137,7 @@
             
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = 'en-US';
-            utterance.rate = 0.9;
+            utterance.rate = 1.0;
             utterance.pitch = 1.0;
             utterance.volume = 1;
             
