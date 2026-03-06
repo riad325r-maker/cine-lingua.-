@@ -1,6 +1,6 @@
 const CACHE_NAME = 'cine-lingua-v2';
 const urlsToCache = [
-  '/',
+  'https://riad325r-maker.github.io/cine-lingua.-/',
   '/index.html',
   '/lessons.html',
   '/stories.html',
