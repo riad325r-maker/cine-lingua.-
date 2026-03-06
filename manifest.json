@@ -1,11 +1,11 @@
 {
-  "name": "CineLingua | تعلم الإنجليزية بذكاء",
+  "name": "CineLingua",
   "short_name": "CineLingua",
   "description": "منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية",
   "start_url": "https://riad325r-maker.github.io/cine-lingua.-/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#8b5cf6", 
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "orientation": "portrait",
   "scope": "https://riad325r-maker.github.io/cine-lingua.-/",
   "icons": [
