@@ -12,7 +12,7 @@ const STORIES_DATA = [
   {
     id: 1, level: 'a1', difficulty: 'A1',
     title: 'My Family',
-    image: 'https://lh3.googleusercontent.com/d/1O9_0j7eW2F_XmZ-G7J3YmZ9u2R7U0u4S',
+    image: 'https://images.pexels.com/photos/3807571/pexels-photo-3807571.jpeg',
     arabic: 'عائلتي صغيرة. لدي أب وأم وأخت واحدة. اسم أبي عمر وهو طبيب. اسم أمي سارة وهي معلمة. اسم أختي لينا وهي طالبة. نحن نعيش في بيت كبير ونحب بعضنا كثيراً.',
     content: `My family is small. I have a father, a mother, and one sister.
 My father's name is Omar. He is a doctor.
