@@ -4,8 +4,8 @@
   "description": "منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية",
   "start_url": "https://riad325r-maker.github.io/cine-lingua.-/",
   "display": "standalone",
-  "background_color": "#6366f1",
-  "theme_color": "#6366f1",
+  "background_color": "#0f172a",
+  "theme_color": "#8b5cf6", 
   "orientation": "portrait",
   "scope": "https://riad325r-maker.github.io/cine-lingua.-/",
   "icons": [
