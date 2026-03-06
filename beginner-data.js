@@ -1,6 +1,6 @@
 // beginner-data.js - 500 كلمة للمستوى المبتدئ (كلمات بسيطة يومية)
 const BEGINNER_WORDS = [
-    // ========== تحيات ومجاملات ========== (25 كلمة)
+    // تحيات ومجاملات
     { id: 1001, word: "hello", arabic: "مرحباً", pronunciation: "هالو", example: "Hello, how are you?", exampleArabic: "مرحباً، كيف حالك؟", category: "تحيات" },
     { id: 1002, word: "goodbye", arabic: "وداعاً", pronunciation: "جود باي", example: "Goodbye, see you tomorrow.", exampleArabic: "وداعاً، أراك غداً", category: "تحيات" },
     { id: 1003, word: "good morning", arabic: "صباح الخير", pronunciation: "جود مورنينغ", example: "Good morning, everyone!", exampleArabic: "صباح الخير للجميع!", category: "تحيات" },
@@ -27,7 +27,7 @@ const BEGINNER_WORDS = [
     { id: 1024, word: "long time no see", arabic: "لم أرك منذ فترة", pronunciation: "لونغ تايم نو سي", example: "Long time no see, how have you been?", exampleArabic: "لم أرك منذ فترة، كيف كان حالك؟", category: "تحيات" },
     { id: 1025, word: "take it easy", arabic: "خذ الأمر ببساطة", pronunciation: "تيك إت إيزي", example: "Take it easy and relax.", exampleArabic: "خذ الأمر ببساطة واسترخِ", category: "تحيات" },
 
-    // ========== المنزل والأثاث ========== (25 كلمة)
+    // المنزل والأثاث
     { id: 1101, word: "house", arabic: "منزل", pronunciation: "هاوس", example: "I live in a big house.", exampleArabic: "أنا أعيش في منزل كبير", category: "منزل" },
     { id: 1102, word: "apartment", arabic: "شقة", pronunciation: "أبارتمنت", example: "She lives in an apartment.", exampleArabic: "هي تعيش في شقة", category: "منزل" },
     { id: 1103, word: "room", arabic: "غرفة", pronunciation: "روم", example: "This is my room.", exampleArabic: "هذه غرفتي", category: "منزل" },
@@ -54,7 +54,7 @@ const BEGINNER_WORDS = [
     { id: 1124, word: "pillow", arabic: "وسادة", pronunciation: "بيلو", example: "I need a soft pillow.", exampleArabic: "أحتاج وسادة ناعمة", category: "منزل" },
     { id: 1125, word: "blanket", arabic: "بطانية", pronunciation: "بلانكت", example: "The blanket is warm.", exampleArabic: "البطانية دافئة", category: "منزل" },
 
-    // ========== العائلة والعلاقات ========== (25 كلمة)
+    // العائلة والعلاقات
     { id: 1201, word: "family", arabic: "عائلة", pronunciation: "فاميلي", example: "I love my family.", exampleArabic: "أنا أحب عائلتي", category: "عائلة" },
     { id: 1202, word: "mother", arabic: "أم", pronunciation: "ماذر", example: "My mother is kind.", exampleArabic: "أمي لطيفة", category: "عائلة" },
     { id: 1203, word: "father", arabic: "أب", pronunciation: "فاذر", example: "My father works hard.", exampleArabic: "أبي يعمل بجد", category: "عائلة" },
@@ -81,7 +81,7 @@ const BEGINNER_WORDS = [
     { id: 1224, word: "relative", arabic: "قريب", pronunciation: "ريلاتيف", example: "We have relatives in Canada.", exampleArabic: "لدينا أقارب في كندا", category: "عائلة" },
     { id: 1225, word: "fiancé", arabic: "خطيب", pronunciation: "فيانسي", example: "My fiancé is from Egypt.", exampleArabic: "خطيبي من مصر", category: "عائلة" },
 
-    // ========== الطعام والشراب ========== (25 كلمة)
+    // الطعام والشراب
     { id: 1301, word: "food", arabic: "طعام", pronunciation: "فود", example: "The food is delicious.", exampleArabic: "الطعام لذيذ", category: "طعام" },
     { id: 1302, word: "drink", arabic: "شراب", pronunciation: "درينك", example: "I want a cold drink.", exampleArabic: "أريد شراباً بارداً", category: "طعام" },
     { id: 1303, word: "water", arabic: "ماء", pronunciation: "ووتر", example: "Drink water every day.", exampleArabic: "اشرب الماء كل يوم", category: "طعام" },
@@ -108,7 +108,7 @@ const BEGINNER_WORDS = [
     { id: 1324, word: "dinner", arabic: "عشاء", pronunciation: "دينر", example: "We have dinner together.", exampleArabic: "نتناول العشاء معاً", category: "طعام" },
     { id: 1325, word: "dessert", arabic: "حلوى", pronunciation: "ديزرت", example: "I love chocolate dessert.", exampleArabic: "أحب حلوى الشوكولاتة", category: "طعام" },
 
-    // ========== التسوق والمال ========== (25 كلمة)
+    // التسوق والمال
     { id: 1401, word: "shop", arabic: "متجر", pronunciation: "شوب", example: "I go to the shop.", exampleArabic: "أذهب إلى المتجر", category: "تسوق" },
     { id: 1402, word: "store", arabic: "متجر", pronunciation: "ستور", example: "The store is open.", exampleArabic: "المتجر مفتوح", category: "تسوق" },
     { id: 1403, word: "market", arabic: "سوق", pronunciation: "ماركت", example: "We buy vegetables from the market.", exampleArabic: "نشتري الخضروات من السوق", category: "تسوق" },
@@ -135,7 +135,7 @@ const BEGINNER_WORDS = [
     { id: 1424, word: "receipt", arabic: "وصل", pronunciation: "ريسيبت", example: "Here is your receipt.", exampleArabic: "هذا هو الوصل", category: "تسوق" },
     { id: 1425, word: "price tag", arabic: "بطاقة سعر", pronunciation: "برايس تاغ", example: "Look at the price tag.", exampleArabic: "انظر إلى بطاقة السعر", category: "تسوق" },
 
-    // ========== المواصلات والسفر ========== (25 كلمة)
+    // المواصلات والسفر
     { id: 1501, word: "car", arabic: "سيارة", pronunciation: "كار", example: "I drive a car.", exampleArabic: "أنا أقود سيارة", category: "مواصلات" },
     { id: 1502, word: "bus", arabic: "حافلة", pronunciation: "باس", example: "I take the bus to work.", exampleArabic: "أستقل الحافلة للعمل", category: "مواصلات" },
     { id: 1503, word: "train", arabic: "قطار", pronunciation: "ترين", example: "The train is fast.", exampleArabic: "القطار سريع", category: "مواصلات" },
@@ -162,7 +162,7 @@ const BEGINNER_WORDS = [
     { id: 1524, word: "suitcase", arabic: "حقيبة سفر", pronunciation: "سوتكيس", example: "I packed my suitcase.", exampleArabic: "حزمت حقيبة سفري", category: "مواصلات" },
     { id: 1525, word: "destination", arabic: "وجهة", pronunciation: "ديستينيشن", example: "Our destination is London.", exampleArabic: "وجهتنا لندن", category: "مواصلات" },
 
-    // ========== الصحة والجسم ========== (25 كلمة)
+    // الصحة والجسم
     { id: 1601, word: "health", arabic: "صحة", pronunciation: "هيلث", example: "Good health is important.", exampleArabic: "الصحة الجيدة مهمة", category: "صحة" },
     { id: 1602, word: "body", arabic: "جسم", pronunciation: "بودي", example: "The body needs exercise.", exampleArabic: "الجسم يحتاج لتمارين", category: "صحة" },
     { id: 1603, word: "head", arabic: "رأس", pronunciation: "هيد", example: "My head hurts.", exampleArabic: "رأسي يؤلمني", category: "صحة" },
@@ -189,7 +189,7 @@ const BEGINNER_WORDS = [
     { id: 1624, word: "cough", arabic: "سعال", pronunciation: "كوف", example: "I have a bad cough.", exampleArabic: "عندي سعال شديد", category: "صحة" },
     { id: 1625, word: "exercise", arabic: "تمرين", pronunciation: "إكسيرسايز", example: "I exercise every day.", exampleArabic: "أتمرن كل يوم", category: "صحة" },
 
-    // ========== العمل والوظائف ========== (25 كلمة)
+    // العمل والوظائف
     { id: 1701, word: "job", arabic: "وظيفة", pronunciation: "جوب", example: "I have a new job.", exampleArabic: "لدي وظيفة جديدة", category: "عمل" },
     { id: 1702, word: "work", arabic: "عمل", pronunciation: "ورك", example: "I go to work at 8.", exampleArabic: "أذهب للعمل الساعة 8", category: "عمل" },
     { id: 1703, word: "office", arabic: "مكتب", pronunciation: "أوفيس", example: "My office is downtown.", exampleArabic: "مكتبي في وسط المدينة", category: "عمل" },
@@ -216,7 +216,7 @@ const BEGINNER_WORDS = [
     { id: 1724, word: "project", arabic: "مشروع", pronunciation: "بروجكت", example: "I'm working on a project.", exampleArabic: "أعمل على مشروع", category: "عمل" },
     { id: 1725, word: "team", arabic: "فريق", pronunciation: "تيم", example: "We have a great team.", exampleArabic: "لدينا فريق رائع", category: "عمل" },
 
-    // ========== التعليم والدراسة ========== (25 كلمة)
+    // التعليم والدراسة
     { id: 1801, word: "school", arabic: "مدرسة", pronunciation: "سكول", example: "Children go to school.", exampleArabic: "الأطفال يذهبون للمدرسة", category: "تعليم" },
     { id: 1802, word: "university", arabic: "جامعة", pronunciation: "يونيفرسيتي", example: "She studies at the university.", exampleArabic: "هي تدرس في الجامعة", category: "تعليم" },
     { id: 1803, word: "college", arabic: "كلية", pronunciation: "كوليدج", example: "I go to college.", exampleArabic: "أذهب إلى الكلية", category: "تعليم" },
@@ -243,7 +243,7 @@ const BEGINNER_WORDS = [
     { id: 1824, word: "lesson", arabic: "درس", pronunciation: "ليسن", example: "Today's lesson is easy.", exampleArabic: "درس اليوم سهل", category: "تعليم" },
     { id: 1825, word: "degree", arabic: "شهادة", pronunciation: "ديغري", example: "She has a university degree.", exampleArabic: "لديها شهادة جامعية", category: "تعليم" },
 
-    // ========== الوقت والتاريخ ========== (25 كلمة)
+    // الوقت والتاريخ
     { id: 1901, word: "time", arabic: "وقت", pronunciation: "تايم", example: "What time is it?", exampleArabic: "كم الساعة؟", category: "وقت" },
     { id: 1902, word: "clock", arabic: "ساعة", pronunciation: "كلوك", example: "Look at the clock.", exampleArabic: "انظر إلى الساعة", category: "وقت" },
     { id: 1903, word: "hour", arabic: "ساعة", pronunciation: "أور", example: "One hour has 60 minutes.", exampleArabic: "الساعة فيها 60 دقيقة", category: "وقت" },
@@ -270,7 +270,7 @@ const BEGINNER_WORDS = [
     { id: 1924, word: "Sunday", arabic: "الأحد", pronunciation: "صندي", example: "Sunday is a day off.", exampleArabic: "الأحد يوم عطلة", category: "وقت" },
     { id: 1925, word: "weekend", arabic: "عطلة نهاية الأسبوع", pronunciation: "ويك إند", example: "I enjoy the weekend.", exampleArabic: "أستمتع بعطلة نهاية الأسبوع", category: "وقت" },
 
-    // ========== الملابس والموضة ========== (25 كلمة)
+    // الملابس والموضة
     { id: 2001, word: "clothes", arabic: "ملابس", pronunciation: "كلوز", example: "I buy new clothes.", exampleArabic: "أشتري ملابس جديدة", category: "ملابس" },
     { id: 2002, word: "shirt", arabic: "قميص", pronunciation: "شيرت", example: "He wears a white shirt.", exampleArabic: "يرتدي قميصاً أبيض", category: "ملابس" },
     { id: 2003, word: "pants", arabic: "بنطال", pronunciation: "بانتس", example: "These pants are black.", exampleArabic: "هذا البنطال أسود", category: "ملابس" },
@@ -297,7 +297,7 @@ const BEGINNER_WORDS = [
     { id: 2024, word: "suit", arabic: "بدلة", pronunciation: "سوت", example: "He wears a formal suit.", exampleArabic: "يرتدي بدلة رسمية", category: "ملابس" },
     { id: 2025, word: "pajamas", arabic: "بيجاما", pronunciation: "باجاماز", example: "I wear comfortable pajamas.", exampleArabic: "أرتدي بيجاما مريحة", category: "ملابس" },
 
-    // ========== الاتجاهات والأماكن ========== (25 كلمة)
+    // الاتجاهات والأماكن
     { id: 2101, word: "place", arabic: "مكان", pronunciation: "بليس", example: "This is a nice place.", exampleArabic: "هذا مكان جميل", category: "اتجاهات" },
     { id: 2102, word: "direction", arabic: "اتجاه", pronunciation: "دايركشن", example: "Which direction should I go?", exampleArabic: "أي اتجاه يجب أن أذهب؟", category: "اتجاهات" },
     { id: 2103, word: "left", arabic: "يسار", pronunciation: "ليفت", example: "Turn left.", exampleArabic: "انعطف يساراً", category: "اتجاهات" },
@@ -324,7 +324,7 @@ const BEGINNER_WORDS = [
     { id: 2124, word: "downtown", arabic: "وسط البلد", pronunciation: "داون تاون", example: "I work downtown.", exampleArabic: "أعمل في وسط البلد", category: "اتجاهات" },
     { id: 2125, word: "neighborhood", arabic: "حي", pronunciation: "نيبرهود", example: "This is a quiet neighborhood.", exampleArabic: "هذا حي هادئ", category: "اتجاهات" },
 
-    // ========== المشاعر والأحاسيس ========== (25 كلمة)
+    // المشاعر والأحاسيس
     { id: 2201, word: "happy", arabic: "سعيد", pronunciation: "هابي", example: "I am happy today.", exampleArabic: "أنا سعيد اليوم", category: "مشاعر" },
     { id: 2202, word: "sad", arabic: "حزين", pronunciation: "ساد", example: "She is sad.", exampleArabic: "هي حزينة", category: "مشاعر" },
     { id: 2203, word: "angry", arabic: "غاضب", pronunciation: "أنغري", example: "He is angry.", exampleArabic: "هو غاضب", category: "مشاعر" },
@@ -351,7 +351,7 @@ const BEGINNER_WORDS = [
     { id: 2224, word: "disappointed", arabic: "خائب الأمل", pronunciation: "ديسابوينتد", example: "I am disappointed.", exampleArabic: "أنا خائب الأمل", category: "مشاعر" },
     { id: 2225, word: "curious", arabic: "فضولي", pronunciation: "كيوريوس", example: "I am curious.", exampleArabic: "أنا فضولي", category: "مشاعر" },
 
-    // ========== الأفعال اليومية ========== (25 كلمة)
+    // الأفعال اليومية
     { id: 2301, word: "wake up", arabic: "يستيقظ", pronunciation: "ويك أب", example: "I wake up at 7 am.", exampleArabic: "أستيقظ الساعة 7 صباحاً", category: "أفعال" },
     { id: 2302, word: "get up", arabic: "ينهض", pronunciation: "جيت أب", example: "I get up from bed.", exampleArabic: "أنهض من السرير", category: "أفعال" },
     { id: 2303, word: "eat", arabic: "يأكل", pronunciation: "إيت", example: "I eat breakfast.", exampleArabic: "أتناول الفطور", category: "أفعال" },
@@ -378,7 +378,7 @@ const BEGINNER_WORDS = [
     { id: 2324, word: "wash", arabic: "يغسل", pronunciation: "ووش", example: "I wash my hands.", exampleArabic: "أغسل يدي", category: "أفعال" },
     { id: 2325, word: "clean", arabic: "ينظف", pronunciation: "كلين", example: "I clean my room.", exampleArabic: "أنظف غرفتي", category: "أفعال" },
 
-    // ========== التكنولوجيا والإنترنت ========== (25 كلمة)
+    // التكنولوجيا والإنترنت
     { id: 2401, word: "phone", arabic: "هاتف", pronunciation: "فون", example: "I talk on the phone.", exampleArabic: "أتحدث على الهاتف", category: "تكنولوجيا" },
     { id: 2402, word: "cell phone", arabic: "هاتف محمول", pronunciation: "سيل فون", example: "My cell phone is new.", exampleArabic: "هاتفي المحمول جديد", category: "تكنولوجيا" },
     { id: 2403, word: "smartphone", arabic: "هاتف ذكي", pronunciation: "سمارت فون", example: "I use my smartphone.", exampleArabic: "أستخدم هاتفي الذكي", category: "تكنولوجيا" },
@@ -405,7 +405,7 @@ const BEGINNER_WORDS = [
     { id: 2424, word: "screen", arabic: "شاشة", pronunciation: "سكرين", example: "The screen is bright.", exampleArabic: "الشاشة ساطعة", category: "تكنولوجيا" },
     { id: 2425, word: "keyboard", arabic: "لوحة مفاتيح", pronunciation: "كي بورد", example: "I type on the keyboard.", exampleArabic: "أكتب على لوحة المفاتيح", category: "تكنولوجيا" },
 
-    // ========== الطقس والطبيعة ========== (25 كلمة)
+    // الطقس والطبيعة
     { id: 2501, word: "weather", arabic: "طقس", pronunciation: "ويذر", example: "The weather is nice.", exampleArabic: "الطقس لطيف", category: "طقس" },
     { id: 2502, word: "sun", arabic: "شمس", pronunciation: "سان", example: "The sun is hot.", exampleArabic: "الشمس حارة", category: "طقس" },
     { id: 2503, word: "rain", arabic: "مطر", pronunciation: "رين", example: "It's raining.", exampleArabic: "إنها تمطر", category: "طقس" },
@@ -432,7 +432,7 @@ const BEGINNER_WORDS = [
     { id: 2524, word: "mountain", arabic: "جبل", pronunciation: "ماونتن", example: "The mountain is high.", exampleArabic: "الجبل عالي", category: "طقس" },
     { id: 2525, word: "beach", arabic: "شاطئ", pronunciation: "بيتش", example: "I go to the beach.", exampleArabic: "أذهب إلى الشاطئ", category: "طقس" },
 
-    // ========== الحيوانات ========== (25 كلمة)
+    // الحيوانات
     { id: 2601, word: "animal", arabic: "حيوان", pronunciation: "أنيمال", example: "I love animals.", exampleArabic: "أحب الحيوانات", category: "حيوانات" },
     { id: 2602, word: "dog", arabic: "كلب", pronunciation: "دوغ", example: "The dog is friendly.", exampleArabic: "الكلب ودود", category: "حيوانات" },
     { id: 2603, word: "cat", arabic: "قطة", pronunciation: "كات", example: "The cat is sleeping.", exampleArabic: "القطة نائمة", category: "حيوانات" },
@@ -459,7 +459,7 @@ const BEGINNER_WORDS = [
     { id: 2624, word: "panda", arabic: "باندا", pronunciation: "باندا", example: "The panda is black and white.", exampleArabic: "الباندا أسود وأبيض", category: "حيوانات" },
     { id: 2625, word: "kangaroo", arabic: "كنغر", pronunciation: "كانغارو", example: "The kangaroo jumps high.", exampleArabic: "الكنغر يقفز عالياً", category: "حيوانات" },
 
-    // ========== الألوان ========== (25 كلمة) - تصنيف جديد
+    // الألوان
     { id: 2701, word: "color", arabic: "لون", pronunciation: "كالر", example: "What color do you like?", exampleArabic: "ما هو اللون الذي تحب؟", category: "ألوان" },
     { id: 2702, word: "red", arabic: "أحمر", pronunciation: "ريد", example: "The apple is red.", exampleArabic: "التفاحة حمراء", category: "ألوان" },
     { id: 2703, word: "blue", arabic: "أزرق", pronunciation: "بلو", example: "The sky is blue.", exampleArabic: "السماء زرقاء", category: "ألوان" },
@@ -486,7 +486,7 @@ const BEGINNER_WORDS = [
     { id: 2724, word: "lavender", arabic: "خزامي", pronunciation: "لافيندر", example: "Lavender color is soft.", exampleArabic: "اللون الخزامي ناعم", category: "ألوان" },
     { id: 2725, word: "peach", arabic: "خوخي", pronunciation: "بيتش", example: "Peach is a warm color.", exampleArabic: "الخوخي لون دافئ", category: "ألوان" },
 
-    // ========== المهن ========== (25 كلمة) - تصنيف جديد
+    // المهن
     { id: 2801, word: "job", arabic: "مهنة", pronunciation: "جوب", example: "What is your job?", exampleArabic: "ما هي مهنتك؟", category: "مهن" },
     { id: 2802, word: "doctor", arabic: "طبيب", pronunciation: "داكتر", example: "The doctor helps sick people.", exampleArabic: "الطبيب يساعد المرضى", category: "مهن" },
     { id: 2803, word: "teacher", arabic: "معلم", pronunciation: "تيتشر", example: "The teacher explains lessons.", exampleArabic: "المعلم يشرح الدروس", category: "مهن" },
@@ -511,9 +511,9 @@ const BEGINNER_WORDS = [
     { id: 2822, word: "carpenter", arabic: "نجار", pronunciation: "كاربنتر", example: "The carpenter makes furniture.", exampleArabic: "النجار يصنع الأثاث", category: "مهن" },
     { id: 2823, word: "mechanic", arabic: "ميكانيكي", pronunciation: "ميكانيك", example: "The mechanic repairs cars.", exampleArabic: "الميكانيكي يصلح السيارات", category: "مهن" },
     { id: 2824, word: "barber", arabic: "حلاق", pronunciation: "باربر", example: "The barber cuts hair.", exampleArabic: "الحلاق يقص الشعر", category: "مهن" },
-    { id: 2825, word: "waiter", arabic: "نادل", pronunciation: "ويتر", example: "The waiter serves food.", exampleArabic: "النادل يقدم الطعام", category: "مهن" }
+    { id: 2825, word: "waiter", arabic: "نادل", pronunciation: "ويتر", example: "The waiter serves food.", exampleArabic: "النادل يقدم الطعام", category: "مهن" },
 
-// ========== الرياضة ========== (25 كلمة) - تصنيف جديد
+    // الرياضة
     { id: 2901, word: "sport", arabic: "رياضة", pronunciation: "سبورت", example: "Sport is good for health.", exampleArabic: "الرياضة مفيدة للصحة", category: "رياضة" },
     { id: 2902, word: "football", arabic: "كرة قدم", pronunciation: "فوت بول", example: "I play football.", exampleArabic: "ألعب كرة القدم", category: "رياضة" },
     { id: 2903, word: "basketball", arabic: "كرة سلة", pronunciation: "باسكت بول", example: "He is tall, he plays basketball.", exampleArabic: "هو طويل، يلعب كرة السلة", category: "رياضة" },
@@ -539,9 +539,12 @@ const BEGINNER_WORDS = [
     { id: 2923, word: "fitness", arabic: "لياقة", pronunciation: "فيتنس", example: "Fitness is important.", exampleArabic: "اللياقة مهمة", category: "رياضة" },
     { id: 2924, word: "champion", arabic: "بطل", pronunciation: "تشامبيون", example: "He is the champion.", exampleArabic: "هو البطل", category: "رياضة" },
     { id: 2925, word: "medal", arabic: "ميدالية", pronunciation: "ميدال", example: "She won a gold medal.", exampleArabic: "فازت بميدالية ذهبية", category: "رياضة" }
-    
 ];
 
 // التحقق من التحميل
-console.log('✅ beginner-data.js loaded with', BEGINNER_WORDS.length, 'words (500 كلمة للمبتدئين)');
- 
+console.log('✅ beginner-data.js loaded with', BEGINNER_WORDS.length, 'words');
+
+// تصدير البيانات للاستخدام في ملفات أخرى
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = BEGINNER_WORDS;
+    }
