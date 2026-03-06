@@ -209,6 +209,7 @@
         }
 
         /* ===== DOWNLOAD CARD ===== */
+        /* APK section removed */
         .download-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -592,103 +593,10 @@
     <div class="main-content">
         <div class="download-hero" data-aos="fade-up">
             <h1>حمّل تطبيق CineLingua</h1>
-            <p>اختر الطريقة المناسبة لك لتثبيت التطبيق والبدء في رحلة تعلم الإنجليزية</p>
+            <p>حمل التطبيق الآن و ابدأ رحلتك لتعلم اللغة الإنجليزية</p>
         </div>
 
         <div class="download-container">
-            <!-- بطاقة تحميل APK -->
-            <div class="download-card" data-aos="fade-up">
-                <div class="app-icon-large">
-                    <img src="https://i.postimg.cc/J4xdc62M/20260305-233826.png" alt="CineLingua Logo">
-                </div>
-
-                <div class="version-info">
-                    <div class="version-badge">
-                        <i class="fas fa-tag"></i>
-                        <span id="appVersion">الإصدار 1.0.0</span>
-                    </div>
-                    <div class="version-badge">
-                        <i class="fas fa-calendar"></i>
-                        <span id="updateDate">5 مارس 2026</span>
-                    </div>
-                </div>
-
-                <h2 style="text-align: center; margin-bottom: 1rem;">نسخة أندرويد APK</h2>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-                    قم بتحميل ملف التثبيت المباشر للأندرويد وشاركه مع أصدقائك
-                </p>
-
-                <div class="download-btn-container">
-                    <a href="#" class="download-btn-main" id="downloadBtn" download>
-                        <i class="fas fa-download"></i>
-                        <span>تحميل APK الآن</span>
-                        <i class="fas fa-android"></i>
-                    </a>
-                </div>
-
-                <div class="file-info">
-                    <div class="file-info-item">
-                        <i class="fas fa-database"></i>
-                        <span id="appSize">3.2 MB</span>
-                    </div>
-                    <div class="file-info-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>آمن 100%</span>
-                    </div>
-                    <div class="file-info-item">
-                        <i class="fas fa-mobile-alt"></i>
-                        <span>أندرويد 5.0+</span>
-                    </div>
-                </div>
-
-                <!-- قسم ما الجديد -->
-                <div class="whats-new">
-                    <h3><i class="fas fa-star"></i> ما الجديد في الإصدار 1.0.0؟</h3>
-                    <ul id="changesList">
-                        <li><i class="fas fa-check-circle"></i> إطلاق التطبيق الرسمي</li>
-                        <li><i class="fas fa-check-circle"></i> دعم أكثر من 1000 كلمة</li>
-                        <li><i class="fas fa-check-circle"></i> واجهة مستخدم محسنة</li>
-                        <li><i class="fas fa-check-circle"></i> نظام تتبع التقدم</li>
-                    </ul>
-                </div>
-
-                <!-- خطوات التثبيت -->
-                <h3 style="margin-bottom: 1rem;">📲 خطوات التثبيت</h3>
-                <div class="installation-steps">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <h4>حمّل الملف</h4>
-                        <p>اضغط على زر التحميل وانتظر حتى يكتمل</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <h4>افتح الملف</h4>
-                        <p>افتح ملف APK من مجلد التحميلات</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <h4>اسمح بالتثبيت</h4>
-                        <p>افتح الإعدادات واسمح بالتثبيت من مصادر غير معروفة</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">4</div>
-                        <h4>استمتع!</h4>
-                        <p>اضغط تثبيت وابدأ رحلة التعلم</p>
-                    </div>
-                </div>
-
-                <!-- نظام التحقق من التحديثات -->
-                <div class="update-checker">
-                    <div class="update-status">
-                        <i class="fas fa-sync-alt"></i>
-                        <span id="updateMessage">أنت تستخدم آخر إصدار ✅</span>
-                    </div>
-                    <button class="update-btn" onclick="checkForUpdates()">
-                        <i class="fas fa-search"></i> التحقق من تحديثات
-                    </button>
-                </div>
-            </div>
-
             <!-- بطاقة التثبيت المباشر (PWA) -->
             <div class="download-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="app-icon-large">
@@ -697,7 +605,7 @@
 
                 <h2 style="text-align: center; margin-bottom: 1rem;">تثبيت مباشر من المتصفح</h2>
                 <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-                    طريقة أسهل وأسرع - ثبّت التطبيق مباشرة من الموقع بدون تحميل ملفات
+                         طريقة أسهل وأسرع - ثبّت التطبيق مباشرة من الموقع 
                 </p>
 
                 <div style="text-align: center;">
@@ -849,177 +757,6 @@
             setTimeout(() => notification.remove(), 10000);
         }
 
-        // ===== نظام إشعار انتهاء التحميل =====
-        function setupDownloadNotification() {
-            const downloadBtn = document.getElementById('downloadBtn');
-            let progressNotification = null;
-            let progressInterval = null;
-
-            // دالة عرض شريط التقدم
-            function showProgressNotification() {
-                if (progressNotification) return;
-                
-                progressNotification = document.createElement('div');
-                progressNotification.className = 'download-progress';
-                progressNotification.id = 'downloadProgress';
-                progressNotification.innerHTML = `
-                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.3rem;">
-                        <i class="fas fa-download" style="color:var(--primary);"></i>
-                        <span style="font-weight:600;">جاري التحميل...</span>
-                    </div>
-                    <div class="download-progress-bar">
-                        <div class="download-progress-fill" id="progressFill" style="width:0%"></div>
-                    </div>
-                    <div class="download-progress-text">
-                        <span id="progressPercent">0%</span>
-                        <span id="progressSize">0 / ${APP_VERSION.size}</span>
-                    </div>
-                `;
-                document.body.appendChild(progressNotification);
-                
-                // محاكاة تقدم التحميل
-                let progress = 0;
-                progressInterval = setInterval(() => {
-                    if (progress < 90) {
-                        progress += Math.random() * 15;
-                        if (progress > 90) progress = 90;
-                        updateProgress(progress);
-                    }
-                }, 300);
-            }
-
-            // تحديث شريط التقدم
-            function updateProgress(percent) {
-                const fill = document.getElementById('progressFill');
-                const percentText = document.getElementById('progressPercent');
-                if (fill && percentText) {
-                    fill.style.width = `${percent}%`;
-                    percentText.textContent = `${Math.round(percent)}%`;
-                }
-            }
-
-            // دالة إكمال التحميل
-            function completeDownload() {
-                if (progressInterval) {
-                    clearInterval(progressInterval);
-                }
-                
-                // أكمل التقدم إلى 100%
-                updateProgress(100);
-                
-                // إزالة شريط التقدم بعد ثانية
-                setTimeout(() => {
-                    if (progressNotification && progressNotification.parentNode) {
-                        progressNotification.remove();
-                        progressNotification = null;
-                    }
-                }, 1000);
-                
-                // عرض إشعار الانتهاء
-                setTimeout(() => {
-                    showDownloadCompleteNotification();
-                }, 500);
-            }
-
-            // دالة عرض إشعار انتهاء التحميل
-            function showDownloadCompleteNotification() {
-                const notification = document.createElement('div');
-                notification.className = 'update-notification';
-                notification.style.borderColor = '#22c55e';
-                notification.innerHTML = `
-                    <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.8rem;">
-                        <div style="background:#22c55e; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                            <i class="fas fa-check" style="color:white; font-size:0.9rem;"></i>
-                        </div>
-                        <h4 style="color:#22c55e;">تم التحميل بنجاح!</h4>
-                    </div>
-                    <p style="color:var(--text-secondary); margin-bottom:1rem;">تم تحميل ملف التطبيق. يمكنك الآن تثبيته على جهازك.</p>
-                    <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
-                        <button onclick="this.parentElement.parentElement.remove()" style="background:var(--primary); color:white; border:none; padding:0.5rem 1rem; border-radius:2rem; cursor:pointer;">
-                            <i class="fas fa-check"></i> حسناً
-                        </button>
-                    </div>
-                `;
-                document.body.appendChild(notification);
-                
-                // إخفاء الإشعار بعد 7 ثواني
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.remove();
-                    }
-                }, 7000);
-            }
-
-            // مراقبة بداية التحميل
-            downloadBtn.addEventListener('click', function(e) {
-                // عرض شريط التقدم
-                showProgressNotification();
-                
-                // للمتصفحات الحديثة، نحاول مراقبة التحميل الفعلي
-                if (window.fetch) {
-                    e.preventDefault();
-                    
-                    const url = this.href;
-                    const filename = url.split('/').pop() || 'cinelingua.apk';
-                    
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) throw new Error('فشل التحميل');
-                            
-                            const reader = response.body.getReader();
-                            const contentLength = +response.headers.get('Content-Length') || 1024 * 1024 * 3; // تقريب 3MB
-                            let receivedLength = 0;
-                            
-                            // قراءة البيانات
-                            return new Response(
-                                new ReadableStream({
-                                    start(controller) {
-                                        function push() {
-                                            reader.read().then(({done, value}) => {
-                                                if (done) {
-                                                    controller.close();
-                                                    return;
-                                                }
-                                                receivedLength += value.length;
-                                                const percent = (receivedLength / contentLength) * 100;
-                                                updateProgress(percent);
-                                                controller.enqueue(value);
-                                                push();
-                                            });
-                                        }
-                                        push();
-                                    }
-                                })
-                            );
-                        })
-                        .then(response => response.blob())
-                        .then(blob => {
-                            // إنشاء رابط تحميل مؤقت
-                            const blobUrl = window.URL.createObjectURL(blob);
-                            const link = document.createElement('a');
-                            link.href = blobUrl;
-                            link.download = filename;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            window.URL.revokeObjectURL(blobUrl);
-                            
-                            // إكمال التحميل
-                            completeDownload();
-                        })
-                        .catch(error => {
-                            console.error('Download failed:', error);
-                            // إذا فشل التحميل، نستخدم الطريقة التقليدية
-                            window.location.href = url;
-                            completeDownload();
-                        });
-                } else {
-                    // للمتصفحات القديمة
-                    setTimeout(completeDownload, 3000);
-                }
-            });
-        }
-
         // ===== PWA INSTALLATION =====
         let deferredPrompt;
         const pwaInstallBtn = document.getElementById('pwaInstallBtn');
@@ -1050,8 +787,7 @@
         window.addEventListener('load', () => {
             updateAppInfo();
             setTimeout(checkForUpdates, 2000);
-            setupDownloadNotification();
         });
     </script>
 </body>
-                                                                        </html>
+    </html>
