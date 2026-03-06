@@ -201,7 +201,6 @@
                 <li><a href="stories.html" class="active">القصص</a></li>
                 <li><a href="tenses.html">الأزمنة</a></li>
                 <li><a href="quiz.html">الاختبارات</a></li>
-                <li><a href="download.html">تحميل التطبيق</a></li>
             </ul>
             <div class="nav-right">
                 <div class="theme-toggle">
@@ -227,15 +226,26 @@
                     <span class="filter-label">المستوى:</span>
                     <div class="filter-tabs" id="levelFilters">
                         <button class="filter-tab active" onclick="filterByLevel('all')">الكل</button>
-                        <button class="filter-tab" onclick="filterByLevel('beginner')">مبتدئ</button>
-                        <button class="filter-tab" onclick="filterByLevel('intermediate')">متوسط</button>
-                        <button class="filter-tab" onclick="filterByLevel('advanced')">متقدم</button>
+                        <button class="filter-tab" onclick="filterByLevel('a1')">A1</button>
+                        <button class="filter-tab" onclick="filterByLevel('a2')">A2</button>
+                        <button class="filter-tab" onclick="filterByLevel('b1')">B1</button>
+                        <button class="filter-tab" onclick="filterByLevel('b2')">B2</button>
+                        <button class="filter-tab" onclick="filterByLevel('c1')">C1</button>
+                        <button class="filter-tab" onclick="filterByLevel('c2')">C2</button>
                     </div>
                 </div>
                 <button class="saved-btn" id="savedBtn" onclick="showSavedStories()">
                     <i class="fas fa-bookmark"></i> المحفوظة
                     <span class="saved-badge" id="savedBadge">0</span>
                 </button>
+            </div>
+            <div class="filter-row">
+                <div style="position:relative;flex:1;max-width:380px">
+                    <i class="fas fa-search" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--text-secondary);font-size:0.85rem;pointer-events:none"></i>
+                    <input id="searchInput" type="text" placeholder="ابحث عن قصة..." onkeyup="applyFilters()"
+                        style="width:100%;padding:0.6rem 2.5rem 0.6rem 1rem;border:1.5px solid var(--border);border-radius:2rem;background:var(--bg-card);color:var(--text-primary);font-family:inherit;font-size:0.88rem;outline:none;transition:border .2s"
+                        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+                </div>
             </div>
         </div>
 
@@ -276,6 +286,16 @@
         let totalPages            = 1;
         let currentDisplayStories = [];
 
+        const READ_TIME_MAP = {
+            a1: '2 دقيقة', a2: '3 دقائق',
+            b1: '4 دقائق', b2: '5 دقائق',
+            c1: '7 دقائق', c2: '9 دقائق'
+        };
+
+        const LEVEL_LABELS = {
+            all:'الكل', a1:'A1', a2:'A2', b1:'B1', b2:'B2', c1:'C1', c2:'C2'
+        };
+
         function speakText(text) {
             window.speechSynthesis.cancel();
             const u = new SpeechSynthesisUtterance(text);
@@ -302,9 +322,8 @@
         function filterByLevel(level) {
             if (viewingSaved) exitSavedView();
             currentLevel = level;
-            const map = { all:'الكل', beginner:'مبتدئ', intermediate:'متوسط', advanced:'متقدم' };
             document.querySelectorAll('#levelFilters .filter-tab').forEach(t => {
-                t.classList.toggle('active', t.textContent.trim() === map[level]);
+                t.classList.toggle('active', t.textContent.trim() === (LEVEL_LABELS[level] || level));
             });
             applyFilters();
         }
@@ -312,7 +331,12 @@
         function applyFilters() {
             if (viewingSaved) { showSavedStories(); return; }
             const data = (typeof STORIES_DATA !== 'undefined') ? STORIES_DATA : [];
-            currentDisplayStories = currentLevel === 'all' ? data : data.filter(s => s.level === currentLevel);
+            const query = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+            let filtered = currentLevel === 'all' ? data : data.filter(s => s.level === currentLevel);
+            if (query) filtered = filtered.filter(s =>
+                s.title.toLowerCase().includes(query) || s.content.toLowerCase().includes(query)
+            );
+            currentDisplayStories = filtered;
             currentPage = 1; renderGrid(); updatePagination();
         }
 
@@ -325,12 +349,11 @@
             document.getElementById('paginationContainer').style.display = 'flex';
             const start = (currentPage - 1) * itemsPerPage;
             const end   = Math.min(start + itemsPerPage, currentDisplayStories.length);
-            const readTimeMap = { beginner:'2 دقيقة', intermediate:'4 دقائق', advanced:'6 دقائق' };
 
             document.getElementById('storiesGrid').innerHTML = currentDisplayStories.slice(start, end).map(story => {
                 const isSaved  = savedStories.includes(story.id);
                 const preview  = story.content.length > 110 ? story.content.substring(0,110) + '...' : story.content;
-                const readTime = readTimeMap[story.level] || '3 دقائق';
+                const readTime = READ_TIME_MAP[story.level] || '3 دقائق';
                 return `
                 <div class="story-card ${isSaved ? 'saved' : ''}">
                     <div class="story-img-wrap">
