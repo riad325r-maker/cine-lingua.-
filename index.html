@@ -13,7 +13,6 @@
     <meta name="apple-mobile-web-app-title" content="CineLingua">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/J4xdc62M/20260305-233826.png">
     
-    <!-- Existing Meta Tags (محدثة بالصورة الجديدة) -->
     <meta property="og:title" content="CineLingua | تعلم الإنجليزية بذكاء">
     <meta property="og:description" content="منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية">
     <meta property="og:image" content="https://i.postimg.cc/J4xdc62M/20260305-233826.png">
@@ -27,7 +26,6 @@
     <meta name="twitter:image" content="https://i.postimg.cc/J4xdc62M/20260305-233826.png">
     <meta name="description" content="منصة تعليمية متكاملة تساعدك على تعلم الإنجليزية من خلال كلمات، قصص، أزمنة، واختبارات تفاعلية">
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -67,7 +65,7 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* Install Banner - محدث بالصورة */
+        /* Install Banner */
         .install-banner {
             position: fixed;
             bottom: 20px;
@@ -153,9 +151,59 @@
             transition: transform 0.2s;
             white-space: nowrap;
             margin-left: 0.5rem;
+            font-family: inherit;
         }
 
         .install-btn:hover { transform: scale(1.05); }
+
+        /* ===== NOTIFICATION PROMPT ===== */
+        .notif-prompt {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            max-width: 400px;
+            width: calc(100% - 2rem);
+            border-right: 4px solid var(--primary);
+            animation: slideDown 0.4s ease;
+            direction: rtl;
+        }
+
+        .notif-prompt.show { display: flex; }
+
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-60px); opacity: 0; }
+            to   { transform: translateX(-50%) translateY(0);     opacity: 1; }
+        }
+
+        .notif-prompt-icon { font-size: 1.8rem; }
+
+        .notif-prompt-text { flex-grow: 1; }
+        .notif-prompt-text strong { display: block; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.2rem; }
+        .notif-prompt-text span   { font-size: 0.78rem; color: var(--text-secondary); }
+
+        .notif-prompt-btns { display: flex; flex-direction: column; gap: 0.4rem; flex-shrink: 0; }
+
+        .notif-allow-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 0.4rem 0.9rem; border-radius: 2rem; font-weight: 700;
+            cursor: pointer; font-size: 0.82rem; font-family: inherit; white-space: nowrap;
+        }
+
+        .notif-deny-btn {
+            background: none; border: none; color: #94a3b8;
+            cursor: pointer; font-size: 0.78rem; font-family: inherit;
+            text-align: center;
+        }
+        .notif-deny-btn:hover { color: #475569; }
 
         /* ===== NAVBAR ===== */
         .navbar {
@@ -272,23 +320,13 @@
         .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: white; background: transparent; }
         .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
 
-        /* Hero Stats */
         .hero-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
-
         .hero-stat { text-align: center; }
-
-        .hero-stat .stat-number {
-            font-size: 2rem; font-weight: 800; display: block; line-height: 1;
-        }
-
+        .hero-stat .stat-number { font-size: 2rem; font-weight: 800; display: block; line-height: 1; }
         .hero-stat .stat-label { font-size: 0.85rem; opacity: 0.8; margin-top: 0.2rem; }
 
-        /* ===== PROGRESS BANNER (للعائدين) ===== */
-        .progress-banner {
-            max-width: 1200px; margin: 2rem auto 0; padding: 0 2rem;
-            display: none;
-        }
-
+        /* ===== PROGRESS BANNER ===== */
+        .progress-banner { max-width: 1200px; margin: 2rem auto 0; padding: 0 2rem; display: none; }
         .progress-banner.show { display: block; }
 
         .progress-card {
@@ -310,11 +348,9 @@
         .progress-greeting p  { font-size: 0.85rem; opacity: 0.85; }
 
         .progress-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-
         .progress-stat { text-align: center; }
         .progress-stat .p-val  { font-size: 1.6rem; font-weight: 800; display: block; line-height: 1; }
         .progress-stat .p-lbl  { font-size: 0.75rem; opacity: 0.8; }
-
         .progress-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
 
         .progress-cta {
@@ -322,23 +358,18 @@
             padding: 0.65rem 1.4rem; border-radius: 2rem; font-weight: 700;
             cursor: pointer; font-family: inherit; font-size: 0.88rem;
             transition: all 0.2s; text-decoration: none;
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
         }
-
         .progress-cta:hover { transform: scale(1.04); }
 
         /* ===== MENU SECTION ===== */
         .menu-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-
         .section-header { text-align: center; margin-bottom: 2.5rem; }
-
         .section-header h2 {
             font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
         .section-header p { color: var(--text-secondary); font-size: 1rem; }
 
         .menu-grid {
@@ -375,136 +406,56 @@
             box-shadow: 0 8px 20px rgba(99,102,241,0.3);
         }
 
-        .menu-card h3 {
-            font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--primary);
-        }
+        .menu-card h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--primary); }
+        .menu-card p { color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.95rem; flex-grow: 1; }
 
-        .menu-card p {
-            color: var(--text-secondary); margin-bottom: 1.2rem;
-            line-height: 1.6; font-size: 0.95rem; flex-grow: 1;
-        }
-
-        /* Mini progress bar inside card */
         .card-progress { margin-bottom: 1rem; }
-
-        .card-progress-bar {
-            height: 5px; background: var(--bg-secondary);
-            border-radius: 100px; overflow: hidden; margin-bottom: 0.35rem;
-        }
-
-        .card-progress-fill {
-            height: 100%; border-radius: 100px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.8s ease;
-        }
-
+        .card-progress-bar { height: 5px; background: var(--bg-secondary); border-radius: 100px; overflow: hidden; margin-bottom: 0.35rem; }
+        .card-progress-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.8s ease; }
         .card-progress-label { font-size: 0.75rem; color: var(--text-secondary); text-align: right; }
 
-        .menu-stats {
-            display: flex; justify-content: center; gap: 1rem;
-            padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap;
-        }
-
-        .menu-stats span {
-            display: flex; align-items: center; gap: 0.4rem;
-            color: var(--text-secondary); font-size: 0.85rem;
-        }
-
+        .menu-stats { display: flex; justify-content: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+        .menu-stats span { display: flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); font-size: 0.85rem; }
         .menu-stats i { color: var(--primary); font-size: 0.85rem; }
 
         /* ===== DOWNLOAD BANNER ===== */
-        .download-banner {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
+        .download-banner { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
 
         .download-banner-card {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 2rem;
-            padding: 2.5rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-            box-shadow: var(--shadow-lg);
+            border-radius: 2rem; padding: 2.5rem; color: white;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 2rem; box-shadow: var(--shadow-lg);
         }
 
-        .download-banner-content {
-            flex: 1;
-            min-width: 250px;
-        }
+        .download-banner-content { flex: 1; min-width: 250px; }
+        .download-banner-content h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .download-banner-content p { opacity: 0.9; margin-bottom: 1rem; }
 
-        .download-banner-content h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .download-banner-content p {
-            opacity: 0.9;
-            margin-bottom: 1rem;
-        }
-
-        .download-banner-stats {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .download-banner-stat {
-            text-align: center;
-        }
-
-        .download-banner-stat .stat {
-            font-size: 1.5rem;
-            font-weight: 800;
-            display: block;
-        }
-
-        .download-banner-stat .label {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
+        .download-banner-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .download-banner-stat { text-align: center; }
+        .download-banner-stat .stat { font-size: 1.5rem; font-weight: 800; display: block; }
+        .download-banner-stat .label { font-size: 0.8rem; opacity: 0.8; }
 
         .download-banner-btn {
-            background: white;
-            color: var(--primary);
-            padding: 1rem 2.5rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: white; color: var(--primary);
+            padding: 1rem 2.5rem; border-radius: 100px;
+            text-decoration: none; font-weight: 700; font-size: 1.1rem;
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            transition: all 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        .download-banner-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
+        .download-banner-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
 
         /* ===== FEATURES ===== */
         .features-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1.25rem;
-        }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
 
         .feature-card {
             background: var(--bg-card); padding: 1.75rem;
             border-radius: 1.2rem; text-align: center;
-            box-shadow: var(--shadow); transition: all 0.3s;
-            border: 1px solid var(--border);
+            box-shadow: var(--shadow); transition: all 0.3s; border: 1px solid var(--border);
         }
-
         .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(99,102,241,0.25); }
 
         .feature-icon {
@@ -513,83 +464,41 @@
             align-items: center; justify-content: center;
             margin: 0 auto 1rem; font-size: 1.4rem; color: var(--primary);
         }
-
         .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
         .feature-card p  { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; }
 
         /* ===== CTA SECTION ===== */
-        .cta-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
+        .cta-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; text-align: center; }
 
-        .cta-card {
-            background: var(--bg-card);
-            border-radius: 2rem;
-            padding: 3rem;
-            border: 2px solid var(--border);
-        }
+        .cta-card { background: var(--bg-card); border-radius: 2rem; padding: 3rem; border: 2px solid var(--border); }
 
         .cta-card h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2rem; margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
 
         .cta-btn {
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
+            padding: 1rem 2rem; border-radius: 100px; text-decoration: none;
+            font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s;
         }
-
-        .cta-btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .cta-btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
+        .cta-btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .cta-btn-secondary { background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border); }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--bg-card);
-            border-top: 1px solid var(--border);
-            text-align: center;
-            padding: 1.75rem 2rem;
-            margin-top: 4rem;
-            color: var(--text-secondary);
-            font-size: 0.88rem;
+            background: var(--bg-card); border-top: 1px solid var(--border);
+            text-align: center; padding: 1.75rem 2rem; margin-top: 4rem;
+            color: var(--text-secondary); font-size: 0.88rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- INSTALL BANNER (محدث بالصورة) -->
+    <!-- INSTALL BANNER -->
     <div class="install-banner" id="installBanner">
         <div class="install-icon">
             <img src="https://i.postimg.cc/J4xdc62M/20260305-233826.png" alt="CineLingua">
@@ -606,7 +515,19 @@
         </button>
     </div>
 
-    <!-- باقي الملف كما هو ... -->
+    <!-- NOTIFICATION PROMPT -->
+    <div class="notif-prompt" id="notifPrompt">
+        <div class="notif-prompt-icon">🔔</div>
+        <div class="notif-prompt-text">
+            <strong>فعّل تذكيرات التعلم اليومية</strong>
+            <span>حتى لا تفوتك أي جلسة تعلم</span>
+        </div>
+        <div class="notif-prompt-btns">
+            <button class="notif-allow-btn" id="allowNotif">السماح</button>
+            <button class="notif-deny-btn" id="denyNotif">لاحقاً</button>
+        </div>
+    </div>
+
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
@@ -660,7 +581,7 @@
         </div>
     </section>
 
-    <!-- PROGRESS BANNER (للعائدين) -->
+    <!-- PROGRESS BANNER -->
     <div class="progress-banner" id="progressBanner">
         <div class="progress-card" data-aos="fade-up">
             <div class="progress-card-left">
@@ -904,17 +825,15 @@
         // ===== PWA INSTALLATION =====
         let deferredPrompt;
         const installBanner = document.getElementById('installBanner');
-        const installBtn = document.getElementById('installBtn');
-        const installClose = document.getElementById('installClose');
+        const installBtn    = document.getElementById('installBtn');
+        const installClose  = document.getElementById('installClose');
 
         if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
             console.log('App is running in standalone mode');
         } else {
             const hasSeenBanner = localStorage.getItem('installBannerSeen');
             if (!hasSeenBanner) {
-                setTimeout(() => {
-                    installBanner.classList.add('show');
-                }, 5000);
+                setTimeout(() => { installBanner.classList.add('show'); }, 5000);
             }
         }
 
@@ -928,10 +847,11 @@
             if (!deferredPrompt) return;
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
             deferredPrompt = null;
             installBanner.classList.remove('show');
             localStorage.setItem('installBannerSeen', 'true');
+            // بعد التثبيت اعرض طلب الإشعارات
+            setTimeout(showNotifPrompt, 1500);
         });
 
         installClose.addEventListener('click', () => {
@@ -939,23 +859,86 @@
             localStorage.setItem('installBannerSeen', 'true');
         });
 
-        // ===== SERVICE WORKER REGISTRATION =====
+        window.addEventListener('appinstalled', () => {
+            installBanner.classList.remove('show');
+            setTimeout(showNotifPrompt, 1500);
+        });
+
+        // ===== NOTIFICATIONS =====
+        function showNotifPrompt() {
+            if (!('Notification' in window)) return;
+            if (Notification.permission === 'granted') return;
+            if (localStorage.getItem('notifDenied')) return;
+            document.getElementById('notifPrompt').classList.add('show');
+        }
+
+        document.getElementById('allowNotif').addEventListener('click', async () => {
+            document.getElementById('notifPrompt').classList.remove('show');
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification('مرحباً في CineLingua! 🎓', {
+                        body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
+                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        dir: 'rtl', lang: 'ar', vibrate: [200, 100, 200],
+                        tag: 'welcome',
+                        actions: [{ action: 'open', title: 'تعلم الآن' }]
+                    });
+                });
+                scheduleDailyReminder();
+            }
+        });
+
+        document.getElementById('denyNotif').addEventListener('click', () => {
+            document.getElementById('notifPrompt').classList.remove('show');
+            localStorage.setItem('notifDenied', '1');
+        });
+
+        // عرض طلب الإشعارات بعد 10 ثواني للزوار العاديين
+        setTimeout(() => {
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                showNotifPrompt();
+            }
+        }, 10000);
+
+        // ===== DAILY REMINDER =====
+        function scheduleDailyReminder() {
+            const lastReminder = localStorage.getItem('lastReminder');
+            const now = Date.now();
+            if (!lastReminder || (now - parseInt(lastReminder)) >= 86400000) {
+                localStorage.setItem('lastReminder', now.toString());
+                const hour = new Date().getHours();
+                if (hour >= 8 && hour <= 21 && Notification.permission === 'granted') {
+                    navigator.serviceWorker.ready.then(reg => {
+                        const msgs = [
+                            { title: 'وقت تعلمك اليومي 📚', body: 'خصص 10 دقائق لتعلم كلمات جديدة!' },
+                            { title: 'CineLingua بيستناك 🎓', body: 'استمر في بناء مهاراتك اللغوية!' },
+                            { title: 'تحدّي اليوم 🏆', body: 'جرّب اختباراً جديداً واكتشف مستواك!' },
+                            { title: 'قصة جديدة تنتظرك 📖', body: 'اقرأ قصة وطوّر فهمك للإنجليزية!' }
+                        ];
+                        const msg = msgs[Math.floor(Math.random() * msgs.length)];
+                        reg.showNotification(msg.title, {
+                            body: msg.body,
+                            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                            dir: 'rtl', lang: 'ar', vibrate: [200, 100, 200],
+                            tag: 'daily-reminder'
+                        });
+                    });
+                }
+            }
+        }
+
+        // ===== SERVICE WORKER =====
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('✅ Service Worker registered successfully:', registration.scope);
+                    .then(reg => {
+                        console.log('✅ Service Worker registered:', reg.scope);
+                        if (Notification.permission === 'granted') scheduleDailyReminder();
                     })
-                    .catch(error => {
-                        console.log('❌ Service Worker registration failed:', error);
-                    });
+                    .catch(err => console.log('❌ SW failed:', err));
             });
         }
-
-        window.addEventListener('appinstalled', (evt) => {
-            console.log('✅ CineLingua was installed successfully');
-            installBanner.classList.remove('show');
-        });
     </script>
 </body>
-                        </html>
+</html>
