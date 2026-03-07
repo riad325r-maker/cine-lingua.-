@@ -173,8 +173,7 @@
             max-width: 400px;
             width: calc(100% - 2rem);
             border-right: 4px solid var(--primary);
-            animation: slideDown 0.4s ease;
-            direction: rtl;
+            animation: popIn 0.3s ease forwards;
         }
 
         .notif-prompt.show { display: flex; }
@@ -515,15 +514,22 @@
         </button>
     </div>
 
+    <!-- NOTIFICATION OVERLAY -->
+    <div class="notif-overlay" id="notifOverlay"></div>
+
     <!-- NOTIFICATION PROMPT -->
     <div class="notif-prompt" id="notifPrompt">
         <div class="notif-prompt-icon">🔔</div>
         <div class="notif-prompt-text">
             <strong>فعّل تذكيرات التعلم اليومية</strong>
-            <span>حتى لا تفوتك أي جلسة تعلم</span>
+            <span>سنذكّرك يومياً بجلسة تعلمك حتى تبني عادة منتظمة</span>
+        </div>
+        <div class="notif-step">
+            بعد الضغط على <b>السماح</b> ستظهر رسالة من Chrome<br>
+            اضغط <b>Allow / السماح</b> فيها لتفعيل الإشعارات ✅
         </div>
         <div class="notif-prompt-btns">
-            <button class="notif-allow-btn" id="allowNotif">السماح</button>
+            <button class="notif-allow-btn" id="allowNotif">🔔 السماح بالإشعارات</button>
             <button class="notif-deny-btn" id="denyNotif">لاحقاً</button>
         </div>
     </div>
@@ -792,10 +798,12 @@
             if (Notification.permission === 'granted') return;
             if (localStorage.getItem('notifDenied')) return;
             document.getElementById('notifPrompt').classList.add('show');
+            document.getElementById('notifOverlay').classList.add('show');
         }
 
         document.getElementById('allowNotif').addEventListener('click', async () => {
             document.getElementById('notifPrompt').classList.remove('show');
+            document.getElementById('notifOverlay').classList.remove('show');
             const permission = await Notification.requestPermission();
             if (permission === 'granted') {
                 // انتظر SW يكون جاهز ثم أرسل الإشعار الترحيبي
@@ -815,6 +823,13 @@
 
         document.getElementById('denyNotif').addEventListener('click', () => {
             document.getElementById('notifPrompt').classList.remove('show');
+            document.getElementById('notifOverlay').classList.remove('show');
+            localStorage.setItem('notifDenied', '1');
+        });
+
+        document.getElementById('notifOverlay').addEventListener('click', () => {
+            document.getElementById('notifPrompt').classList.remove('show');
+            document.getElementById('notifOverlay').classList.remove('show');
             localStorage.setItem('notifDenied', '1');
         });
 
