@@ -876,18 +876,33 @@
             document.getElementById('notifPrompt').classList.remove('show');
             const permission = await Notification.requestPermission();
             if (permission === 'granted') {
-                navigator.serviceWorker.ready.then(reg => {
-                    reg.showNotification('مرحباً في CineLingua! 🎓', {
-                        body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
-                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        dir: 'rtl', lang: 'ar', vibrate: [200, 100, 200],
-                        tag: 'welcome',
-                        actions: [{ action: 'open', title: 'تعلم الآن' }]
-                    });
-                });
+                sendWelcomeNotification();
                 scheduleDailyReminder();
             }
         });
+
+        async function sendWelcomeNotification() {
+            try {
+                // طريقة مباشرة - أسرع وأضمن على الجوال
+                new Notification('مرحباً في CineLingua! 🎓', {
+                    body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
+                    icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                    dir: 'rtl',
+                    lang: 'ar'
+                });
+            } catch (e) {
+                // fallback عبر service worker
+                try {
+                    const reg = await navigator.serviceWorker.ready;
+                    await reg.showNotification('مرحباً في CineLingua! 🎓', {
+                        body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
+                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        dir: 'rtl', lang: 'ar', vibrate: [200, 100, 200],
+                        tag: 'welcome'
+                    });
+                } catch (e2) { console.log('Notification failed:', e2); }
+            }
+        }
 
         document.getElementById('denyNotif').addEventListener('click', () => {
             document.getElementById('notifPrompt').classList.remove('show');
