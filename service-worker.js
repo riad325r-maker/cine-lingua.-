@@ -12,99 +12,70 @@ const urlsToCache = [
   'https://unpkg.com/aos@2.3.1/dist/aos.js'
 ];
 
-// Install Service Worker
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('✅ Opened cache');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache => {
+      return Promise.allSettled(
+        urlsToCache.map(url => cache.add(url).catch(() => {}))
+      );
+    })
   );
 });
 
-// Activate and clean up old caches
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('🗑️ Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
   );
   self.clients.claim();
 });
 
-// Fetch strategy: Network First, fallback to cache
 self.addEventListener('fetch', event => {
   event.respondWith(
     fetch(event.request)
       .then(response => {
-        const responseClone = response.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseClone);
-        });
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return response;
       })
       .catch(() => caches.match(event.request))
   );
 });
 
-// ===== استقبال الإشعارات Push =====
+// ===== Push Notifications =====
 self.addEventListener('push', event => {
   let data = {
     title: 'CineLingua 🎓',
     body: 'لديك تذكير جديد!',
     icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png'
   };
-
-  try {
-    if (event.data) data = { ...data, ...event.data.json() };
-  } catch (e) {
-    if (event.data) data.body = event.data.text();
-  }
+  try { if (event.data) data = { ...data, ...event.data.json() }; } catch (e) {}
 
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
       icon: data.icon,
       badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-      dir: 'rtl',
-      lang: 'ar',
+      dir: 'rtl', lang: 'ar',
       vibrate: [200, 100, 200],
       tag: 'cinelingua-notif',
       renotify: true,
-      data: { url: data.url || 'https://riad325r-maker.github.io/cine-lingua.-/' },
-      actions: [
-        { action: 'open', title: 'افتح التطبيق' },
-        { action: 'dismiss', title: 'لاحقاً' }
-      ]
+      data: { url: 'https://riad325r-maker.github.io/cine-lingua.-/' }
     })
   );
 });
 
-// ===== الضغط على الإشعار =====
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-
-  if (event.action === 'dismiss') return;
-
-  const targetUrl = event.notification.data?.url || 'https://riad325r-maker.github.io/cine-lingua.-/';
-
+  const url = event.notification.data?.url || 'https://riad325r-maker.github.io/cine-lingua.-/';
   event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
-      for (const client of clientList) {
-        if (client.url.includes('riad325r-maker.github.io') && 'focus' in client) {
-          return client.focus();
-        }
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+      for (const c of list) {
+        if (c.url.includes('riad325r-maker') && 'focus' in c) return c.focus();
       }
-      if (clients.openWindow) return clients.openWindow(targetUrl);
+      return clients.openWindow(url);
     })
   );
 });
