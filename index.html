@@ -526,10 +526,6 @@
             const data = await getNotifData();
             if (!data) return;
 
-            const intervalMs = (data.interval_hours || 24) * 3600000;
-            const lastReminder = parseInt(localStorage.getItem('lastReminder') || '0');
-            const now = Date.now();
-
             // إشعار التحديث — يظهر مرة وحدة لما enabled = true
             if (data.update && data.update.enabled) {
                 const lastUpdate = localStorage.getItem('lastUpdateNotif');
@@ -545,24 +541,47 @@
                     localStorage.setItem('lastUpdateNotif', '1');
                 }
             } else {
-                // لو صار false مسح الذاكرة عشان يظهر مرة ثانية لما تشغله
                 localStorage.removeItem('lastUpdateNotif');
             }
 
-            // التذكير الدوري
-            if ((now - lastReminder) >= intervalMs) {
-                localStorage.setItem('lastReminder', now.toString());
-                const msgs = data.reminders;
-                const msg = msgs[Math.floor(Math.random() * msgs.length)];
-                navigator.serviceWorker.ready.then(reg => {
-                    reg.showNotification(msg.title, {
-                        body: msg.body,
-                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        dir: 'rtl', lang: 'ar', vibrate: [200, 100, 200], tag: 'reminder'
+            // التذكيرات — كل إشعار له وقت محدد
+            checkScheduledReminders(data.reminders);
+
+            // فحص كل دقيقة
+            setInterval(() => checkScheduledReminders(data.reminders), 60000);
+        }
+
+        function checkScheduledReminders(reminders) {
+            if (!reminders || Notification.permission !== 'granted') return;
+            const now = new Date();
+            const currentHour   = now.getHours();
+            const currentMinute = now.getMinutes();
+            const todayKey = now.toDateString();
+
+            reminders.forEach((reminder, index) => {
+                const key = `notif_sent_${index}_${todayKey}`;
+                // تحقق إذا وقت الإشعار وصل ولم يُرسل اليوم
+                if (currentHour === reminder.hour &&
+                    currentMinute === (reminder.minute || 0) &&
+                    !localStorage.getItem(key)) {
+                    localStorage.setItem(key, '1');
+                    navigator.serviceWorker.ready.then(reg => {
+                        reg.showNotification(reminder.title, {
+                            body: reminder.body,
+                            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                            badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                            dir: 'rtl', lang: 'ar', vibrate: [200, 100, 200],
+                            tag: 'reminder-' + index
+                        });
                     });
-                });
-            }
+                }
+            });
+
+            // مسح مفاتيح أمس عشان ما تتراكم
+            const yesterday = new Date(now - 86400000).toDateString();
+            reminders.forEach((_, index) => {
+                localStorage.removeItem(`notif_sent_${index}_${yesterday}`);
+            });
         }
 
         // ===== SERVICE WORKER =====
