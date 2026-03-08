@@ -382,9 +382,6 @@
                 document.getElementById('notifBlocked').classList.add('show');
                 return;
             }
-            const snoozed = localStorage.getItem('notifSnoozed');
-            if (snoozed && (Date.now() - parseInt(snoozed)) < 86400000) return;
-            if (snoozed) localStorage.removeItem('notifSnoozed');
             showOverlay();
             document.getElementById('notifPrompt').classList.add('show');
         }
@@ -414,13 +411,11 @@
 
         document.getElementById('denyNotif').addEventListener('click', () => {
             hideNotifPrompt();
-            localStorage.setItem('notifSnoozed', Date.now().toString());
         });
 
         document.getElementById('notifOverlay').addEventListener('click', () => {
             hideNotifPrompt();
             document.getElementById('notifBlocked').classList.remove('show');
-            localStorage.setItem('notifSnoozed', Date.now().toString());
         });
 
         document.getElementById('notifBlockedClose').addEventListener('click', () => {
