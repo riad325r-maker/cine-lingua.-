@@ -2,11 +2,11 @@ name: Send Scheduled Notifications
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 6 صباحاً UTC = 9 صباحاً السعودية
-    - cron: '0 11 * * *'  # 11 ظهراً UTC = 2 ظهراً السعودية
-    - cron: '0 16 * * *'  # 4 مساءً UTC = 7 مساءً السعودية
-    - cron: '0 19 * * *'  # 7 مساءً UTC = 10 مساءً السعودية
-  workflow_dispatch: # تشغيل يدوي من GitHub
+    - cron: '0 6 * * *'
+    - cron: '0 11 * * *'
+    - cron: '0 16 * * *'
+    - cron: '0 19 * * *'
+  workflow_dispatch:
 
 jobs:
   notify:
@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install firebase-admin node-fetch
+        run: npm install firebase-admin
 
       - name: Send notification
         env:
