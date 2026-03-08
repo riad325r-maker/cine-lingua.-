@@ -30,7 +30,7 @@
     }
   ],
   "update": {
-    "enabled": true,
+    "enabled": false,
     "title": "✨ تحديث جديد",
     "body": "أضفنا قصص جديدة وتدريبات تفاعلية"
   }
