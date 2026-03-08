@@ -1,4 +1,4 @@
-يعني name: Send Scheduled Notifications
+name: Send Scheduled Notifications
 
 on:
   schedule:
