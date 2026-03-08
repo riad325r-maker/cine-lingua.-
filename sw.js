@@ -1,60 +1,33 @@
-const CACHE_NAME = 'cinelingua-v1';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/lessons.html',
-    '/stories.html',
-    '/tenses.html',
-    '/quiz.html',
-    '/download.html',
-    '/manifest.json',
-    '/notifications.json'
-];
+importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js');
 
-self.addEventListener('install', event => {
-    self.skipWaiting();
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
-    );
+firebase.initializeApp({
+    apiKey: "AIzaSyBUqx2f4jmg-XSshWA_AcDSMPcttPPBs_E",
+    authDomain: "cinelingua-d4c2b.firebaseapp.com",
+    projectId: "cinelingua-d4c2b",
+    storageBucket: "cinelingua-d4c2b.firebasestorage.app",
+    messagingSenderId: "569970499890",
+    appId: "1:569970499890:web:9cf03df25e37745d44f72b"
 });
 
-self.addEventListener('activate', event => {
-    self.clients.claim();
-    event.waitUntil(
-        caches.keys().then(keys =>
-            Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-        )
-    );
-});
+const messaging = firebase.messaging();
 
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request).then(cached => cached || fetch(event.request))
-    );
-});
-
-self.addEventListener('push', event => {
-    const data = event.data ? event.data.json() : {
-        title: 'CineLingua 🎓',
-        body: 'وقت تعلمك اليومي!'
-    };
-    event.waitUntil(
-        self.registration.showNotification(data.title, {
-            body: data.body,
-            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-            badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-            image: data.image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-            dir: 'rtl', lang: 'ar',
-            vibrate: [200, 100, 200, 100, 200],
-            tag: 'cinelingua-notif',
-            renotify: true,
-            actions: [
-                { action: 'open',  title: '📚 تعلم الآن' },
-                { action: 'close', title: 'لاحقاً' }
-            ],
-            data: { url: 'https://riad325r-maker.github.io/cine-lingua.-/' }
-        })
-    );
+messaging.onBackgroundMessage(payload => {
+    const { title, body, image } = payload.notification;
+    self.registration.showNotification(title, {
+        body,
+        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+        badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+        image: image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+        dir: 'rtl', lang: 'ar',
+        vibrate: [200, 100, 200, 100, 200],
+        tag: 'cinelingua-notif',
+        renotify: true,
+        actions: [
+            { action: 'open',  title: '📚 تعلم الآن' },
+            { action: 'close', title: 'لاحقاً' }
+        ]
+    });
 });
 
 self.addEventListener('notificationclick', event => {
