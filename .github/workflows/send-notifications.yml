@@ -1,4 +1,4 @@
-name: Send Scheduled Notifications
+ت غييرname: Send Scheduled Notifications
 
 on:
   schedule:
