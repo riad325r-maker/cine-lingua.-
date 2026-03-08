@@ -43,3 +43,78 @@ self.addEventListener('notificationclick', event => {
         })
     );
 });
+
+// ===== إضافة كود BACKGROUND SYNC =====
+// هذا الكود يخلي التطبيق يشتغل في الخلفية حتى لو مقفول
+
+self.addEventListener('periodicsync', (event) => {
+    if (event.tag === 'cinelingua-sync') {
+        event.waitUntil(
+            (async () => {
+                console.log('🔄 CineLingua شغال في الخلفية!');
+                
+                // هنا نقدر نحدث البيانات أو نرسل إشعارات
+                try {
+                    // جيب كل العملاء المفتوحين
+                    const clients = await self.clients.matchAll();
+                    clients.forEach(client => {
+                        client.postMessage({
+                            type: 'BACKGROUND_SYNC',
+                            timestamp: Date.now()
+                        });
+                    });
+                    
+                    // اختياري: نحدث البيانات من السيرفر
+                    // await updateContent();
+                    
+                } catch (error) {
+                    console.log('خطأ في background sync:', error);
+                }
+            })()
+        );
+    }
+});
+
+// تسجيل الـ periodic sync عند تفعيل السيرفس وركر
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        (async () => {
+            // نمسك السيرفس وركر القديم
+            await self.clients.claim();
+            
+            if ('periodicSync' in self.registration) {
+                try {
+                    // نسجل طلب تشغيل كل ساعة
+                    await self.registration.periodicSync.register('cinelingua-sync', {
+                        minInterval: 60 * 60 * 1000 // نطلب كل ساعة (المتصفح يقرر)
+                    });
+                    console.log('✅ CineLingua مسجل للعمل في الخلفية');
+                } catch (error) {
+                    console.log('❌ Periodic sync not supported:', error);
+                }
+            } else {
+                console.log('⚠️ Periodic sync غير مدعوم في هذا المتصفح');
+            }
+        })()
+    );
+});
+
+// وظيفة اختيارية لتحديث المحتوى
+async function updateContent() {
+    try {
+        const response = await fetch('https://api.cinelingua.com/updates');
+        const data = await response.json();
+        
+        // لو في تحديث جديد، نرسل إشعار
+        if (data.hasUpdate) {
+            self.registration.showNotification('📚 تحديث جديد!', {
+                body: data.message,
+                icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                tag: 'content-update'
+            });
+        }
+    } catch (error) {
+        console.log('فشل تحديث المحتوى:', error);
+    }
+}
