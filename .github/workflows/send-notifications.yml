@@ -1,28 +1,27 @@
-name: Send Scheduled Notifications
+name: Send Scheduled Notifications                    # 0 مسافات
+on:                                                   # 0 مسافات
+  schedule:                                           # 2 مسافات
+    - cron: '0 6 * * *'                               # 4 مسافات
+    - cron: '0 11 * * *'                              # 4 مسافات
+    - cron: '0 16 * * *'                              # 4 مسافات
+    - cron: '0 19 * * *'                              # 4 مسافات
+  workflow_dispatch:                                   # 2 مسافات
 
-on:
-  schedule:
-    - cron: '0 6 * * *'
-    - cron: '0 11 * * *'
-    - cron: '0 16 * * *'
-    - cron: '0 19 * * *'
-  workflow_dispatch:
+jobs:                                                 # 0 مسافات
+  notify:                                             # 2 مسافات
+    runs-on: ubuntu-latest                            # 4 مسافات
+    steps:                                            # 4 مسافات
+      - uses: actions/checkout@v3                      # 6 مسافات
 
-jobs:
-  notify:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+      - name: Setup Node.js                            # 6 مسافات
+        uses: actions/setup-node@v3                     # 8 مسافات
+        with:                                           # 8 مسافات
+          node-version: '18'                             # 10 مسافات
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Install dependencies                      # 6 مسافات
+        run: npm install firebase-admin                  # 8 مسافات
 
-      - name: Install dependencies
-        run: npm install firebase-admin
-
-      - name: Send notification
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: node .github/scripts/send-notification.js
+      - name: Send notification                         # 6 مسافات
+        env:                                             # 8 مسافات
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}  # 10 مسافات
+        run: node .github/scripts/send-notification.js   # 8 مسافات
