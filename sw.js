@@ -1,7 +1,16 @@
 const CACHE_NAME = 'cinelingua-v1';
-const urlsToCache = ['/', '/index.html', '/manifest.json'];
+const urlsToCache = [
+    '/',
+    '/index.html',
+    '/lessons.html',
+    '/stories.html',
+    '/tenses.html',
+    '/quiz.html',
+    '/download.html',
+    '/manifest.json',
+    '/notifications.json'
+];
 
-// تثبيت السيرفس ووركر
 self.addEventListener('install', event => {
     self.skipWaiting();
     event.waitUntil(
@@ -18,13 +27,17 @@ self.addEventListener('activate', event => {
     );
 });
 
-// الإشعارات من الخلفية
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request).then(cached => cached || fetch(event.request))
+    );
+});
+
 self.addEventListener('push', event => {
     const data = event.data ? event.data.json() : {
         title: 'CineLingua 🎓',
         body: 'وقت تعلمك اليومي!'
     };
-
     event.waitUntil(
         self.registration.showNotification(data.title, {
             body: data.body,
@@ -44,12 +57,9 @@ self.addEventListener('push', event => {
     );
 });
 
-// لما يضغط على الإشعار
 self.addEventListener('notificationclick', event => {
     event.notification.close();
-
     if (event.action === 'close') return;
-
     const url = 'https://riad325r-maker.github.io/cine-lingua.-/';
     event.waitUntil(
         clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
