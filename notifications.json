@@ -1,43 +1,37 @@
 {
-  "update": {
-    "enabled": true,
-    "title": "تحديث جديد 🎉",
-    "body": "أضفنا محتوى جديداً! افتح التطبيق لتكتشفه",
-    "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
-  },
-
   "reminders": [
     {
-      "enabled": true,
-      "title": "وقت تعلمك الصباحي 📚",
-      "body": "خصص 10 دقائق لتعلم كلمات جديدة!",
-      "hour": 8,
+      "hour": 9,
       "minute": 0,
-      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+      "title": "🌅 صباح الخير!",
+      "body": "وقت جلسة التعلم الصباحية ☕",
+      "enabled": true
     },
     {
-      "enabled": true,
-      "title": "تذكير الظهر 🎯",
-      "body": "لا تنسَ جلسة تعلمك اليومية!",
-      "hour": 13,
-      "minute": 30,
-      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+      "hour": 14,
+      "minute": 0,
+      "title": "📖 استراحة تعلم",
+      "body": "5 دقائق مع CineLingua تنشط ذاكرتك",
+      "enabled": true
     },
     {
-      "enabled": false,
-      "title": "تحدّي المساء 🏆",
-      "body": "جرّب اختباراً جديداً الآن!",
-      "hour": 18,
+      "hour": 19,
       "minute": 0,
-      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+      "title": "🌟 المساء الذهبي",
+      "body": "أفضل وقت لتعلم كلمات جديدة",
+      "enabled": true
     },
     {
-      "enabled": true,
-      "title": "مراجعة الليل 🌙",
-      "body": "راجع ما تعلمته اليوم قبل النوم",
-      "hour": 21,
+      "hour": 22,
       "minute": 0,
-      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+      "title": "🌙 قبل النوم",
+      "body": "راجع كلمات اليوم وخلّها بذاكرتك",
+      "enabled": true
     }
-  ]
+  ],
+  "update": {
+    "enabled": false,
+    "title": "✨ تحديث جديد",
+    "body": "أضفنا قصص جديدة وتدريبات تفاعلية"
+  }
 }
