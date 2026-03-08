@@ -324,7 +324,64 @@
 
     <footer class="footer"><p>© 2026 CineLingua — جميع الحقوق محفوظة</p></footer>
 
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // ===== FIREBASE =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUqx2f4jmg-XSshWA_AcDSMPcttPPBs_E",
+            authDomain: "cinelingua-d4c2b.firebaseapp.com",
+            projectId: "cinelingua-d4c2b",
+            storageBucket: "cinelingua-d4c2b.firebasestorage.app",
+            messagingSenderId: "569970499890",
+            appId: "1:569970499890:web:9cf03df25e37745d44f72b"
+        };
+        const VAPID_KEY = "BCf33TmM6clsgVH480Qxh0K0NY1PrTAAFIQwO1MOS4g2vMXuqrAicgl2cu2UFYLEYTgrQlgSS95vwydvrISXfXA";
+        let messaging = null;
+
+        function initFirebase() {
+            try {
+                firebase.initializeApp(firebaseConfig);
+                messaging = firebase.messaging();
+                messaging.onMessage(payload => {
+                    const { title, body, image } = payload.notification;
+                    navigator.serviceWorker.ready.then(reg => {
+                        reg.showNotification(title, {
+                            body,
+                            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                            badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                            image: image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                            dir: 'rtl', lang: 'ar',
+                            vibrate: [200, 100, 200, 100, 200],
+                            tag: 'cinelingua-notif',
+                            renotify: true,
+                            actions: [
+                                { action: 'open',  title: '📚 تعلم الآن' },
+                                { action: 'close', title: 'لاحقاً' }
+                            ]
+                        });
+                    });
+                });
+            } catch(e) { console.log('Firebase init error:', e); }
+        }
+
+        async function getFCMToken() {
+            if (!messaging) return;
+            try {
+                const token = await messaging.getToken({ vapidKey: VAPID_KEY });
+                if (token) {
+                    localStorage.setItem('fcmToken', token);
+                    console.log('✅ FCM Token:', token);
+                    // اشترك في topic all-users
+                    await fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/all-users`, {
+                        method: 'POST',
+                        headers: { 'Authorization': 'key=569970499890' }
+                    }).catch(() => {});
+                }
+            } catch(e) { console.log('FCM token error:', e); }
+        }
+    </script>
     <script>
         AOS.init({ duration: 900, once: true, offset: 60 });
 
@@ -479,12 +536,16 @@
                 }
             }, 1000);
 
-            // Service Worker
+            // Service Worker + Firebase
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js')
                     .then(reg => {
                         console.log('✅ SW registered:', reg.scope);
-                        if (Notification.permission === 'granted') scheduleReminders();
+                        initFirebase();
+                        if (Notification.permission === 'granted') {
+                            getFCMToken();
+                            scheduleReminders();
+                        }
                     })
                     .catch(err => console.log('❌ SW failed:', err));
             }
@@ -515,6 +576,8 @@
                     ]
                 });
             });
+            // احصل على FCM Token
+            getFCMToken();
         }
 
         async function scheduleReminders() {
