@@ -2,12 +2,42 @@
   "update": {
     "enabled": false,
     "title": "تحديث جديد 🎉",
-    "body": "أضفنا محتوى جديداً! افتح التطبيق لتكتشفه"
+    "body": "أضفنا محتوى جديداً! افتح التطبيق لتكتشفه",
+    "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
   },
+
   "reminders": [
-    { "title": "وقت تعلمك الصباحي 📚", "body": "خصص 10 دقائق لتعلم كلمات جديدة!", "hour": 8,  "minute": 0  },
-    { "title": "تذكير الظهر 🎯",        "body": "لا تنسَ جلسة تعلمك اليومية!",        "hour": 13, "minute": 0  },
-    { "title": "تحدّي المساء 🏆",       "body": "جرّب اختباراً جديداً الآن!",          "hour": 18, "minute": 0  },
-    { "title": "مراجعة الليل 🌙",       "body": "راجع ما تعلمته اليوم قبل النوم",      "hour": 21, "minute": 0  }
+    {
+      "enabled": true,
+      "title": "وقت تعلمك الصباحي 📚",
+      "body": "خصص 10 دقائق لتعلم كلمات جديدة!",
+      "hour": 8,
+      "minute": 0,
+      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+    },
+    {
+      "enabled": true,
+      "title": "تذكير الظهر 🎯",
+      "body": "لا تنسَ جلسة تعلمك اليومية!",
+      "hour": 13,
+      "minute": 30,
+      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+    },
+    {
+      "enabled": false,
+      "title": "تحدّي المساء 🏆",
+      "body": "جرّب اختباراً جديداً الآن!",
+      "hour": 18,
+      "minute": 0,
+      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+    },
+    {
+      "enabled": true,
+      "title": "مراجعة الليل 🌙",
+      "body": "راجع ما تعلمته اليوم قبل النوم",
+      "hour": 21,
+      "minute": 0,
+      "image": "https://i.postimg.cc/J4xdc62M/20260305-233826.png"
+    }
   ]
 }
