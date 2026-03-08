@@ -1,13 +1,28 @@
 name: Send Scheduled Notifications
 
 on:
-  push:
-    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * *'
+    - cron: '0 11 * * *'
+    - cron: '0 16 * * *'
+    - cron: '0 19 * * *'
   workflow_dispatch:
 
 jobs:
-  test:
+  notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Test Workflow
-        run: echo "✅ Workflow is working!"
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install firebase-admin
+
+      - name: Send notification
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      run: node .github/scripts/send-notification.js
