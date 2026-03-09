@@ -21,7 +21,13 @@ try {
     const cleaned = raw.trim().replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
     console.log('Cleaned first 50 chars:', cleaned.substring(0, 50));
     
-    serviceAccount = JSON.parse(cleaned);
+    // ✅ فك التشفير من Base64 إلى JSON حقيقي
+    console.log('4. Decoding from Base64...');
+    const decoded = Buffer.from(cleaned, 'base64').toString('utf8');
+    console.log('Decoded first 50 chars:', decoded.substring(0, 50));
+    
+    // ✅ الآن نحول النص المفكوك إلى JSON
+    serviceAccount = JSON.parse(decoded);
     console.log('✅ Parse successful!');
     console.log('Project ID:', serviceAccount.project_id);
     console.log('Client Email:', serviceAccount.client_email);
