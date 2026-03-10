@@ -33,6 +33,7 @@
         }
         body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.3s, color 0.3s; }
 
+        /* ===== INSTALL BANNER ===== */
         .install-banner { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 400px; margin: 0 auto; background: var(--bg-card); border-radius: 1rem; padding: 1rem; box-shadow: var(--shadow-lg); border: 2px solid var(--primary); display: none; align-items: center; gap: 1rem; z-index: 2000; animation: slideUp 0.3s ease; direction: rtl; }
         @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .install-banner.show { display: flex; }
@@ -44,11 +45,10 @@
         .install-close { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.1rem; padding: 0.5rem; }
         .install-btn { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; padding: 0.5rem 1rem; border-radius: 2rem; font-weight: 600; font-size: 0.85rem; cursor: pointer; white-space: nowrap; margin-left: 0.5rem; font-family: inherit; }
 
+        /* ===== NOTIF ===== */
         .notif-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9997; display: none; backdrop-filter: blur(2px); }
         .notif-overlay.show { display: block; }
-
         @keyframes popIn { from { transform: translate(-50%,-50%) scale(0.85); opacity:0; } to { transform: translate(-50%,-50%) scale(1); opacity:1; } }
-
         .notif-prompt { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.9); background: var(--bg-card); border-radius: 1.75rem; padding: 2.25rem 2rem; z-index: 9998; display: none; flex-direction: column; align-items: center; text-align: center; gap: 1.25rem; width: calc(100% - 3rem); max-width: 320px; box-shadow: 0 25px 60px rgba(0,0,0,0.25); direction: rtl; }
         .notif-prompt.show { display: flex; animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
         .notif-prompt-icon { font-size: 3.5rem; line-height: 1; }
@@ -56,7 +56,6 @@
         .notif-prompt-sub { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
         .notif-allow-btn { width: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; padding: 0.9rem; border-radius: 2rem; font-weight: 700; cursor: pointer; font-size: 1rem; font-family: inherit; box-shadow: 0 4px 15px rgba(99,102,241,0.4); }
         .notif-deny-btn { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 0.85rem; font-family: inherit; }
-
         .notif-blocked { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.9); background: var(--bg-card); border-radius: 1.75rem; padding: 2rem 1.75rem; z-index: 9998; display: none; flex-direction: column; align-items: center; text-align: center; gap: 1rem; width: calc(100% - 3rem); max-width: 320px; box-shadow: 0 25px 60px rgba(0,0,0,0.25); direction: rtl; }
         .notif-blocked.show { display: flex; animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
         .notif-blocked-icon { font-size: 3rem; }
@@ -65,6 +64,7 @@
         .notif-blocked-steps b { color: var(--text-primary); }
         .notif-blocked-close { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; padding: 0.8rem; border-radius: 2rem; font-weight: 700; cursor: pointer; font-size: 0.9rem; font-family: inherit; width: 100%; }
 
+        /* ===== NAVBAR ===== */
         .navbar { background: var(--bg-card); box-shadow: 0 1px 0 var(--border); position: fixed; width: 100%; top: 0; z-index: 1000; }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0.9rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.45rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
@@ -83,6 +83,7 @@
             .nav-menu a { padding: 0.75rem 1rem; display: block; }
         }
 
+        /* ===== HERO ===== */
         .hero { min-height: 82vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%); color: white; margin-top: 58px; padding: 4rem 2rem; position: relative; overflow: hidden; }
         .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
         .hero-content { position: relative; z-index: 1; max-width: 700px; }
@@ -98,6 +99,7 @@
         .hero-stat .stat-number { font-size: 2rem; font-weight: 800; display: block; line-height: 1; }
         .hero-stat .stat-label { font-size: 0.85rem; opacity: 0.8; margin-top: 0.2rem; }
 
+        /* ===== PROGRESS BANNER ===== */
         .progress-banner { max-width: 1200px; margin: 2rem auto 0; padding: 0 2rem; display: none; }
         .progress-banner.show { display: block; }
         .progress-card { background: linear-gradient(135deg, var(--primary), #7c3aed); border-radius: 1.25rem; padding: 1.5rem 2rem; color: white; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
@@ -112,6 +114,7 @@
         .progress-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.2); }
         .progress-cta { background: white; color: var(--primary); border: none; padding: 0.65rem 1.4rem; border-radius: 2rem; font-weight: 700; font-family: inherit; font-size: 0.88rem; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
 
+        /* ===== MENU SECTION ===== */
         .menu-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .section-header { text-align: center; margin-bottom: 2.5rem; }
         .section-header h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -132,6 +135,7 @@
         .menu-stats span { display: flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); font-size: 0.85rem; }
         .menu-stats i { color: var(--primary); font-size: 0.85rem; }
 
+        /* ===== DOWNLOAD BANNER ===== */
         .download-banner { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
         .download-banner-card { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 2rem; padding: 2.5rem; color: white; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; box-shadow: var(--shadow-lg); }
         .download-banner-content { flex: 1; min-width: 250px; }
@@ -142,6 +146,7 @@
         .download-banner-stat .label { font-size: 0.8rem; opacity: 0.8; }
         .download-banner-btn { background: white; color: var(--primary); padding: 1rem 2.5rem; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.8rem; transition: all 0.3s; }
 
+        /* ===== FEATURES ===== */
         .features-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
         .feature-card { background: var(--bg-card); padding: 1.75rem; border-radius: 1.2rem; text-align: center; box-shadow: var(--shadow); transition: all 0.3s; border: 1px solid var(--border); }
@@ -150,6 +155,7 @@
         .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
         .feature-card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; }
 
+        /* ===== CTA ===== */
         .cta-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; text-align: center; }
         .cta-card { background: var(--bg-card); border-radius: 2rem; padding: 3rem; border: 2px solid var(--border); }
         .cta-card h2 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -159,10 +165,23 @@
         .cta-btn-secondary { background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border); }
 
         .footer { background: var(--bg-card); border-top: 1px solid var(--border); text-align: center; padding: 1.75rem 2rem; margin-top: 4rem; color: var(--text-secondary); font-size: 0.88rem; }
+
+        /* ===== LIVE PULSE ANIMATION ===== */
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        .live-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #22c55e; display: inline-block;
+            animation: pulse-dot 1.8s ease-in-out infinite;
+            margin-left: 4px; vertical-align: middle;
+        }
     </style>
 </head>
 <body>
 
+    <!-- INSTALL BANNER -->
     <div class="install-banner" id="installBanner">
         <div class="install-icon"><img src="https://i.postimg.cc/J4xdc62M/20260305-233826.png" alt="CineLingua"></div>
         <div class="install-content">
@@ -195,6 +214,7 @@
         <button class="notif-blocked-close" id="notifBlockedClose">فهمت</button>
     </div>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
             <a class="logo" href="index.html"><i class="fas fa-film"></i> CineLingua</a>
@@ -216,6 +236,7 @@
         </div>
     </nav>
 
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-content" data-aos="fade-up">
             <div class="hero-label"><i class="fas fa-star"></i> منصة تعلم الإنجليزية</div>
@@ -226,14 +247,15 @@
                 <a href="download.html" class="btn btn-outline"><i class="fas fa-download"></i> تحميل التطبيق</a>
             </div>
             <div class="hero-stats">
-                <div class="hero-stat"><span class="stat-number">1000+</span><span class="stat-label">كلمة</span></div>
+                <div class="hero-stat"><span class="stat-number">1500+</span><span class="stat-label">كلمة</span></div>
                 <div class="hero-stat"><span class="stat-number">30+</span><span class="stat-label">قصة</span></div>
                 <div class="hero-stat"><span class="stat-number">12</span><span class="stat-label">زمن نحوي</span></div>
-                <div class="hero-stat"><span class="stat-number">3</span><span class="stat-label">أنواع اختبارات</span></div>
+                <div class="hero-stat"><span class="stat-number">6</span><span class="stat-label">أنواع اختبارات</span></div>
             </div>
         </div>
     </section>
 
+    <!-- PROGRESS BANNER (يظهر فقط إذا عندك تقدم) -->
     <div class="progress-banner" id="progressBanner">
         <div class="progress-card" data-aos="fade-up">
             <div class="progress-card-left">
@@ -244,53 +266,127 @@
                 </div>
             </div>
             <div class="progress-stats">
-                <div class="progress-stat"><span class="p-val" id="pb-learned">0</span><span class="p-lbl">كلمة تعلمتها</span></div>
+                <div class="progress-stat">
+                    <span class="p-val" id="pb-learned">0</span>
+                    <span class="p-lbl">كلمة تعلمتها</span>
+                </div>
                 <div class="progress-divider"></div>
-                <div class="progress-stat"><span class="p-val" id="pb-saved">0</span><span class="p-lbl">محفوظة</span></div>
+                <div class="progress-stat">
+                    <span class="p-val" id="pb-quizzes">0</span>
+                    <span class="p-lbl">اختبار أكملته</span>
+                </div>
                 <div class="progress-divider"></div>
-                <div class="progress-stat"><span class="p-val" id="pb-streak"><i class="fas fa-fire" style="font-size:1.2rem"></i> 0</span><span class="p-lbl">يوم متتالي</span></div>
+                <div class="progress-stat">
+                    <span class="p-val" id="pb-stories">0</span>
+                    <span class="p-lbl">قصة قرأتها</span>
+                </div>
+                <div class="progress-divider"></div>
+                <div class="progress-stat">
+                    <span class="p-val" id="pb-streak"><i class="fas fa-fire" style="font-size:1rem"></i> 0</span>
+                    <span class="p-lbl">يوم متتالي</span>
+                </div>
             </div>
             <a href="lessons.html" class="progress-cta"><i class="fas fa-arrow-left"></i> واصل التعلم</a>
         </div>
     </div>
 
+    <!-- MENU -->
     <section class="menu-section" id="menu">
         <div class="section-header" data-aos="fade-up">
             <h2>اختر ما تريد تعلمه</h2>
             <p>محتوى متدرج من المبتدئ إلى المتقدم</p>
         </div>
         <div class="menu-grid">
+
+            <!-- كارد الكلمات -->
             <a href="lessons.html" class="menu-card" data-aos="fade-up">
-                <div class="menu-icon"><i class="fas fa-book"></i></div><h3>الكلمات</h3>
+                <div class="menu-icon"><i class="fas fa-book"></i></div>
+                <h3>الكلمات</h3>
                 <p>تعلم المفردات الأساسية والمتقدمة مع النطق الصحيح والأمثلة التطبيقية</p>
-                <div class="card-progress"><div class="card-progress-bar"><div class="card-progress-fill" id="words-progress" style="width:0%"></div></div><div class="card-progress-label" id="words-progress-label">0 كلمة تعلمتها</div></div>
-                <div class="menu-stats"><span><i class="fas fa-layer-group"></i> 3 مستويات</span><span><i class="fas fa-font"></i> 1000+ كلمة</span></div>
+                <div class="card-progress">
+                    <div class="card-progress-bar">
+                        <div class="card-progress-fill" id="words-progress" style="width:0%"></div>
+                    </div>
+                    <div class="card-progress-label" id="words-progress-label">
+                        0 كلمة تعلمتها
+                        <span class="live-dot" title="يتحدث تلقائياً"></span>
+                    </div>
+                </div>
+                <div class="menu-stats">
+                    <span><i class="fas fa-layer-group"></i> 3 مستويات</span>
+                    <span><i class="fas fa-font"></i> 1500+ كلمة</span>
+                </div>
             </a>
+
+            <!-- كارد القصص -->
             <a href="stories.html" class="menu-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="menu-icon"><i class="fas fa-book-open"></i></div><h3>القصص</h3>
+                <div class="menu-icon"><i class="fas fa-book-open"></i></div>
+                <h3>القصص</h3>
                 <p>اقرأ قصصاً قصيرة ممتعة مع أسئلة تفاعلية وحسّن فهمك للغة</p>
-                <div class="card-progress"><div class="card-progress-bar"><div class="card-progress-fill" style="width:0%"></div></div><div class="card-progress-label">0 قصة قرأتها</div></div>
-                <div class="menu-stats"><span><i class="fas fa-layer-group"></i> 30 قصة</span><span><i class="fas fa-question-circle"></i> أسئلة تفاعلية</span></div>
+                <div class="card-progress">
+                    <div class="card-progress-bar">
+                        <div class="card-progress-fill" id="stories-progress" style="width:0%"></div>
+                    </div>
+                    <div class="card-progress-label" id="stories-progress-label">
+                        0 قصة محفوظة
+                        <span class="live-dot"></span>
+                    </div>
+                </div>
+                <div class="menu-stats">
+                    <span><i class="fas fa-layer-group"></i> 30 قصة</span>
+                    <span><i class="fas fa-question-circle"></i> أسئلة تفاعلية</span>
+                </div>
             </a>
+
+            <!-- كارد الأزمنة -->
             <a href="tenses.html" class="menu-card" data-aos="fade-up" data-aos-delay="150">
-                <div class="menu-icon"><i class="fas fa-clock"></i></div><h3>الأزمنة</h3>
+                <div class="menu-icon"><i class="fas fa-clock"></i></div>
+                <h3>الأزمنة</h3>
                 <p>تعلم أزمنة اللغة الإنجليزية مع شرح مبسط وأمثلة وتمارين تفاعلية</p>
-                <div class="card-progress"><div class="card-progress-bar"><div class="card-progress-fill" style="width:0%"></div></div><div class="card-progress-label">0 زمن أتقنته</div></div>
-                <div class="menu-stats"><span><i class="fas fa-layer-group"></i> 12 زمن</span><span><i class="fas fa-tasks"></i> تمارين تفاعلية</span></div>
+                <div class="card-progress">
+                    <div class="card-progress-bar">
+                        <div class="card-progress-fill" id="tenses-progress" style="width:0%"></div>
+                    </div>
+                    <div class="card-progress-label" id="tenses-progress-label">
+                        0 زمن محفوظ
+                        <span class="live-dot"></span>
+                    </div>
+                </div>
+                <div class="menu-stats">
+                    <span><i class="fas fa-layer-group"></i> 12 زمن</span>
+                    <span><i class="fas fa-tasks"></i> تمارين تفاعلية</span>
+                </div>
             </a>
+
+            <!-- كارد الاختبارات -->
             <a href="quiz.html" class="menu-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="menu-icon"><i class="fas fa-question-circle"></i></div><h3>الاختبارات</h3>
+                <div class="menu-icon"><i class="fas fa-question-circle"></i></div>
+                <h3>الاختبارات</h3>
                 <p>اختبر مستواك واكتشف نقاط قوتك وضعفك من خلال اختبارات متنوعة</p>
-                <div class="card-progress"><div class="card-progress-bar"><div class="card-progress-fill" style="width:0%"></div></div><div class="card-progress-label">0 اختبار أكملته</div></div>
-                <div class="menu-stats"><span><i class="fas fa-layer-group"></i> 3 اختبارات</span><span><i class="fas fa-chart-line"></i> تحليل النتائج</span></div>
+                <div class="card-progress">
+                    <div class="card-progress-bar">
+                        <div class="card-progress-fill" id="quizzes-progress" style="width:0%"></div>
+                    </div>
+                    <div class="card-progress-label" id="quizzes-progress-label">
+                        0 اختبار أكملته
+                        <span class="live-dot"></span>
+                    </div>
+                </div>
+                <div class="menu-stats">
+                    <span><i class="fas fa-layer-group"></i> 6 اختبارات</span>
+                    <span><i class="fas fa-chart-line"></i> تحليل النتائج</span>
+                </div>
             </a>
+
         </div>
     </section>
 
+    <!-- DOWNLOAD BANNER -->
     <section class="download-banner" data-aos="fade-up">
         <div class="download-banner-card">
             <div class="download-banner-content">
-                <h3>حمّل تطبيق CineLingua</h3><p>نسخة أندرويد APK</p>
+                <h3>حمّل تطبيق CineLingua</h3>
+                <p>نسخة أندرويد APK</p>
                 <div class="download-banner-stats">
                     <div class="download-banner-stat"><span class="stat">3.2 MB</span><span class="label">حجم الملف</span></div>
                     <div class="download-banner-stat"><span class="stat">1.0.0</span><span class="label">الإصدار</span></div>
@@ -301,16 +397,37 @@
         </div>
     </section>
 
+    <!-- FEATURES -->
     <section class="features-section" id="features">
-        <div class="section-header" data-aos="fade-up"><h2>لماذا CineLingua؟</h2><p>مميزات تجعل تجربة تعلمك أسهل وأكثر فاعلية</p></div>
+        <div class="section-header" data-aos="fade-up">
+            <h2>لماذا CineLingua؟</h2>
+            <p>مميزات تجعل تجربة تعلمك أسهل وأكثر فاعلية</p>
+        </div>
         <div class="features-grid">
-            <div class="feature-card" data-aos="fade-up"><div class="feature-icon"><i class="fas fa-volume-up"></i></div><h3>النطق الصحيح</h3><p>استمع للكلمات بصوت طبيعي وبطيء لإتقان النطق</p></div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>تتبع التقدم</h3><p>اعرف كم كلمة تعلمت وكم قصة قرأت في أي وقت</p></div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="150"><div class="feature-icon"><i class="fas fa-bookmark"></i></div><h3>حفظ المفضلة</h3><p>احفظ الكلمات التي تريد مراجعتها لاحقاً بسهولة</p></div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200"><div class="feature-icon"><i class="fas fa-fire"></i></div><h3>نظام الـ Streak</h3><p>حافظ على تقدمك اليومي وابنِ عادة تعلم منتظمة</p></div>
+            <div class="feature-card" data-aos="fade-up">
+                <div class="feature-icon"><i class="fas fa-volume-up"></i></div>
+                <h3>النطق الصحيح</h3>
+                <p>استمع للكلمات بصوت طبيعي وبطيء لإتقان النطق</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>تتبع التقدم</h3>
+                <p>اعرف كم كلمة تعلمت وكم قصة قرأت في أي وقت — يتحدث فوراً</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="feature-icon"><i class="fas fa-bookmark"></i></div>
+                <h3>حفظ المفضلة</h3>
+                <p>احفظ الكلمات والقصص والأزمنة التي تريد مراجعتها لاحقاً</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                <h3>نظام الـ Streak</h3>
+                <p>حافظ على تقدمك اليومي وابنِ عادة تعلم منتظمة</p>
+            </div>
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section" data-aos="fade-up">
         <div class="cta-card">
             <h2>ابدأ رحلة تعلم الإنجليزية الآن</h2>
@@ -324,425 +441,416 @@
 
     <footer class="footer"><p>© 2026 CineLingua — جميع الحقوق محفوظة</p></footer>
 
+    <!-- SCRIPTS -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-        // ===== FIREBASE =====
-        const firebaseConfig = {
-            apiKey: "AIzaSyBUqx2f4jmg-XSshWA_AcDSMPcttPPBs_E",
-            authDomain: "cinelingua-d4c2b.firebaseapp.com",
-            projectId: "cinelingua-d4c2b",
-            storageBucket: "cinelingua-d4c2b.firebasestorage.app",
-            messagingSenderId: "569970499890",
-            appId: "1:569970499890:web:9cf03df25e37745d44f72b"
-        };
-        const VAPID_KEY = "BCf33TmM6clsgVH480Qxh0K0NY1PrTAAFIQwO1MOS4g2vMXuqrAicgl2cu2UFYLEYTgrQlgSS95vwydvrISXfXA";
-        let messaging = null;
+    // =============================================
+    //  FIREBASE
+    // =============================================
+    const firebaseConfig = {
+        apiKey: "AIzaSyBUqx2f4jmg-XSshWA_AcDSMPcttPPBs_E",
+        authDomain: "cinelingua-d4c2b.firebaseapp.com",
+        projectId: "cinelingua-d4c2b",
+        storageBucket: "cinelingua-d4c2b.firebasestorage.app",
+        messagingSenderId: "569970499890",
+        appId: "1:569970499890:web:9cf03df25e37745d44f72b"
+    };
+    const VAPID_KEY = "BCf33TmM6clsgVH480Qxh0K0NY1PrTAAFIQwO1MOS4g2vMXuqrAicgl2cu2UFYLEYTgrQlgSS95vwydvrISXfXA";
+    let messaging = null;
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-
-        function initFirebase() {
-            try {
-                messaging = firebase.messaging();
-                messaging.onMessage(payload => {
-                    const { title, body, image } = payload.notification;
-                    navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(title, {
-                            body,
-                            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            image: image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            dir: 'rtl', lang: 'ar',
-                            vibrate: [200, 100, 200, 100, 200],
-                            tag: 'cinelingua-notif',
-                            renotify: true,
-                            actions: [
-                                { action: 'open',  title: '📚 تعلم الآن' },
-                                { action: 'close', title: 'لاحقاً' }
-                            ]
-                        });
+    function initFirebase() {
+        try {
+            messaging = firebase.messaging();
+            messaging.onMessage(payload => {
+                const { title, body, image } = payload.notification;
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification(title, {
+                        body, icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        image: image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        dir: 'rtl', lang: 'ar', vibrate: [200,100,200,100,200],
+                        tag: 'cinelingua-notif', renotify: true,
+                        actions: [{ action:'open', title:'📚 تعلم الآن' },{ action:'close', title:'لاحقاً' }]
                     });
                 });
-            } catch(e) { console.log('Firebase init error:', e); }
-        }
-
-        async function getAndSaveFCMToken() {
-            if (!messaging) return;
-            try {
-                if (Notification.permission !== 'granted') return;
-                const token = await messaging.getToken({ vapidKey: VAPID_KEY });
-                if (token) {
-                    console.log('✅ FCM Token obtained');
-                    try {
-                        const db = firebase.firestore();
-                        await db.collection('fcmTokens').doc(token).set({
-                            token: token,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
-                            userAgent: navigator.userAgent,
-                            platform: navigator.platform
-                        }, { merge: true });
-                        console.log('✅ Token saved to Firestore');
-                    } catch (e) {}
-                }
-            } catch(e) { console.log('Error getting FCM token:', e); }
-        }
-
-        function checkPermissionAndGetToken() {
-            if (!('Notification' in window)) return;
-            if (Notification.permission === 'granted') {
-                setTimeout(() => getAndSaveFCMToken(), 2000);
-            }
-        }
-
-        AOS.init({ duration: 900, once: true, offset: 60 });
-
-        // ===== THEME =====
-        window.setTheme = function(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            document.querySelectorAll('.theme-btn').forEach(btn => {
-                btn.classList.toggle('active',
-                    (theme === 'light' && btn.innerHTML.includes('sun')) ||
-                    (theme === 'dark'  && btn.innerHTML.includes('moon'))
-                );
             });
-        };
-        setTheme(localStorage.getItem('theme') || 'light');
+        } catch(e) { console.log('Firebase init error:', e); }
+    }
 
-        // ===== NAV =====
-        function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
-        document.querySelectorAll('.nav-menu a').forEach(a =>
-            a.addEventListener('click', () => document.getElementById('navMenu').classList.remove('show'))
-        );
-
-        // ===== PROGRESS =====
-        function loadProgress() {
-            const learned = JSON.parse(localStorage.getItem('learnedWords')) || [];
-            const saved   = JSON.parse(localStorage.getItem('savedWords'))   || [];
-            const streak  = JSON.parse(localStorage.getItem('streak'))       || { count: 0 };
-            if (learned.length > 0 || saved.length > 0) {
-                document.getElementById('progressBanner').classList.add('show');
-                document.getElementById('pb-learned').textContent = learned.length;
-                document.getElementById('pb-saved').textContent   = saved.length;
-                document.getElementById('pb-streak').innerHTML = `<i class="fas fa-fire" style="font-size:1rem;margin-left:0.2rem"></i> ${streak.count}`;
-                const hour = new Date().getHours();
-                document.getElementById('greetingText').textContent = hour < 12 ? 'صباح النور!' : hour < 17 ? 'مرحباً بعودتك!' : 'مساء النور!';
-                let sub = 'واصل تقدمك من حيث توقفت';
-                if (streak.count >= 7) sub = `${streak.count} أيام متتالية — استمر!`;
-                else if (streak.count >= 3) sub = 'أنت في المسار الصحيح!';
-                document.getElementById('greetingSubtext').textContent = sub;
-            }
-            const pct = Math.min(Math.round(((JSON.parse(localStorage.getItem('learnedWords'))||[]).length / 1000) * 100), 100);
-            document.getElementById('words-progress').style.width = pct + '%';
-            document.getElementById('words-progress-label').textContent = (JSON.parse(localStorage.getItem('learnedWords'))||[]).length + ' كلمة تعلمتها';
-        }
-        loadProgress();
-
-        // ===== NOTIF FUNCTIONS =====
-        function showOverlay()  { document.getElementById('notifOverlay').classList.add('show'); }
-        function hideOverlay()  { document.getElementById('notifOverlay').classList.remove('show'); }
-
-        function showNotifPrompt() {
-            if (!('Notification' in window)) return;
-            if (Notification.permission === 'granted') return;
-            if (Notification.permission === 'denied') {
-                showOverlay();
-                document.getElementById('notifBlocked').classList.add('show');
-                return;
-            }
-            showOverlay();
-            document.getElementById('notifPrompt').classList.add('show');
-        }
-
-        function hideNotifPrompt() {
-            document.getElementById('notifPrompt').classList.remove('show');
-            hideOverlay();
-        }
-
-        document.getElementById('allowNotif').addEventListener('click', async () => {
-            if (Notification.permission === 'denied') {
-                hideNotifPrompt();
-                showOverlay();
-                document.getElementById('notifBlocked').classList.add('show');
-                return;
-            }
-            hideNotifPrompt();
-            const permission = await Notification.requestPermission();
-            if (permission === 'granted') {
-                sendWelcomeNotif();
-                scheduleReminders();
-                getAndSaveFCMToken();
-                registerBackgroundSync(); // تسجيل الخلفية بعد الموافقة
-            } else if (permission === 'denied') {
-                showOverlay();
-                document.getElementById('notifBlocked').classList.add('show');
-            }
-        });
-
-        document.getElementById('denyNotif').addEventListener('click', hideNotifPrompt);
-
-        document.getElementById('notifOverlay').addEventListener('click', () => {
-            hideNotifPrompt();
-            document.getElementById('notifBlocked').classList.remove('show');
-        });
-
-        document.getElementById('notifBlockedClose').addEventListener('click', () => {
-            document.getElementById('notifBlocked').classList.remove('show');
-            hideOverlay();
-        });
-
-        // ===== INSTALL BANNER (يظهر فقط إذا التطبيق غير مثبت) =====
-        let deferredPrompt;
-        const installBanner = document.getElementById('installBanner');
-        let bannerAutoHideTimer = null;
-
-        // دالة للتحقق من تثبيت التطبيق
-        function isAppInstalled() {
-            if (window.matchMedia('(display-mode: standalone)').matches) return true;
-            if (window.navigator.standalone === true) return true;
-            if (document.referrer.includes('android-app://')) return true;
-            if (localStorage.getItem('app_installed') === 'true') return true;
-            return false;
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            // إذا التطبيق غير مثبت، نعرض البانر
-            if (!isAppInstalled()) {
-                showInstallBanner();
-            }
-        });
-
-        function showInstallBanner() {
-            // لا نعرض البانر إذا التطبيق مثبت
-            if (isAppInstalled()) {
-                console.log('App installed, banner hidden');
-                return;
-            }
-            
-            installBanner.classList.add('show');
-            console.log('Install banner shown');
-            
-            bannerAutoHideTimer = setTimeout(() => {
-                if (installBanner.classList.contains('show')) {
-                    installBanner.classList.remove('show');
-                    showNotifPrompt();
-                }
-            }, 8000);
-        }
-
-        document.getElementById('installBtn').addEventListener('click', async () => {
-            if (bannerAutoHideTimer) clearTimeout(bannerAutoHideTimer);
-            
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const choiceResult = await deferredPrompt.userChoice;
-                
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the install prompt');
-                    localStorage.setItem('app_installed', 'true');
-                }
-                
-                deferredPrompt = null;
-            } else {
-                if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                    alert('لتثبيت التطبيق على iOS:\n١. اضغط على زر المشاركة (📤)\n٢. اختر "أضف إلى الشاشة الرئيسية"');
-                } else {
-                    alert('يمكنك تثبيت التطبيق من خلال قائمة المتصفح');
-                }
-            }
-            
-            installBanner.classList.remove('show');
-            showNotifPrompt();
-        });
-
-        document.getElementById('installClose').addEventListener('click', () => {
-            if (bannerAutoHideTimer) clearTimeout(bannerAutoHideTimer);
-            installBanner.classList.remove('show');
-            showNotifPrompt();
-        });
-
-        window.addEventListener('appinstalled', () => {
-            if (bannerAutoHideTimer) clearTimeout(bannerAutoHideTimer);
-            installBanner.classList.remove('show');
-            localStorage.setItem('app_installed', 'true');
-            console.log('App installed successfully');
-            showNotifPrompt();
-        });
-
-        // ===== BACKGROUND SYNC REGISTRATION =====
-        async function registerBackgroundSync() {
-            if (!('serviceWorker' in navigator)) return;
+    async function getAndSaveFCMToken() {
+        if (!messaging) return;
+        try {
             if (Notification.permission !== 'granted') return;
-            
-            try {
-                const registration = await navigator.serviceWorker.ready;
-                
-                if ('periodicSync' in registration) {
-                    const status = await navigator.permissions.query({
-                        name: 'periodic-background-sync'
-                    });
-                    
-                    if (status.state === 'granted') {
-                        await registration.periodicSync.register('cinelingua-background-sync', {
-                            minInterval: 60 * 60 * 1000 // كل ساعة
-                        });
-                        console.log('✅ Background sync registered - التطبيق راح يشتغل في الخلفية كل ساعة');
-                        localStorage.setItem('background_sync_registered', 'true');
-                    } else {
-                        console.log('⚠️ Periodic sync permission denied');
-                    }
-                } else {
-                    console.log('⚠️ Periodic sync not supported in this browser');
-                }
-            } catch (error) {
-                console.log('Background sync registration error:', error);
+            const token = await messaging.getToken({ vapidKey: VAPID_KEY });
+            if (token) {
+                try {
+                    const db = firebase.firestore();
+                    await db.collection('fcmTokens').doc(token).set({
+                        token, createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+                        userAgent: navigator.userAgent, platform: navigator.platform
+                    }, { merge: true });
+                } catch(e) {}
             }
-        }
+        } catch(e) {}
+    }
 
-        // ===== MAIN LOAD =====
-        window.addEventListener('load', () => {
-            // التحقق من حالة التثبيت عند تحميل الصفحة
-            setTimeout(() => {
-                if (!isAppInstalled()) {
-                    // إذا التطبيق غير مثبت، نعرض البانر
-                    // الـ beforeinstallprompt راح يظهر البانر
-                    console.log('App not installed, waiting for beforeinstallprompt');
-                    
-                    // إذا ما ظهر beforeinstallprompt خلال 5 ثواني، نعرض الإشعارات
-                    setTimeout(() => {
-                        if (!installBanner.classList.contains('show')) {
-                            showNotifPrompt();
-                        }
-                    }, 5000);
-                } else {
-                    console.log('App is installed, showing notifications directly');
-                    showNotifPrompt();
-                    registerBackgroundSync(); // تسجيل الخلفية إذا التطبيق مثبت
-                }
-            }, 1500);
+    AOS.init({ duration: 900, once: true, offset: 60 });
 
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => {
-                        console.log('✅ SW registered:', reg.scope);
-                        initFirebase();
-                        
-                        setTimeout(() => {
-                            checkPermissionAndGetToken();
-                            if (Notification.permission === 'granted') {
-                                registerBackgroundSync();
-                            }
-                        }, 3000);
-                        
-                        if (Notification.permission === 'granted') {
-                            scheduleReminders();
-                        }
-                    })
-                    .catch(err => console.log('❌ SW failed:', err));
-            }
+    // =============================================
+    //  THEME
+    // =============================================
+    window.setTheme = function(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.toggle('active',
+                (theme === 'light' && btn.innerHTML.includes('sun')) ||
+                (theme === 'dark'  && btn.innerHTML.includes('moon'))
+            );
         });
+    };
+    setTheme(localStorage.getItem('theme') || 'light');
 
-        // ===== NOTIFICATIONS =====
-        async function getNotifData() {
-            try {
-                const res = await fetch('notifications.json?v=' + Date.now());
-                return await res.json();
-            } catch(e) { return null; }
+    // =============================================
+    //  NAV
+    // =============================================
+    function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
+    document.querySelectorAll('.nav-menu a').forEach(a =>
+        a.addEventListener('click', () => document.getElementById('navMenu').classList.remove('show'))
+    );
+
+    // =============================================
+    //  PROGRESS — القراءة من localStorage بنفس
+    //  المفاتيح المستخدمة في كل صفحة
+    // =============================================
+    function readProgress() {
+        // الكلمات — من lessons.html
+        const learnedWords = JSON.parse(localStorage.getItem('learnedWords')) || [];
+        const savedWords   = JSON.parse(localStorage.getItem('savedWords'))   || [];
+
+        // الاختبارات — من quiz.html (cefr_completed_v2)
+        const completedQuizzes = JSON.parse(localStorage.getItem('cefr_completed_v2') || '[]');
+
+        // القصص — من stories.html (savedStories)
+        const savedStories = JSON.parse(localStorage.getItem('savedStories')) || [];
+
+        // الأزمنة — من tenses.html (savedTenses)
+        const savedTenses  = JSON.parse(localStorage.getItem('savedTenses')) || [];
+
+        // Streak — من lessons.html
+        const streak = JSON.parse(localStorage.getItem('streak')) || { count: 0 };
+
+        return { learnedWords, savedWords, completedQuizzes, savedStories, savedTenses, streak };
+    }
+
+    function loadProgress() {
+        const { learnedWords, savedWords, completedQuizzes, savedStories, savedTenses, streak } = readProgress();
+
+        const hasAnyProgress = learnedWords.length > 0 || completedQuizzes.length > 0
+                            || savedStories.length > 0  || savedTenses.length > 0;
+
+        // ---- Progress Banner ----
+        if (hasAnyProgress) {
+            document.getElementById('progressBanner').classList.add('show');
+
+            // تحية حسب الوقت
+            const hour = new Date().getHours();
+            document.getElementById('greetingText').textContent =
+                hour < 12 ? 'صباح النور!' : hour < 17 ? 'مرحباً بعودتك!' : 'مساء النور!';
+
+            // نص فرعي حسب الـ streak
+            let sub = 'واصل تقدمك من حيث توقفت';
+            if (streak.count >= 7)      sub = `${streak.count} أيام متتالية — استمر! 🔥`;
+            else if (streak.count >= 3) sub = 'أنت في المسار الصحيح! 💪';
+            document.getElementById('greetingSubtext').textContent = sub;
+
+            // أرقام البانر
+            document.getElementById('pb-learned').textContent  = learnedWords.length;
+            document.getElementById('pb-quizzes').textContent  = completedQuizzes.length;
+            document.getElementById('pb-stories').textContent  = savedStories.length;
+            document.getElementById('pb-streak').innerHTML =
+                `<i class="fas fa-fire" style="font-size:1rem;margin-left:0.2rem"></i> ${streak.count}`;
+        } else {
+            document.getElementById('progressBanner').classList.remove('show');
         }
 
-        function sendWelcomeNotif() {
-            navigator.serviceWorker.ready.then(reg => {
-                reg.showNotification('مرحباً في CineLingua! 🎓', {
-                    body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
-                    icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                    badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                    image: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                    dir: 'rtl', lang: 'ar',
-                    vibrate: [200, 100, 200, 100, 200],
-                    tag: 'welcome',
-                    renotify: true,
-                    actions: [
-                        { action: 'open',  title: '📚 تعلم الآن' },
-                        { action: 'close', title: 'لاحقاً' }
-                    ]
-                });
-            });
+        // ---- كارد الكلمات ----
+        // نسبة من 1000 كلمة
+        const wordsPct = Math.min(Math.round((learnedWords.length / 1000) * 100), 100);
+        document.getElementById('words-progress').style.width = wordsPct + '%';
+        document.getElementById('words-progress-label').innerHTML =
+            `${learnedWords.length} كلمة تعلمتها <span class="live-dot"></span>`;
+
+        // ---- كارد القصص ----
+        // savedStories = قصص محفوظة (30 قصة)
+        const storiesPct = Math.min(Math.round((savedStories.length / 30) * 100), 100);
+        document.getElementById('stories-progress').style.width = storiesPct + '%';
+        document.getElementById('stories-progress-label').innerHTML =
+            `${savedStories.length} قصة محفوظة <span class="live-dot"></span>`;
+
+        // ---- كارد الأزمنة ----
+        // savedTenses = أزمنة محفوظة (12 زمن)
+        const tensesPct = Math.min(Math.round((savedTenses.length / 12) * 100), 100);
+        document.getElementById('tenses-progress').style.width = tensesPct + '%';
+        document.getElementById('tenses-progress-label').innerHTML =
+            `${savedTenses.length} زمن محفوظ <span class="live-dot"></span>`;
+
+        // ---- كارد الاختبارات ----
+        // completedQuizzes = اختبارات مكتملة (6 اختبارات)
+        const quizzesPct = Math.min(Math.round((completedQuizzes.length / 6) * 100), 100);
+        document.getElementById('quizzes-progress').style.width = quizzesPct + '%';
+        document.getElementById('quizzes-progress-label').innerHTML =
+            `${completedQuizzes.length} اختبار أكملته <span class="live-dot"></span>`;
+    }
+
+    // تحميل أول مرة
+    loadProgress();
+
+    // ✅ تحديث تلقائي فوري عند أي تغيير في localStorage
+    // (يشتغل لما تحفظ كلمة أو تكمل اختبار في تاب ثاني)
+    window.addEventListener('storage', function(e) {
+        // الأحداث اللي تهمنا فقط
+        const watchedKeys = ['learnedWords','savedWords','cefr_completed_v2','savedStories','savedTenses','streak'];
+        if (watchedKeys.includes(e.key)) {
+            loadProgress();
         }
+    });
 
-        async function scheduleReminders() {
-            const data = await getNotifData();
-            if (!data) return;
+    // تحديث كل 5 ثوانٍ للتأكد (backup للمتصفحات اللي لا تدعم storage event بشكل كامل)
+    setInterval(loadProgress, 5000);
 
-            if (data.update && data.update.enabled) {
-                if (!localStorage.getItem('lastUpdateNotif')) {
-                    navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(data.update.title, {
-                            body: data.update.body,
-                            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            dir: 'rtl', lang: 'ar', vibrate: [300, 100, 300], tag: 'update'
-                        });
-                    });
-                    localStorage.setItem('lastUpdateNotif', '1');
+    // =============================================
+    //  NOTIF
+    // =============================================
+    function showOverlay()  { document.getElementById('notifOverlay').classList.add('show'); }
+    function hideOverlay()  { document.getElementById('notifOverlay').classList.remove('show'); }
+
+    function showNotifPrompt() {
+        if (!('Notification' in window)) return;
+        if (Notification.permission === 'granted') return;
+        if (Notification.permission === 'denied') {
+            showOverlay();
+            document.getElementById('notifBlocked').classList.add('show');
+            return;
+        }
+        showOverlay();
+        document.getElementById('notifPrompt').classList.add('show');
+    }
+
+    function hideNotifPrompt() {
+        document.getElementById('notifPrompt').classList.remove('show');
+        hideOverlay();
+    }
+
+    document.getElementById('allowNotif').addEventListener('click', async () => {
+        if (Notification.permission === 'denied') {
+            hideNotifPrompt(); showOverlay();
+            document.getElementById('notifBlocked').classList.add('show'); return;
+        }
+        hideNotifPrompt();
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+            sendWelcomeNotif(); scheduleReminders(); getAndSaveFCMToken(); registerBackgroundSync();
+        } else if (permission === 'denied') {
+            showOverlay(); document.getElementById('notifBlocked').classList.add('show');
+        }
+    });
+
+    document.getElementById('denyNotif').addEventListener('click', hideNotifPrompt);
+    document.getElementById('notifOverlay').addEventListener('click', () => {
+        hideNotifPrompt(); document.getElementById('notifBlocked').classList.remove('show');
+    });
+    document.getElementById('notifBlockedClose').addEventListener('click', () => {
+        document.getElementById('notifBlocked').classList.remove('show'); hideOverlay();
+    });
+
+    // =============================================
+    //  INSTALL BANNER
+    // =============================================
+    let deferredPrompt;
+    const installBanner = document.getElementById('installBanner');
+    let bannerAutoHideTimer = null;
+
+    function isAppInstalled() {
+        if (window.matchMedia('(display-mode: standalone)').matches) return true;
+        if (window.navigator.standalone === true) return true;
+        if (document.referrer.includes('android-app://')) return true;
+        if (localStorage.getItem('app_installed') === 'true') return true;
+        return false;
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault(); deferredPrompt = e;
+        if (!isAppInstalled()) showInstallBanner();
+    });
+
+    function showInstallBanner() {
+        if (isAppInstalled()) return;
+        installBanner.classList.add('show');
+        bannerAutoHideTimer = setTimeout(() => {
+            if (installBanner.classList.contains('show')) {
+                installBanner.classList.remove('show'); showNotifPrompt();
+            }
+        }, 8000);
+    }
+
+    document.getElementById('installBtn').addEventListener('click', async () => {
+        if (bannerAutoHideTimer) clearTimeout(bannerAutoHideTimer);
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const choiceResult = await deferredPrompt.userChoice;
+            if (choiceResult.outcome === 'accepted') localStorage.setItem('app_installed','true');
+            deferredPrompt = null;
+        } else {
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                alert('لتثبيت التطبيق على iOS:\n١. اضغط على زر المشاركة (📤)\n٢. اختر "أضف إلى الشاشة الرئيسية"');
+            }
+        }
+        installBanner.classList.remove('show'); showNotifPrompt();
+    });
+
+    document.getElementById('installClose').addEventListener('click', () => {
+        if (bannerAutoHideTimer) clearTimeout(bannerAutoHideTimer);
+        installBanner.classList.remove('show'); showNotifPrompt();
+    });
+
+    window.addEventListener('appinstalled', () => {
+        if (bannerAutoHideTimer) clearTimeout(bannerAutoHideTimer);
+        installBanner.classList.remove('show');
+        localStorage.setItem('app_installed','true'); showNotifPrompt();
+    });
+
+    // =============================================
+    //  BACKGROUND SYNC
+    // =============================================
+    async function registerBackgroundSync() {
+        if (!('serviceWorker' in navigator)) return;
+        if (Notification.permission !== 'granted') return;
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            if ('periodicSync' in registration) {
+                const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
+                if (status.state === 'granted') {
+                    await registration.periodicSync.register('cinelingua-background-sync', { minInterval: 60 * 60 * 1000 });
+                    localStorage.setItem('background_sync_registered','true');
                 }
+            }
+        } catch(error) {}
+    }
+
+    // =============================================
+    //  MAIN LOAD
+    // =============================================
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (!isAppInstalled()) {
+                setTimeout(() => {
+                    if (!installBanner.classList.contains('show')) showNotifPrompt();
+                }, 5000);
             } else {
-                localStorage.removeItem('lastUpdateNotif');
+                showNotifPrompt(); registerBackgroundSync();
             }
+        }, 1500);
 
-            checkScheduledReminders(data.reminders);
-            setInterval(() => checkScheduledReminders(data.reminders), 60000);
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => {
+                    initFirebase();
+                    setTimeout(() => {
+                        if (Notification.permission === 'granted') {
+                            getAndSaveFCMToken(); registerBackgroundSync();
+                        }
+                    }, 3000);
+                    if (Notification.permission === 'granted') scheduleReminders();
+                })
+                .catch(err => console.log('SW failed:', err));
         }
+    });
 
-        function checkScheduledReminders(reminders) {
-            if (!reminders || Notification.permission !== 'granted') return;
-            const now = new Date();
-            const h = now.getHours();
-            const m = now.getMinutes();
-            const today = now.toDateString();
-            const yesterday = new Date(now - 86400000).toDateString();
+    window.addEventListener('load', function() {
+        if (Notification.permission === 'granted') setTimeout(getAndSaveFCMToken, 4000);
+    });
 
-            reminders.forEach((r, i) => {
-                if (r.enabled === false) {
-                    localStorage.removeItem(`notif_sent_${i}_${today}`);
-                    localStorage.removeItem(`notif_sent_${i}_${yesterday}`);
-                    return;
-                }
+    // =============================================
+    //  NOTIFICATIONS
+    // =============================================
+    async function getNotifData() {
+        try {
+            const res = await fetch('notifications.json?v=' + Date.now());
+            return await res.json();
+        } catch(e) { return null; }
+    }
 
-                const key = `notif_sent_${i}_${today}`;
-                if (h === r.hour && m === (r.minute || 0) && !localStorage.getItem(key)) {
-                    localStorage.setItem(key, '1');
-                    navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(r.title, {
-                            body: r.body,
-                            icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            image: r.image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                            dir: 'rtl', lang: 'ar',
-                            vibrate: [200, 100, 200, 100, 200],
-                            tag: 'reminder-' + i,
-                            renotify: true,
-                            actions: [
-                                { action: 'open',  title: '📚 تعلم الآن' },
-                                { action: 'close', title: 'لاحقاً' }
-                            ]
-                        });
-                    });
-                }
-                localStorage.removeItem(`notif_sent_${i}_${yesterday}`);
+    function sendWelcomeNotif() {
+        navigator.serviceWorker.ready.then(reg => {
+            reg.showNotification('مرحباً في CineLingua! 🎓', {
+                body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
+                icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                image: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                dir: 'rtl', lang: 'ar', vibrate: [200,100,200,100,200],
+                tag: 'welcome', renotify: true,
+                actions: [{ action:'open', title:'📚 تعلم الآن' },{ action:'close', title:'لاحقاً' }]
             });
-        }
-
-        window.addEventListener('load', function() {
-            if (Notification.permission === 'granted') {
-                setTimeout(getAndSaveFCMToken, 4000);
-            }
         });
+    }
+
+    async function scheduleReminders() {
+        const data = await getNotifData();
+        if (!data) return;
+        if (data.update && data.update.enabled) {
+            if (!localStorage.getItem('lastUpdateNotif')) {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification(data.update.title, {
+                        body: data.update.body,
+                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        dir: 'rtl', lang: 'ar', vibrate: [300,100,300], tag: 'update'
+                    });
+                });
+                localStorage.setItem('lastUpdateNotif','1');
+            }
+        } else { localStorage.removeItem('lastUpdateNotif'); }
+        checkScheduledReminders(data.reminders);
+        setInterval(() => checkScheduledReminders(data.reminders), 60000);
+    }
+
+    function checkScheduledReminders(reminders) {
+        if (!reminders || Notification.permission !== 'granted') return;
+        const now = new Date();
+        const h = now.getHours(), m = now.getMinutes();
+        const today = now.toDateString();
+        const yesterday = new Date(now - 86400000).toDateString();
+        reminders.forEach((r, i) => {
+            if (r.enabled === false) {
+                localStorage.removeItem(`notif_sent_${i}_${today}`);
+                localStorage.removeItem(`notif_sent_${i}_${yesterday}`);
+                return;
+            }
+            const key = `notif_sent_${i}_${today}`;
+            if (h === r.hour && m === (r.minute || 0) && !localStorage.getItem(key)) {
+                localStorage.setItem(key,'1');
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification(r.title, {
+                        body: r.body,
+                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        image: r.image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                        dir: 'rtl', lang: 'ar', vibrate: [200,100,200,100,200],
+                        tag: 'reminder-' + i, renotify: true,
+                        actions: [{ action:'open', title:'📚 تعلم الآن' },{ action:'close', title:'لاحقاً' }]
+                    });
+                });
+            }
+            localStorage.removeItem(`notif_sent_${i}_${yesterday}`);
+        });
+    }
     </script>
 </body>
-    </html>
+</html>
