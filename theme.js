@@ -1,25 +1,10 @@
-// theme.js
-function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if ((theme === 'light' && btn.innerHTML.includes('sun')) ||
-            (theme === 'dark' && btn.innerHTML.includes('moon'))) {
-            btn.classList.add('active');
-        }
-    });
+// theme.js - kept for backward compatibility
+// Main theme logic is now in settings.js
+// This file ensures theme is applied before DOM loads
+
+const _t = localStorage.getItem('cl-theme') || localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', _t);
+// Migrate old key
+if (localStorage.getItem('theme') && !localStorage.getItem('cl-theme')) {
+    localStorage.setItem('cl-theme', localStorage.getItem('theme'));
 }
-
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        if ((savedTheme === 'light' && btn.innerHTML.includes('sun')) ||
-            (savedTheme === 'dark' && btn.innerHTML.includes('moon'))) {
-            btn.classList.add('active');
-        }
-    });
-});
