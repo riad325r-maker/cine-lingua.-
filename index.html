@@ -178,6 +178,9 @@
             margin-left: 4px; vertical-align: middle;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="translation.js"></script>
+    <script src="settings.js"></script>
 </head>
 <body>
 
@@ -185,10 +188,10 @@
     <div class="install-banner" id="installBanner">
         <div class="install-icon"><img src="https://i.postimg.cc/J4xdc62M/20260305-233826.png" alt="CineLingua"></div>
         <div class="install-content">
-            <h4>ثبّت تطبيق CineLingua</h4>
-            <p>تعلم الإنجليزية بسهولة من شاشتك الرئيسية</p>
+            <h4 data-i18n="installTitle">ثبّت تطبيق CineLingua</h4>
+            <p data-i18n="installDesc">احصل على تجربة أفضل</p>
         </div>
-        <button class="install-btn" id="installBtn"><i class="fas fa-download"></i> تثبيت</button>
+        <button class="install-btn" id="installBtn"><i class="fas fa-download"></i> <span data-i18n="installBtn">تثبيت</span></button>
         <button class="install-close" id="installClose"><i class="fas fa-times"></i></button>
     </div>
 
@@ -196,42 +199,42 @@
 
     <div class="notif-prompt" id="notifPrompt">
         <div class="notif-prompt-icon">🔔</div>
-        <div class="notif-prompt-title">تفعيل الإشعارات</div>
-        <div class="notif-prompt-sub">سنذكّرك يومياً بجلسة تعلمك حتى تبني عادة منتظمة</div>
-        <button class="notif-allow-btn" id="allowNotif">السماح</button>
-        <button class="notif-deny-btn" id="denyNotif">لاحقاً</button>
+        <div class="notif-prompt-title" data-i18n="notifPromptTitle">تفعيل الإشعارات</div>
+        <div class="notif-prompt-sub" data-i18n="notifPromptSub">سنذكّرك يومياً بجلسة تعلمك حتى تبني عادة منتظمة</div>
+        <button class="notif-allow-btn" id="allowNotif" data-i18n="notifAllow">✅ السماح بالإشعارات</button>
+        <button class="notif-deny-btn" id="denyNotif" data-i18n="notifDeny">لاحقاً</button>
     </div>
 
     <div class="notif-blocked" id="notifBlocked">
         <div class="notif-blocked-icon">🔕</div>
-        <div class="notif-blocked-title">الإشعارات محظورة</div>
+        <div class="notif-blocked-title" data-i18n="notifBlockedTitle">الإشعارات محظورة</div>
         <div class="notif-blocked-steps">
-            لتفعيل الإشعارات اتبع هذي الخطوات:<br>
-            <b>١.</b> اضغط على 🔒 بجانب الرابط<br>
-            <b>٢.</b> اضغط <b>Site settings</b><br>
-            <b>٣.</b> غيّر <b>Notifications</b> إلى <b>Allow</b>
+            <span data-i18n="notifBlockedStep1">اضغط على 🔒 بجانب الرابط</span><br>
+            <span data-i18n="notifBlockedStep2">ابحث عن «الإشعارات»</span><br>
+            <span data-i18n="notifBlockedStep3">اضبطها على «السماح»</span>
         </div>
-        <button class="notif-blocked-close" id="notifBlockedClose">فهمت</button>
+        <button class="notif-blocked-close" id="notifBlockedClose" data-i18n="notifBlockedClose">فهمت</button>
     </div>
 
-    <!-- NAVBAR -->
+        <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
             <a class="logo" href="index.html"><i class="fas fa-film"></i> CineLingua</a>
             <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="active">الرئيسية</a></li>
-                <li><a href="lessons.html">الكلمات</a></li>
-                <li><a href="stories.html">القصص</a></li>
-                <li><a href="tenses.html">الأزمنة</a></li>
-                <li><a href="quiz.html">الاختبارات</a></li>
-                <li><a href="download.html">تحميل التطبيق</a></li>
+                <li><a href="index.html" class="active" data-i18n="home">الرئيسية</a></li>
+                <li><a href="lessons.html" data-i18n="lessons">الكلمات</a></li>
+                <li><a href="stories.html" data-i18n="stories">القصص</a></li>
+                <li><a href="tenses.html" data-i18n="tenses">الأزمنة</a></li>
+                <li><a href="quiz.html" data-i18n="quiz">الاختبارات</a></li>
+                <li><a href="download.html" data-i18n="download">تحميل</a></li>
             </ul>
             <div class="nav-right">
                 <div class="theme-toggle">
                     <button class="theme-btn active" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
                     <button class="theme-btn" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
                 </div>
+                <button class="settings-btn" onclick="openSettings()" title="Settings"><i class="fas fa-cog"></i></button>
             </div>
         </div>
     </nav>
@@ -778,47 +781,69 @@
     });
 
     // =============================================
-    //  NOTIFICATIONS
+    //  NOTIFICATIONS (Enhanced)
     // =============================================
     async function getNotifData() {
         try {
             const res = await fetch('notifications.json?v=' + Date.now());
+            if (!res.ok) return null;
             return await res.json();
         } catch(e) { return null; }
     }
 
     function sendWelcomeNotif() {
+        if (!('serviceWorker' in navigator) || Notification.permission !== 'granted') return;
+        const isAr = (typeof currentLanguage !== 'undefined' ? currentLanguage : 'ar') === 'ar';
         navigator.serviceWorker.ready.then(reg => {
-            reg.showNotification('مرحباً في CineLingua! 🎓', {
-                body: 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!',
+            reg.showNotification(isAr ? 'مرحباً في CineLingua! 🎓' : 'Welcome to CineLingua! 🎓', {
+                body: isAr ? 'سنذكّرك يومياً بدرسك. ابدأ تعلمك الآن!' : 'We\'ll remind you daily. Start learning now!',
                 icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
                 badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
                 image: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                dir: 'rtl', lang: 'ar', vibrate: [200,100,200,100,200],
-                tag: 'welcome', renotify: true,
-                actions: [{ action:'open', title:'📚 تعلم الآن' },{ action:'close', title:'لاحقاً' }]
+                dir: isAr ? 'rtl' : 'ltr',
+                lang: isAr ? 'ar' : 'en',
+                vibrate: [200, 100, 200, 100, 200],
+                tag: 'welcome', renotify: false,
+                actions: [
+                    { action: 'open', title: isAr ? '📚 تعلم الآن' : '📚 Learn Now' },
+                    { action: 'close', title: isAr ? 'لاحقاً' : 'Later' }
+                ]
             });
         });
     }
 
     async function scheduleReminders() {
+        if (Notification.permission !== 'granted') return;
         const data = await getNotifData();
         if (!data) return;
+
+        const isAr = (typeof currentLanguage !== 'undefined' ? currentLanguage : 'ar') === 'ar';
+
+        // Show update notification only once per update version
         if (data.update && data.update.enabled) {
-            if (!localStorage.getItem('lastUpdateNotif')) {
+            const updateKey = 'lastUpdateNotif_' + (data.update.version || '1');
+            if (!localStorage.getItem(updateKey)) {
                 navigator.serviceWorker.ready.then(reg => {
-                    reg.showNotification(data.update.title, {
-                        body: data.update.body,
+                    reg.showNotification(data.update.title || '✨ تحديث جديد', {
+                        body: data.update.body || '',
                         icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
                         badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        dir: 'rtl', lang: 'ar', vibrate: [300,100,300], tag: 'update'
+                        dir: isAr ? 'rtl' : 'ltr',
+                        lang: isAr ? 'ar' : 'en',
+                        vibrate: [300, 100, 300],
+                        tag: 'update',
+                        renotify: false
                     });
                 });
-                localStorage.setItem('lastUpdateNotif','1');
+                localStorage.setItem(updateKey, '1');
             }
-        } else { localStorage.removeItem('lastUpdateNotif'); }
+        }
+
         checkScheduledReminders(data.reminders);
-        setInterval(() => checkScheduledReminders(data.reminders), 60000);
+        // Check every minute
+        if (!window._reminderInterval) {
+            window._reminderInterval = setInterval(() => checkScheduledReminders(data.reminders), 60000);
+        }
     }
 
     function checkScheduledReminders(reminders) {
@@ -827,27 +852,35 @@
         const h = now.getHours(), m = now.getMinutes();
         const today = now.toDateString();
         const yesterday = new Date(now - 86400000).toDateString();
+        const isAr = (typeof currentLanguage !== 'undefined' ? currentLanguage : 'ar') === 'ar';
+
         reminders.forEach((r, i) => {
             if (r.enabled === false) {
                 localStorage.removeItem(`notif_sent_${i}_${today}`);
-                localStorage.removeItem(`notif_sent_${i}_${yesterday}`);
                 return;
             }
             const key = `notif_sent_${i}_${today}`;
             if (h === r.hour && m === (r.minute || 0) && !localStorage.getItem(key)) {
-                localStorage.setItem(key,'1');
+                localStorage.setItem(key, '1');
                 navigator.serviceWorker.ready.then(reg => {
                     reg.showNotification(r.title, {
                         body: r.body,
                         icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
                         badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
                         image: r.image || 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        dir: 'rtl', lang: 'ar', vibrate: [200,100,200,100,200],
-                        tag: 'reminder-' + i, renotify: true,
-                        actions: [{ action:'open', title:'📚 تعلم الآن' },{ action:'close', title:'لاحقاً' }]
+                        dir: isAr ? 'rtl' : 'ltr',
+                        lang: isAr ? 'ar' : 'en',
+                        vibrate: [200, 100, 200, 100, 200],
+                        tag: 'reminder-' + i,
+                        renotify: true,
+                        actions: [
+                            { action: 'open', title: isAr ? '📚 تعلم الآن' : '📚 Learn Now' },
+                            { action: 'close', title: isAr ? 'لاحقاً' : 'Later' }
+                        ]
                     });
                 });
             }
+            // Clean up yesterday's keys
             localStorage.removeItem(`notif_sent_${i}_${yesterday}`);
         });
     }
