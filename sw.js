@@ -12,7 +12,7 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-const CACHE_VERSION = '1.3.0';
+const CACHE_VERSION = '1.1.0';
 const CACHE_NAME    = `cinelingua-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `cinelingua-dynamic-${CACHE_VERSION}`;
 
