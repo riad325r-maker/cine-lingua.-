@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineLingua | تعلم الإنجليزية بذكاء</title>
+    <title>CineLingua | تعللم الإنجليزية بذكاء</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -499,7 +499,7 @@
             'ib-title':'ثبّت تطبيق CineLingua','ib-desc':'تعلم الإنجليزية بسهولة من شاشتك الرئيسية','ib-btn':'تثبيت',
             // notif prompt
             'np-title':'تفعيل الإشعارات 🔔','np-sub':'سنذكّرك يومياً بجلسة تعلمك حتى تبني عادة منتظمة',
-            'allowNotif':'السماح بالإشعارات','denyNotif':'لاحقاً',
+            'allowNotif':'✅ السماح بالإشعارات','denyNotif':'لاحقاً',
             // notif blocked
             'nb-title':'الإشعارات محظورة 🔕',
             'nb-steps':'اضغط على 🔒 بجانب الرابط<br>ابحث عن «الإشعارات»<br>اضبطها على «السماح»',
@@ -686,14 +686,11 @@
     async function requestNotifSettings() {
         const result = await Notification.requestPermission();
         refreshNotifBadge();
-        if (result === 'granted' && 'serviceWorker' in navigator) {
-            navigator.serviceWorker.ready.then(reg => {
-                reg.showNotification('CineLingua 🎓', {
-                    body: currentLang === 'ar' ? 'تم تفعيل الإشعارات! سنذكّرك يومياً 🔔' : 'Notifications enabled! We\'ll remind you daily 🔔',
-                    icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                    vibrate: [200,100,200]
-                });
-            });
+        if (result === 'granted') {
+            getAndSaveFCMToken();
+            sendWelcomeNotif();
+            scheduleReminders();
+            registerBackgroundSync();
         }
     }
 
