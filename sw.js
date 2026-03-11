@@ -13,12 +13,12 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// ✅ نظام الإصدار الذكي - غير الرقم ده كل ما ترفع تحديث جديد للموقع
-const CACHE_VERSION = '1.1.0';  // ⚠️ مهم: غير الرقم ده لأي رقم تاني لو حبيت تجبر تحديث شامل
-const CACHE_NAME = `cinelingua-${CACHE_VERSION}`;
+// ===== VERSION =====
+const CACHE_VERSION = '1.2.0'; // ⚠️ غيّر هذا الرقم عند كل تحديث
+const CACHE_NAME    = `cinelingua-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `cinelingua-dynamic-${CACHE_VERSION}`;
 
-// قائمة الملفات الأساسية - إزاي تشتغل بدون نت
+// ===== الملفات الأساسية التي تعمل بدون نت =====
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -34,6 +34,12 @@ const STATIC_ASSETS = [
     '/settings.js',
     '/theme.js',
     '/notifications.json',
+    '/beginner-data.js',
+    '/intermediate-data.js',
+    '/advanced-data.js',
+    '/stories-data.js',
+    '/tenses-data.js',
+    '/words-data.js',
     'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
     'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
@@ -73,248 +79,167 @@ self.addEventListener('notificationclick', event => {
     );
 });
 
-// ===== INSTALL EVENT - CACHE STATIC ASSETS =====
-self.addEventListener('install', (event) => {
-    console.log(`✅ Service Worker ${CACHE_NAME} installing...`);
-    
-    // Force the waiting service worker to become the active service worker
-    self.skipWaiting();
-    
+// ===== INSTALL — كاش كل الملفات الأساسية =====
+self.addEventListener('install', event => {
+    console.log(`✅ SW ${CACHE_VERSION} installing...`);
+    self.skipWaiting(); // تفعيل فوري بدون انتظار
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            console.log('📦 Caching static assets...');
-            return cache.addAll(STATIC_ASSETS).catch(error => {
-                console.log('⚠️ Some files failed to cache:', error);
-                // Don't fail the install if one asset fails
-            });
+        caches.open(CACHE_NAME).then(cache => {
+            console.log('📦 Caching all pages & assets...');
+            // نكاش كل ملف بشكل مستقل حتى لو فشل واحد ما يوقف الباقين
+            return Promise.allSettled(
+                STATIC_ASSETS.map(url =>
+                    cache.add(url).catch(err => console.warn('⚠️ Failed to cache:', url, err))
+                )
+            );
         })
     );
 });
 
-// ===== ACTIVATE EVENT - CLEAN OLD CACHES =====
-self.addEventListener('activate', (event) => {
+// ===== ACTIVATE — حذف الكاش القديم + تحديث تلقائي =====
+self.addEventListener('activate', event => {
     event.waitUntil(
         (async () => {
-            // Take control of all clients immediately
-            await self.clients.claim();
-            
-            // Clean up old caches (keep only current version)
-            const cacheKeys = await caches.keys();
-            const oldCaches = cacheKeys.filter(key => 
-                key.startsWith('cinelingua-') && key !== CACHE_NAME && key !== DYNAMIC_CACHE
+            await self.clients.claim(); // السيطرة الفورية على كل التابات
+
+            // حذف كل الكاشات القديمة
+            const keys = await caches.keys();
+            const old  = keys.filter(k =>
+                k.startsWith('cinelingua-') && k !== CACHE_NAME && k !== DYNAMIC_CACHE
             );
-            
-            if (oldCaches.length > 0) {
-                console.log('🧹 Removing old caches:', oldCaches);
-                await Promise.all(oldCaches.map(key => caches.delete(key)));
+            if (old.length) {
+                console.log('🧹 Removing old caches:', old);
+                await Promise.all(old.map(k => caches.delete(k)));
             }
-            
-            console.log(`✅ Service Worker ${CACHE_NAME} activated!`);
-            
-            // Tell all clients to reload if there's a new version
-            const clients = await self.clients.matchAll();
-            clients.forEach(client => {
-                client.postMessage({
-                    type: 'NEW_VERSION_AVAILABLE',
-                    version: CACHE_VERSION
-                });
-            });
-            
-            // Register periodic sync if supported
+
+            console.log(`✅ SW ${CACHE_VERSION} activated!`);
+
+            // إشعار كل التابات بوجود نسخة جديدة
+            const allClients = await self.clients.matchAll({ includeUncontrolled: true });
+            allClients.forEach(c => c.postMessage({ type: 'NEW_VERSION', version: CACHE_VERSION }));
+
+            // تسجيل Periodic Sync
             if ('periodicSync' in self.registration) {
                 try {
                     await self.registration.periodicSync.register('cinelingua-sync', {
-                        minInterval: 60 * 60 * 1000 // 1 hour
+                        minInterval: 60 * 60 * 1000
                     });
-                    console.log('✅ Periodic sync registered');
-                } catch (error) {
-                    console.log('❌ Periodic sync not supported:', error);
-                }
+                } catch (e) {}
             }
         })()
     );
 });
 
-// ===== FETCH EVENT - SMART CACHING STRATEGY =====
-self.addEventListener('fetch', (event) => {
-    // Only handle GET requests
+// ===== FETCH — الاستراتيجية الذكية =====
+self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
-    
-    // For HTML pages - use Network First, then Cache (ensures updates are seen)
-    if (event.request.mode === 'navigate' || 
-        (event.request.url.includes('.html') && !event.request.url.includes('offline'))) {
-        
+
+    const url = event.request.url;
+
+    // ===== HTML Pages — Network First ثم Cache ثم Offline =====
+    if (event.request.mode === 'navigate' || url.endsWith('.html')) {
         event.respondWith(
             fetch(event.request)
-                .then((networkResponse) => {
-                    // If network successful, update cache and return
-                    if (networkResponse && networkResponse.status === 200) {
-                        const responseToCache = networkResponse.clone();
-                        caches.open(DYNAMIC_CACHE).then((cache) => {
-                            cache.put(event.request, responseToCache);
-                        });
+                .then(res => {
+                    // نجح النت — نحدث الكاش في الخلفية
+                    if (res && res.status === 200) {
+                        const clone = res.clone();
+                        caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
                     }
-                    return networkResponse;
+                    return res;
                 })
-                .catch(() => {
-                    // If network fails, serve from cache
-                    return caches.match(event.request).then(cachedResponse => {
-                        if (cachedResponse) {
-                            return cachedResponse;
-                        }
-                        // If not in cache, serve offline page
-                        return caches.match('/offline.html');
-                    });
+                .catch(async () => {
+                    // فشل النت — نرجع من الكاش
+                    const cached = await caches.match(event.request);
+                    if (cached) return cached;
+
+                    // ما في كاش — نرجع صفحة Offline
+                    return caches.match('/offline.html');
                 })
         );
         return;
     }
-    
-    // For static assets (CSS, JS, Images, Fonts) - use Cache First, then Network
+
+    // ===== JS/CSS/Images/Fonts — Cache First ثم Network =====
     event.respondWith(
-        caches.match(event.request)
-            .then((cachedResponse) => {
-                if (cachedResponse) {
-                    // Return cached version and update in background
-                    // This ensures fast loading while keeping cache fresh
-                    updateCacheInBackground(event.request);
-                    return cachedResponse;
+        caches.match(event.request).then(cached => {
+            if (cached) {
+                // نرجع الكاش فوراً + نحدث في الخلفية
+                refreshInBackground(event.request);
+                return cached;
+            }
+            // مو موجود في الكاش — نجيبه من النت ونحفظه
+            return fetch(event.request).then(res => {
+                if (res && res.status === 200) {
+                    const clone = res.clone();
+                    caches.open(DYNAMIC_CACHE).then(c => c.put(event.request, clone));
                 }
-                
-                // Not in cache, fetch from network
-                return fetch(event.request).then((networkResponse) => {
-                    if (networkResponse && networkResponse.status === 200) {
-                        const responseToCache = networkResponse.clone();
-                        caches.open(DYNAMIC_CACHE).then((cache) => {
-                            cache.put(event.request, responseToCache);
-                        });
-                    }
-                    return networkResponse;
-                });
-            })
-            .catch(() => {
-                // If both cache and network fail
-                if (event.request.url.includes('.html')) {
-                    return caches.match('/offline.html');
-                }
-                return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
-            })
+                return res;
+            }).catch(() => {
+                if (url.endsWith('.html')) return caches.match('/offline.html');
+                return new Response('Offline', { status: 503 });
+            });
+        })
     );
 });
 
-// Helper function to update cache in background
-function updateCacheInBackground(request) {
-    caches.open(DYNAMIC_CACHE).then((cache) => {
-        fetch(request).then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-                cache.put(request, networkResponse);
-            }
-        }).catch(() => {});
-    });
+// تحديث الكاش في الخلفية دون تأخير التحميل
+function refreshInBackground(request) {
+    fetch(request).then(res => {
+        if (res && res.status === 200) {
+            caches.open(DYNAMIC_CACHE).then(c => c.put(request, res));
+        }
+    }).catch(() => {});
 }
 
-// ===== PERIODIC SYNC EVENT =====
-self.addEventListener('periodicsync', (event) => {
+// ===== PERIODIC SYNC =====
+self.addEventListener('periodicsync', event => {
     if (event.tag === 'cinelingua-sync') {
-        event.waitUntil(
-            (async () => {
-                console.log('🔄 Background sync running...');
-                
-                try {
-                    // Notify all clients
-                    const clients = await self.clients.matchAll();
-                    clients.forEach(client => {
-                        client.postMessage({
-                            type: 'BACKGROUND_SYNC',
-                            timestamp: Date.now()
-                        });
-                    });
-                    
-                    // Check for content updates
-                    await checkForUpdates();
-                    
-                    // Update dynamic cache in background
-                    await updateDynamicCache();
-                    
-                } catch (error) {
-                    console.log('Background sync error:', error);
-                }
-            })()
-        );
+        event.waitUntil(checkForUpdates());
     }
 });
 
-// ===== CHECK FOR CONTENT UPDATES =====
+// ===== فحص التحديثات وإشعار المستخدم =====
 async function checkForUpdates() {
     try {
-        // Try to fetch the main page to check for updates
-        const response = await fetch('/?nocache=' + Date.now(), { cache: 'no-store' });
-        
-        if (response && response.status === 200) {
-            // Check if we have a version header or something
-            // For now, just update the cache
-            const cache = await caches.open(DYNAMIC_CACHE);
-            await cache.put('/', response.clone());
-            
-            // Check for notifications.json
-            const notifResponse = await fetch('/notifications.json?nocache=' + Date.now(), { cache: 'no-store' });
-            if (notifResponse && notifResponse.status === 200) {
-                const data = await notifResponse.clone().json();
-                
-                if (data.update?.enabled) {
-                    self.registration.showNotification(data.update.title || '📚 تحديث جديد!', {
-                        body: data.update.body || 'تمت إضافة محتوى جديد',
-                        icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        badge: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
-                        tag: 'content-update',
-                        actions: [
-                            { action: 'refresh', title: '🔄 تحديث الآن' },
-                            { action: 'later', title: '⏰ لاحقاً' }
-                        ]
-                    });
-                }
-                
-                await cache.put('/notifications.json', notifResponse);
-            }
+        const res = await fetch('/notifications.json?t=' + Date.now(), { cache: 'no-store' });
+        if (!res || res.status !== 200) return;
+        const data = await res.clone().json();
+
+        if (data.update?.enabled) {
+            self.registration.showNotification(data.update.title || '📚 تحديث جديد!', {
+                body: data.update.body || 'تمت إضافة محتوى جديد',
+                icon: 'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
+                tag: 'content-update',
+                actions: [
+                    { action: 'refresh', title: '🔄 تحديث الآن' },
+                    { action: 'later',   title: '⏰ لاحقاً' }
+                ]
+            });
         }
-    } catch (error) {
-        console.log('Update check failed:', error);
+
+        // تحديث كل الصفحات في الكاش بشكل صامت
+        const cache = await caches.open(CACHE_NAME);
+        await Promise.allSettled(
+            STATIC_ASSETS
+                .filter(u => !u.startsWith('http') || u.includes('postimg'))
+                .map(url =>
+                    fetch(url, { cache: 'no-store' })
+                        .then(r => { if (r && r.status === 200) cache.put(url, r); })
+                        .catch(() => {})
+                )
+        );
+
+        console.log('✅ All pages refreshed in background');
+    } catch (e) {
+        console.log('Update check failed:', e);
     }
 }
 
-// ===== UPDATE DYNAMIC CACHE =====
-async function updateDynamicCache() {
-    try {
-        const cache = await caches.open(DYNAMIC_CACHE);
-        const requests = await cache.keys();
-        
-        // Update each cached item in background
-        requests.forEach(async (request) => {
-            if (request.url.includes('riad325r-maker')) {
-                try {
-                    const response = await fetch(request.url, { cache: 'no-store' });
-                    if (response && response.status === 200) {
-                        await cache.put(request, response);
-                    }
-                } catch (error) {
-                    // Ignore network errors during background update
-                }
-            }
-        });
-    } catch (error) {
-        console.log('Dynamic cache update failed:', error);
-    }
-}
-
-// ===== MESSAGE EVENT - HANDLE CLIENT MESSAGES =====
-self.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
-    
-    if (event.data && event.data.type === 'CHECK_VERSION') {
-        event.ports[0].postMessage({
-            version: CACHE_VERSION
-        });
+// ===== MESSAGE =====
+self.addEventListener('message', event => {
+    if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+    if (event.data?.type === 'CHECK_VERSION') {
+        event.ports[0]?.postMessage({ version: CACHE_VERSION });
     }
 });
