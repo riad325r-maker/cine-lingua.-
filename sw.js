@@ -1,7 +1,6 @@
 importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js');
 
-// ===== FIREBASE INIT =====
 firebase.initializeApp({
     apiKey: "AIzaSyBUqx2f4jmg-XSshWA_AcDSMPcttPPBs_E",
     authDomain: "cinelingua-d4c2b.firebaseapp.com",
@@ -13,33 +12,34 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// ===== VERSION =====
-const CACHE_VERSION = '1.1.1'; // ⚠️ غيّر هذا الرقم عند كل تحديث
+const CACHE_VERSION = '1.3.0';
 const CACHE_NAME    = `cinelingua-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `cinelingua-dynamic-${CACHE_VERSION}`;
 
-// ===== الملفات الأساسية التي تعمل بدون نت =====
+// ✅ المسار الصحيح لـ GitHub Pages
+const BASE = '/cine-lingua.-';
+
 const STATIC_ASSETS = [
-    '/',
-    '/index.html',
-    '/lessons.html',
-    '/stories.html',
-    '/tenses.html',
-    '/quiz.html',
-    '/download.html',
-    '/offline.html',
-    '/manifest.json',
-    '/style.css',
-    '/translation.js',
-    '/settings.js',
-    '/theme.js',
-    '/notifications.json',
-    '/beginner-data.js',
-    '/intermediate-data.js',
-    '/advanced-data.js',
-    '/stories-data.js',
-    '/tenses-data.js',
-    '/words-data.js',
+    BASE + '/',
+    BASE + '/index.html',
+    BASE + '/lessons.html',
+    BASE + '/stories.html',
+    BASE + '/tenses.html',
+    BASE + '/quiz.html',
+    BASE + '/download.html',
+    BASE + '/offline.html',
+    BASE + '/manifest.json',
+    BASE + '/style.css',
+    BASE + '/translation.js',
+    BASE + '/settings.js',
+    BASE + '/theme.js',
+    BASE + '/notifications.json',
+    BASE + '/beginner-data.js',
+    BASE + '/intermediate-data.js',
+    BASE + '/advanced-data.js',
+    BASE + '/stories-data.js',
+    BASE + '/tenses-data.js',
+    BASE + '/words-data.js',
     'https://i.postimg.cc/J4xdc62M/20260305-233826.png',
     'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
@@ -79,46 +79,39 @@ self.addEventListener('notificationclick', event => {
     );
 });
 
-// ===== INSTALL — كاش كل الملفات الأساسية =====
+// ===== INSTALL =====
 self.addEventListener('install', event => {
     console.log(`✅ SW ${CACHE_VERSION} installing...`);
-    self.skipWaiting(); // تفعيل فوري بدون انتظار
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
-            console.log('📦 Caching all pages & assets...');
-            // نكاش كل ملف بشكل مستقل حتى لو فشل واحد ما يوقف الباقين
+            console.log('📦 Caching all assets...');
             return Promise.allSettled(
                 STATIC_ASSETS.map(url =>
-                    cache.add(url).catch(err => console.warn('⚠️ Failed to cache:', url, err))
+                    cache.add(url).catch(err => console.warn('⚠️ Failed:', url, err))
                 )
             );
         })
     );
 });
 
-// ===== ACTIVATE — حذف الكاش القديم + تحديث تلقائي =====
+// ===== ACTIVATE =====
 self.addEventListener('activate', event => {
     event.waitUntil(
         (async () => {
-            await self.clients.claim(); // السيطرة الفورية على كل التابات
+            await self.clients.claim();
 
-            // حذف كل الكاشات القديمة
             const keys = await caches.keys();
             const old  = keys.filter(k =>
                 k.startsWith('cinelingua-') && k !== CACHE_NAME && k !== DYNAMIC_CACHE
             );
-            if (old.length) {
-                console.log('🧹 Removing old caches:', old);
-                await Promise.all(old.map(k => caches.delete(k)));
-            }
+            if (old.length) await Promise.all(old.map(k => caches.delete(k)));
 
             console.log(`✅ SW ${CACHE_VERSION} activated!`);
 
-            // إشعار كل التابات بوجود نسخة جديدة
             const allClients = await self.clients.matchAll({ includeUncontrolled: true });
             allClients.forEach(c => c.postMessage({ type: 'NEW_VERSION', version: CACHE_VERSION }));
 
-            // تسجيل Periodic Sync
             if ('periodicSync' in self.registration) {
                 try {
                     await self.registration.periodicSync.register('cinelingua-sync', {
@@ -130,60 +123,50 @@ self.addEventListener('activate', event => {
     );
 });
 
-// ===== FETCH — الاستراتيجية الذكية =====
+// ===== FETCH =====
 self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
 
     const url = event.request.url;
 
-    // ===== HTML Pages — Network First ثم Cache ثم Offline =====
+    // HTML — Network First
     if (event.request.mode === 'navigate' || url.endsWith('.html')) {
         event.respondWith(
             fetch(event.request)
                 .then(res => {
-                    // نجح النت — نحدث الكاش في الخلفية
                     if (res && res.status === 200) {
-                        const clone = res.clone();
-                        caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+                        caches.open(CACHE_NAME).then(c => c.put(event.request, res.clone()));
                     }
                     return res;
                 })
                 .catch(async () => {
-                    // فشل النت — نرجع من الكاش
                     const cached = await caches.match(event.request);
-                    if (cached) return cached;
-
-                    // ما في كاش — نرجع صفحة Offline
-                    return caches.match('/offline.html');
+                    return cached || caches.match(BASE + '/offline.html');
                 })
         );
         return;
     }
 
-    // ===== JS/CSS/Images/Fonts — Cache First ثم Network =====
+    // JS/CSS/Images — Cache First
     event.respondWith(
         caches.match(event.request).then(cached => {
             if (cached) {
-                // نرجع الكاش فوراً + نحدث في الخلفية
                 refreshInBackground(event.request);
                 return cached;
             }
-            // مو موجود في الكاش — نجيبه من النت ونحفظه
             return fetch(event.request).then(res => {
                 if (res && res.status === 200) {
-                    const clone = res.clone();
-                    caches.open(DYNAMIC_CACHE).then(c => c.put(event.request, clone));
+                    caches.open(DYNAMIC_CACHE).then(c => c.put(event.request, res.clone()));
                 }
                 return res;
             }).catch(() => {
-                if (url.endsWith('.html')) return caches.match('/offline.html');
+                if (url.endsWith('.html')) return caches.match(BASE + '/offline.html');
                 return new Response('Offline', { status: 503 });
             });
         })
     );
 });
 
-// تحديث الكاش في الخلفية دون تأخير التحميل
 function refreshInBackground(request) {
     fetch(request).then(res => {
         if (res && res.status === 200) {
@@ -199,10 +182,9 @@ self.addEventListener('periodicsync', event => {
     }
 });
 
-// ===== فحص التحديثات وإشعار المستخدم =====
 async function checkForUpdates() {
     try {
-        const res = await fetch('/notifications.json?t=' + Date.now(), { cache: 'no-store' });
+        const res = await fetch(BASE + '/notifications.json?t=' + Date.now(), { cache: 'no-store' });
         if (!res || res.status !== 200) return;
         const data = await res.clone().json();
 
@@ -218,19 +200,17 @@ async function checkForUpdates() {
             });
         }
 
-        // تحديث كل الصفحات في الكاش بشكل صامت
         const cache = await caches.open(CACHE_NAME);
         await Promise.allSettled(
             STATIC_ASSETS
-                .filter(u => !u.startsWith('http') || u.includes('postimg'))
+                .filter(u => !u.startsWith('https://fonts') && !u.startsWith('https://cdnjs'))
                 .map(url =>
                     fetch(url, { cache: 'no-store' })
                         .then(r => { if (r && r.status === 200) cache.put(url, r); })
                         .catch(() => {})
                 )
         );
-
-        console.log('✅ All pages refreshed in background');
+        console.log('✅ Cache refreshed');
     } catch (e) {
         console.log('Update check failed:', e);
     }
