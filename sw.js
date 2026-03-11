@@ -7,12 +7,12 @@ firebase.initializeApp({
     projectId: "cinelingua-fe7f1",
     storageBucket: "cinelingua-fe7f1.firebasestorage.app",
     messagingSenderId: "157697610841",
-    appId: "1:157697610841:web:9cf03df25e37745d44f72b"
+    appId: "1:157697610841:web:529db81f264e1a84ab0d48"
 });
 
 const messaging = firebase.messaging();
 
-const CACHE_VERSION = '1.3.0';
+const CACHE_VERSION = '1.1.3';
 const CACHE_NAME    = `cinelingua-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `cinelingua-dynamic-${CACHE_VERSION}`;
 
