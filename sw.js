@@ -2,17 +2,17 @@ importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js'
 importScripts('https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js');
 
 firebase.initializeApp({
-    apiKey: "AIzaSyBUqx2f4jmg-XSshWA_AcDSMPcttPPBs_E",
-    authDomain: "cinelingua-d4c2b.firebaseapp.com",
-    projectId: "cinelingua-d4c2b",
-    storageBucket: "cinelingua-d4c2b.firebasestorage.app",
-    messagingSenderId: "569970499890",
-    appId: "1:569970499890:web:9cf03df25e37745d44f72b"
+    apiKey: "AIzaSyCvi0VCJv3j6p8ICT1f97TePwDXAazmQMw",
+    authDomain: "cinelingua-fe7f1.firebaseapp.com",
+    projectId: "cinelingua-fe7f1",
+    storageBucket: "cinelingua-fe7f1.firebasestorage.app",
+    messagingSenderId: "157697610841",
+    appId: "1:157697610841:web:9cf03df25e37745d44f72b"
 });
 
 const messaging = firebase.messaging();
 
-const CACHE_VERSION = '1.1.0';
+const CACHE_VERSION = '1.3.0';
 const CACHE_NAME    = `cinelingua-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `cinelingua-dynamic-${CACHE_VERSION}`;
 
