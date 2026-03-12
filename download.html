@@ -175,12 +175,12 @@
                 <div class="settings-section-title"><i class="fas fa-globe"></i> <span id="s-lang">اللغة</span></div>
                 <div class="settings-lang-row">
                     <button class="settings-lang-btn" id="lang-ar" onclick="setLang('ar')">
-                        <span class="lang-flag"></span>
+                        <span class="lang-flag">🌙</span>
                         <div class="lang-info"><span class="lang-name">العربية</span><span class="lang-sub">Arabic</span></div>
                         <i class="fas fa-check lang-check"></i>
                     </button>
                     <button class="settings-lang-btn" id="lang-en" onclick="setLang('en')">
-                        <span class="lang-flag"></span>
+                        <span class="lang-flag">🌐</span>
                         <div class="lang-info"><span class="lang-name">English</span><span class="lang-sub">الإنجليزية</span></div>
                         <i class="fas fa-check lang-check"></i>
                     </button>
@@ -199,7 +199,7 @@
                 </div>
             </div>
         </div>
-        <div class="settings-footer">CineLingua</div>
+        <div class="settings-footer">CineLingua • v2.0</div>
     </div>
 
     <!-- NAVBAR -->
@@ -452,7 +452,7 @@
                 if (!_msg) { console.log('❌ _msg is null'); return; }
                 if (Notification.permission !== 'granted') { console.log('❌ permission:', Notification.permission); return; }
                 console.log('⏳ Getting FCM token...');
-                const token = await _msg.getToken({ vapidKey: VAPID });
+                const token = await _msg.getToken({ vapidKey: VAPID, serviceWorkerRegistration: swRegistration || undefined });
                 if (!token) { console.log('❌ token is empty'); return; }
                 console.log('✅ Token:', token.substring(0,20) + '...');
                 await firebase.firestore().collection('fcmTokens').doc(token).set({
