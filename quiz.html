@@ -681,13 +681,13 @@
                 </div>
             </div>
         </div>
-        <div class="settings-footer">CineLingua</div>
+        <div class="settings-footer">CineLingua • v2.0</div>
     </div>
 
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
-            <a class="logo" href="index.html"><i class="fas fa-film"></i> CineLingua</a>
+            <a class="logo" href="index.html"><i class="fas fa-film"></i>CineLingua • v.2.0</a>
             <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" id="nav-home">الرئيسية</a></li>
@@ -2636,7 +2636,7 @@ const QUIZ_DATA = {
         async function _saveToken() {
             try {
                 if (!_msg || Notification.permission !== "granted") return;
-                const token = await _msg.getToken({ vapidKey: VAPID });
+                const token = await _msg.getToken({ vapidKey: VAPID, serviceWorkerRegistration: swRegistration || undefined });
                 if (!token) return;
                 const db = firebase.firestore();
                 await db.collection("fcmTokens").doc(token).set({
@@ -2657,4 +2657,4 @@ const QUIZ_DATA = {
     </script>
 
 </body>
-    </html>
+                                                                                                                                                                                                                                      </html>
