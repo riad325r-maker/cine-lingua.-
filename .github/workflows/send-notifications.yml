@@ -2,12 +2,12 @@ name: Send Scheduled Notifications
 
 on:
   schedule:
-    - cron: '0 6 * * *'    # 8 صباح مصر
+    - cron: '0 6 * * *'    # 8 صباح مصر  (UTC+2)
     - cron: '0 11 * * *'   # 1 ظهر مصر
     - cron: '0 15 * * *'   # 5 مساء مصر
     - cron: '0 19 * * *'   # 9 مساء مصر
     - cron: '0 23 * * *'   # 1 صباح مصر
-  workflow_dispatch:
+  workflow_dispatch:        # تشغيل يدوي للاختبار فقط
 
 jobs:
   notify:
@@ -26,5 +26,4 @@ jobs:
       - name: Send notification
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          FORCE_SEND: 'true'
         run: node .github/scripts/send-notification.js
