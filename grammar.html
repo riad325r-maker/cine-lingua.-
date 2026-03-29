@@ -799,12 +799,27 @@ body { padding-bottom: calc(66px + env(safe-area-inset-bottom, 0)) !important; }
 
         // FILTERS
         function setCat(c, btn) {
-            if(viewingSaved||viewingLearned) exitSpecial();
-            currentCat = c;
-            document.querySelectorAll('#catFilters .filter-tab').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active');
-            applyFilters();
-        }
+    if (viewingSaved || viewingLearned) exitSpecial();
+
+    currentCat = c;
+
+    // 🔥 الحل هنا
+    if (c === 'all') {
+        currentLevel = 'all';
+        currentSearch = '';
+
+        document.getElementById('searchInput').value = '';
+
+        // رجّع مستوى "الكل"
+        document.querySelectorAll('.level-tab').forEach(b => b.classList.remove('active'));
+        document.getElementById('lvl-all-el').classList.add('active');
+    }
+
+    document.querySelectorAll('#catFilters .filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    applyFilters();
+}
 
         function setLevel(l, btn) {
             if(viewingSaved||viewingLearned) exitSpecial();
