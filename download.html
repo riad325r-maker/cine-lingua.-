@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineLingua | تحميل التطبيق</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/J4xdc62M/20260305-233826.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--p:#4f46e5;--p2:#7c3aed;--acc:#06b6d4;--green:#10b981;--bg:#08090f;--bg2:#0d0f1a;--bg3:#131627;--bg4:#1a1d32;--card:rgba(17,20,40,.97);--border:rgba(79,70,229,.18);--border2:rgba(79,70,229,.35);--bw:rgba(255,255,255,.07);--text:#e8eaff;--text2:#8b90c4;--text3:#4a4e72;--font:'Cairo',sans-serif}
+    [data-theme="light"]{--bg:#f0f2ff;--bg2:#e8eaff;--bg3:#dde0ff;--bg4:#d2d5ff;--card:rgba(255,255,255,.97);--border:rgba(79,70,229,.15);--border2:rgba(79,70,229,.3);--bw:rgba(79,70,229,.08);--text:#0a0b1e;--text2:#3d3f80;--text3:#8084c0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s}
+    .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(100px);animation:fl 18s ease-in-out infinite}
+    .orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(79,70,229,.1),transparent 70%);top:-200px;right:-200px}
+    .orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(6,182,212,.07),transparent 70%);bottom:-200px;left:-200px;animation-delay:-9s}
+    @keyframes fl{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
+    [data-theme="light"] .orb1{background:radial-gradient(circle,rgba(79,70,229,.06),transparent 70%)}
+    [data-theme="light"] .orb2{background:radial-gradient(circle,rgba(6,182,212,.04),transparent 70%)}
+    .navbar{position:fixed;width:100%;top:0;z-index:1000;background:rgba(8,9,15,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--bw);box-shadow:0 1px 40px rgba(0,0,0,.5)}
+    [data-theme="light"] .navbar{background:rgba(240,242,255,.95)}
+    .nav-container{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-size:1.35rem;font-weight:900;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-links{display:flex;gap:.1rem;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--text2);font-weight:600;font-size:.83rem;padding:.38rem .75rem;border-radius:10px;transition:all .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--p);background:rgba(79,70,229,.1)}
+    .nav-right{display:flex;align-items:center;gap:.6rem}
+    .menu-toggle{background:none;border:none;font-size:1.3rem;color:var(--p);cursor:pointer;display:none;width:36px;height:36px;align-items:center;justify-content:center}
+    @media(max-width:860px){.menu-toggle{display:flex}.nav-links{display:none;position:absolute;top:100%;right:0;left:0;flex-direction:column;background:rgba(8,9,15,.97);backdrop-filter:blur(20px);padding:.75rem;border-bottom:1px solid var(--bw)}.nav-links.show{display:flex}.nav-links a{padding:.7rem 1rem}}
+    @keyframes rup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+    .hero{padding:9rem 2rem 5rem;text-align:center;position:relative;z-index:1}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(79,70,229,.18),transparent 65%);z-index:0;pointer-events:none}
+    [data-theme="light"] .hero-bg{background:radial-gradient(ellipse 80% 55% at 50% 0%,rgba(79,70,229,.09),transparent 65%)}
+    .hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(79,70,229,.1);border:1px solid var(--border2);color:var(--text);padding:.35rem 1rem;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:1.5rem}
+    .hb-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pd 2s infinite}
+    @keyframes pd{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}70%{box-shadow:0 0 0 6px rgba(16,185,129,0)}}
+    .hero h1{font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.15;margin-bottom:1rem;opacity:0;animation:rup .7s .1s ease forwards}
+    .hero h1 span{background:linear-gradient(135deg,var(--p),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{font-size:1rem;color:var(--text2);line-height:1.8;margin-bottom:0;opacity:0;animation:rup .7s .25s ease forwards}
+    .main-section{max-width:1100px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1}
+    .preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    @media(max-width:740px){.preview-grid{grid-template-columns:1fr}}
+    .mockup{display:flex;justify-content:center;position:relative}
+    .phone-glow{position:absolute;inset:-24px;border-radius:60px;background:radial-gradient(circle,rgba(79,70,229,.15),transparent 70%);pointer-events:none;animation:gp 3s ease-in-out infinite}
+    @keyframes gp{0%,100%{opacity:.5}50%{opacity:1}}
+    .phone-frame{width:240px;height:490px;border-radius:38px;background:linear-gradient(135deg,var(--bg3),var(--bg4));border:2px solid var(--border2);box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);display:flex;flex-direction:column;overflow:hidden;animation:pf 4.5s ease-in-out infinite;transform:rotate(-2deg)}
+    @keyframes pf{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-12px)}}
+    .ph-top{height:24px;background:var(--bg2);display:flex;align-items:center;justify-content:center}
+    .ph-notch{width:60px;height:8px;background:var(--bg);border-radius:100px}
+    .ph-screen{flex:1;display:flex;flex-direction:column;background:var(--bg2);padding:10px;gap:7px}
+    .ph-hdr{background:linear-gradient(135deg,var(--p),var(--p2));border-radius:12px;padding:9px 10px;text-align:center;color:white;font-size:.63rem;font-weight:800}
+    .ph-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
+    .ph-stat{background:var(--bg3);border-radius:8px;padding:5px;text-align:center;border:1px solid var(--border)}
+    .ph-sn{font-size:.68rem;font-weight:800;color:var(--p);display:block}
+    .ph-sl{font-size:.47rem;color:var(--text3)}
+    .ph-card{background:var(--bg3);border-radius:10px;padding:8px;border:1px solid var(--border)}
+    .ph-ct{font-size:.58rem;font-weight:700;color:var(--text);margin-bottom:3px}
+    .ph-cs{font-size:.53rem;color:var(--text2)}
+    .ph-pg{height:4px;background:var(--bg4);border-radius:100px;margin-top:5px;overflow:hidden}
+    .ph-pgf{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--p),var(--acc));width:0;transition:width 1.5s ease}
+    .ph-row{display:flex;gap:4px}
+    .ph-btn{flex:1;height:24px;border-radius:8px;background:linear-gradient(135deg,var(--p),var(--p2));display:flex;align-items:center;justify-content:center;font-size:.53rem;color:white;font-weight:700}
+    .ph-btn.out{background:var(--bg3);border:1px solid var(--border);color:var(--text2)}
+    .dl-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.5rem 2rem;position:relative;overflow:hidden}
+    .dl-card::before{content:'';position:absolute;top:0;right:0;width:220px;height:220px;background:radial-gradient(circle,rgba(79,70,229,.1),transparent 70%);border-radius:50%;transform:translate(70px,-70px);pointer-events:none}
+    .dl-ver{display:inline-flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green);padding:.25rem .9rem;border-radius:100px;font-size:.73rem;font-weight:800;margin-bottom:1.3rem}
+    .dl-title{font-size:1.65rem;font-weight:900;margin-bottom:.5rem}
+    .dl-title span{background:linear-gradient(135deg,var(--p),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .dl-desc{color:var(--text2);font-size:.9rem;line-height:1.7;margin-bottom:1.6rem}
+    .dl-specs{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.7rem}
+    .dl-spec{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem}
+    .ds-icon{width:36px;height:36px;border-radius:10px;background:rgba(79,70,229,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--p);flex-shrink:0}
+    .ds-lbl{font-size:.68rem;color:var(--text3);display:block}
+    .ds-val{font-size:.87rem;font-weight:700}
+    .dl-btn{width:100%;padding:1.1rem;border-radius:100px;background:linear-gradient(135deg,var(--p),var(--p2));color:white;border:none;font-weight:800;font-size:1.05rem;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:.75rem;box-shadow:0 8px 32px rgba(79,70,229,.5);transition:all .3s cubic-bezier(.34,1.56,.64,1);text-decoration:none}
+    .dl-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 45px rgba(79,70,229,.65)}
+    .dl-note{text-align:center;font-size:.76rem;color:var(--text3);margin-top:.85rem;display:flex;align-items:center;justify-content:center;gap:.4rem}
+    .pwa-section{max-width:1100px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1}
+    .pwa-card{background:linear-gradient(135deg,rgba(79,70,229,.12),rgba(6,182,212,.07));border:1px solid var(--border2);border-radius:24px;padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+    .pwa-l h2{font-size:1.55rem;font-weight:900;margin-bottom:.5rem}
+    .pwa-l h2 span{background:linear-gradient(135deg,var(--p),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .pwa-l p{color:var(--text2);font-size:.9rem;line-height:1.7;max-width:380px}
+    .pwa-steps{display:flex;flex-direction:column;gap:.8rem;min-width:260px}
+    .pwa-step{display:flex;align-items:center;gap:.85rem;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:.8rem 1rem}
+    .sn{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));color:white;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0}
+    .st{font-size:.83rem;font-weight:600}
+    .feat-section{max-width:1100px;margin:0 auto;padding:0 2rem 6rem;position:relative;z-index:1}
+    .sec-head{text-align:center;margin-bottom:2.5rem}
+    .sec-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(79,70,229,.1);border:1px solid var(--border);color:var(--p);padding:.28rem .85rem;border-radius:100px;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+    .sec-head h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;margin-bottom:.4rem}
+    .sec-head h2 span{background:linear-gradient(135deg,var(--p),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem}
+    .fi{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.7rem 1.4rem;transition:all .3s}
+    .fi:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 16px 50px rgba(79,70,229,.18)}
+    .fi-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,rgba(79,70,229,.15),rgba(124,58,237,.1));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:var(--p);margin-bottom:.95rem;transition:transform .3s}
+    .fi:hover .fi-icon{transform:scale(1.1) rotate(-5deg)}
+    .fi h3{font-size:.97rem;font-weight:800;margin-bottom:.35rem}
+    .fi p{color:var(--text2);font-size:.83rem;line-height:1.6}
+    footer{background:var(--bg2);border-top:1px solid var(--border);text-align:center;padding:1.8rem 2rem;color:var(--text3);font-size:.86rem}
+    footer span{color:var(--p);font-weight:700}
+    @media(max-width:640px){.dl-specs{grid-template-columns:1fr}.pwa-card{flex-direction:column;padding:2rem 1.5rem}.hero{padding:7rem 1.5rem 3rem}.dl-card{padding:1.75rem 1.4rem}}
+  </style>
+
+  <script>window.CL_PAGE="download";</script>
+
+  <style id="cl-bn-styles">
+/* ══════════════════════════════════════════════
+   BOTTOM NAVIGATION
+══════════════════════════════════════════════ */
+.cl-bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 900;
+  background: var(--cl-nav-bg, rgba(10,11,22,0.96));
+  backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid var(--cl-nav-border, rgba(79,70,229,0.15));
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  height: 66px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  user-select: none;
+}
+[data-theme="light"] .cl-bottom-nav {
+  background: rgba(240,242,255,0.97);
+  border-top-color: rgba(79,70,229,0.12);
+  box-shadow: 0 -4px 30px rgba(79,70,229,0.08);
+}
+.cl-bn-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--cl-nav-text, #8b90c4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 4px;
+  transition: color 0.2s;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.cl-bn-item.active, .cl-bn-item:hover {
+  color: #818cf8;
+}
+.cl-bn-icon {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+.cl-bn-item.active .cl-bn-icon {
+  background: rgba(79,70,229,0.15);
+  color: #818cf8;
+  transform: scale(1.15) translateY(-2px);
+}
+/* Active indicator dot */
+.cl-bn-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #818cf8;
+}
+.cl-bn-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  transition: opacity 0.2s;
+}
+.cl-bn-item.active .cl-bn-label { color: #818cf8; }
+
+/* AI special button */
+.cl-bn-ai-icon {
+  width: 40px !important; height: 40px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+  color: white !important;
+  font-size: 1.05rem !important;
+  box-shadow: 0 4px 18px rgba(79,70,229,0.55) !important;
+  animation: aiPulse 3s ease-in-out infinite;
+}
+@keyframes aiPulse {
+  0%,100%{box-shadow:0 4px 18px rgba(79,70,229,0.45)}
+  50%{box-shadow:0 6px 28px rgba(79,70,229,0.7)}
+}
+.cl-bn-ai.active .cl-bn-ai-icon,
+.cl-bn-ai:hover .cl-bn-ai-icon {
+  background: linear-gradient(135deg, #6366f1, #a78bfa) !important;
+  transform: scale(1.15) translateY(-4px) !important;
+}
+.cl-bn-ai::after { display: none !important; }
+
+/* MORE OVERLAY */
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cl-more-overlay {
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+}
+.cl-more-overlay.show { display: block; }
+.cl-more-menu {
+  position: fixed;
+  bottom: 70px; left: 12px; right: 12px;
+  z-index: 960;
+  background: var(--cl-menu-bg, rgba(13,15,26,0.98));
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(79,70,229,0.25);
+  border-radius: 24px;
+  padding: 1.2rem;
+  box-shadow: 0 -8px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,70,229,0.1);
+  display: none;
+  transform-origin: bottom center;
+}
+[data-theme="light"] .cl-more-menu {
+  background: rgba(255,255,255,0.98);
+  border-color: rgba(79,70,229,0.15);
+  box-shadow: 0 -8px 40px rgba(79,70,229,0.15);
+}
+.cl-more-menu.show {
+  display: block;
+  animation: menuIn 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.cl-more-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; padding-bottom: .75rem;
+  border-bottom: 1px solid rgba(79,70,229,0.12);
+}
+.cl-more-title {
+  font-size: .82rem; font-weight: 800;
+  color: var(--cl-text, #e8eaff);
+  letter-spacing: .02em;
+}
+[data-theme="light"] .cl-more-title { color: #0a0b1e; }
+.cl-more-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(79,70,229,0.1); border: 1px solid rgba(79,70,229,0.2);
+  color: #8b90c4; cursor: pointer; font-size: .75rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.cl-more-close:hover { background: rgba(79,70,229,0.2); color: white; transform: rotate(90deg); }
+.cl-more-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .65rem;
+}
+.cl-more-item {
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  text-decoration: none; color: var(--cl-text2, #8b90c4);
+  padding: .65rem .3rem; border-radius: 14px;
+  border: 1px solid transparent;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  font-size: .68rem; font-weight: 700; text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-theme="light"] .cl-more-item { color: #3d3f80; }
+.cl-more-item:hover, .cl-more-item.active {
+  background: rgba(79,70,229,0.08);
+  border-color: rgba(79,70,229,0.2);
+  transform: translateY(-3px);
+}
+.cl-more-item.active { border-color: rgba(79,70,229,0.35); }
+.cl-mi-icon {
+  width: 44px; height: 44px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cl-more-item:hover .cl-mi-icon { transform: scale(1.12) rotate(-5deg); }
+.cl-more-item.active .cl-mi-icon { transform: scale(1.1); }
+
+/* ── Body padding for bottom nav ─────────────── */
+body { padding-bottom: calc(66px + env(safe-area-inset-bottom, 0)) !important; }
+
+/* ── Hide bottom nav on desktop (>= 900px) ──── */
+@media (min-width: 900px) {
+  .cl-bottom-nav  { display: none !important; }
+  .cl-more-overlay,
+  .cl-more-menu   { display: none !important; }
+  body            { padding-bottom: 0 !important; }
+}
+
+/* ── Desktop: show all nav links in top navbar ─ */
+@media (min-width: 900px) {
+  .menu-toggle    { display: none !important; }
+  .nav-menu       { display: flex !important; }
+}
+
+/* ── Mobile: hide overflow hamburger nav ─────── */
+@media (max-width: 899px) {
+  .navbar .nav-menu  { display: none !important; }
+  .navbar .nav-links { display: none !important; }
+  .menu-toggle       { display: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a class="logo" href="index.html"><i class="fas fa-film"></i> CineLingua</a>
+    <button class="menu-toggle" onclick="document.getElementById('nm').classList.toggle('show')"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="nm">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="lessons.html">الكلمات</a></li>
+      <li><a href="stories.html">القصص</a></li>
+      <li><a href="tenses.html">الأزمنة</a></li>
+      <li><a href="quiz.html">الاختبارات</a></li>
+      <li><a href="verbs.html">الأفعال</a></li>
+      <li><a href="grammar.html">الجرامر</a></li>
+      <li><a href="chat.html" style="color:#a78bfa">William AI 🤖</a></li>
+      <li><a href="download.html" class="active">تحميل</a></li>
+    </ul>
+    <div class="nav-right">
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hb-dot"></span> متاح للتحميل الآن — مجاناً</div>
+    <h1>حمّل <span>CineLingua</span><br>على جهازك الآن</h1>
+    <p>تعلّم الإنجليزية في أي وقت وأي مكان — بدون إنترنت بعد التنزيل الأول. خفيف، سريع، ومجاني 100%</p>
+  </div>
+</section>
+
+<div class="main-section">
+  <div class="preview-grid">
+    <div class="mockup">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <div class="ph-top"><div class="ph-notch"></div></div>
+        <div class="ph-screen">
+          <div class="ph-hdr">🎓 CineLingua</div>
+          <div class="ph-stats">
+            <div class="ph-stat"><span class="ph-sn">1500+</span><span class="ph-sl">كلمة</span></div>
+            <div class="ph-stat"><span class="ph-sn">30</span><span class="ph-sl">قصة</span></div>
+            <div class="ph-stat"><span class="ph-sn">🤖</span><span class="ph-sl">AI</span></div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-ct">📚 درس اليوم — Level B1</div>
+            <div class="ph-cs">Ambitious · Resilient · Eloquent</div>
+            <div class="ph-pg"><div class="ph-pgf" id="phfill"></div></div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-ct">🔥 Streak: 7 أيام متتالية</div>
+            <div class="ph-cs">استمر! أنت في المسار الصحيح</div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-btn">تعلم الآن</div>
+            <div class="ph-btn out">مراجعة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-ver"><i class="fas fa-check-circle"></i> v1.0.0 — أحدث إصدار</div>
+      <div class="dl-title">تطبيق <span>CineLingua</span><br>لنظام Android</div>
+      <div class="dl-desc">نسخة APK كاملة — تعمل بدون متجر Google Play. ثبّت مباشرة على هاتفك وابدأ التعلم فوراً.</div>
+      <div class="dl-specs">
+        <div class="dl-spec"><div class="ds-icon"><i class="fas fa-weight-hanging"></i></div><div><span class="ds-lbl">حجم الملف</span><span class="ds-val">3.2 MB</span></div></div>
+        <div class="dl-spec"><div class="ds-icon"><i class="fab fa-android"></i></div><div><span class="ds-lbl">المتطلبات</span><span class="ds-val">Android 5.0+</span></div></div>
+        <div class="dl-spec"><div class="ds-icon"><i class="fas fa-code-branch"></i></div><div><span class="ds-lbl">الإصدار</span><span class="ds-val">1.0.0</span></div></div>
+        <div class="dl-spec"><div class="ds-icon"><i class="fas fa-wifi-slash"></i></div><div><span class="ds-lbl">التشغيل</span><span class="ds-val">بدون إنترنت ✓</span></div></div>
+      </div>
+      <a href="https://github.com/riad325r-maker/cine-lingua.-/releases/download/v1.0.0/CineLingua.apk" class="dl-btn">
+        <i class="fas fa-download"></i> تحميل التطبيق مجاناً
+      </a>
+      <div class="dl-note"><i class="fas fa-shield-alt" style="color:var(--green)"></i> ملف APK آمن 100% — لا فيروسات، لا إعلانات</div>
+    </div>
+  </div>
+</div>
+
+<section class="pwa-section">
+  <div class="pwa-card">
+    <div class="pwa-l">
+      <h2>أو ثبّته كـ <span>تطبيق PWA</span></h2>
+      <p>يمكنك تثبيت CineLingua مباشرة من المتصفح دون تحميل ملف — يعمل مثل تطبيق حقيقي على iPhone وAndroid والكمبيوتر.</p>
+    </div>
+    <div class="pwa-steps">
+      <div class="pwa-step"><div class="sn">١</div><span class="st">افتح الموقع في Chrome أو Safari</span></div>
+      <div class="pwa-step"><div class="sn">٢</div><span class="st">اضغط على زر "تثبيت" أو القائمة ⋮</span></div>
+      <div class="pwa-step"><div class="sn">٣</div><span class="st">اختر "إضافة إلى الشاشة الرئيسية"</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="feat-section">
+  <div class="sec-head">
+    <div class="sec-tag"><i class="fas fa-star"></i> مميزات التطبيق</div>
+    <h2>كل ما تحتاجه <span>في مكان واحد</span></h2>
+  </div>
+  <div class="feat-grid">
+    <div class="fi"><div class="fi-icon"><i class="fas fa-book"></i></div><h3>1500+ كلمة</h3><p>مفردات بثلاثة مستويات مع النطق الصحيح والأمثلة الحياتية</p></div>
+    <div class="fi"><div class="fi-icon"><i class="fas fa-robot"></i></div><h3>William AI</h3><p>محادثة ذكية مع تصحيح فوري وتعليم مفردات في الوقت الحقيقي</p></div>
+    <div class="fi"><div class="fi-icon"><i class="fas fa-clock"></i></div><h3>12 زمن نحوي</h3><p>شرح مبسط لجميع الأزمنة مع تمارين تفاعلية فعّالة</p></div>
+    <div class="fi"><div class="fi-icon"><i class="fas fa-fire"></i></div><h3>نظام Streak</h3><p>تتبع تقدمك اليومي وابنِ عادة تعلم منتظمة</p></div>
+    <div class="fi"><div class="fi-icon"><i class="fas fa-wifi-slash"></i></div><h3>بدون إنترنت</h3><p>يعمل بشكل كامل بعد أول زيارة بدون اتصال</p></div>
+    <div class="fi"><div class="fi-icon"><i class="fas fa-bell"></i></div><h3>إشعارات تذكير</h3><p>سنذكّرك يومياً بجلسة تعلمك حتى لا تنسى</p></div>
+  </div>
+</section>
+
+<footer><p>© 2026 <span>CineLingua</span> — جميع الحقوق محفوظة · صنع بشغف لمتعلمي اللغة الإنجليزية</p></footer>
+
+<script>
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+setTimeout(()=>{const f=document.getElementById('phfill');if(f)f.style.width='65%'},600);
+</script>
+
+<!-- ══════════════════════════════════════════════
+     BOTTOM NAVIGATION (Shared)
+══════════════════════════════════════════════ -->
+<nav class="cl-bottom-nav" id="clBottomNav">
+  <a href="index.html"   class="cl-bn-item" data-page="home">
+    <div class="cl-bn-icon"><i class="fas fa-home"></i></div>
+    <span class="cl-bn-label">الرئيسية</span>
+  </a>
+  <a href="lessons.html" class="cl-bn-item" data-page="lessons">
+    <div class="cl-bn-icon"><i class="fas fa-book"></i></div>
+    <span class="cl-bn-label">الكلمات</span>
+  </a>
+  <a href="quiz.html"    class="cl-bn-item" data-page="quiz">
+    <div class="cl-bn-icon"><i class="fas fa-trophy"></i></div>
+    <span class="cl-bn-label">الاختبارات</span>
+  </a>
+  <a href="chat.html"    class="cl-bn-item cl-bn-ai" data-page="chat">
+    <div class="cl-bn-icon cl-bn-ai-icon">
+      <i class="fas fa-robot"></i>
+    </div>
+    <span class="cl-bn-label">William</span>
+  </a>
+  <button class="cl-bn-item" id="clMoreBtn" onclick="toggleMoreMenu()">
+    <div class="cl-bn-icon"><i class="fas fa-grid-2" id="clMoreIcon"></i></div>
+    <span class="cl-bn-label">المزيد</span>
+  </button>
+</nav>
+
+<!-- MORE MENU OVERLAY -->
+<div class="cl-more-overlay" id="clMoreOverlay" onclick="closeMoreMenu()"></div>
+<div class="cl-more-menu" id="clMoreMenu">
+  <div class="cl-more-header">
+    <span class="cl-more-title">صفحات CineLingua</span>
+    <button class="cl-more-close" onclick="closeMoreMenu()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cl-more-grid">
+    <a href="stories.html"  class="cl-more-item" data-page="stories">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)"><i class="fas fa-book-open"></i></div>
+      <span>القصص</span>
+    </a>
+    <a href="tenses.html"   class="cl-more-item" data-page="tenses">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#0891b2,#06b6d4)"><i class="fas fa-clock"></i></div>
+      <span>الأزمنة</span>
+    </a>
+    <a href="verbs.html"    class="cl-more-item" data-page="verbs">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#059669,#10b981)"><i class="fas fa-pencil-alt"></i></div>
+      <span>الأفعال</span>
+    </a>
+    <a href="grammar.html"  class="cl-more-item" data-page="grammar">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#b45309,#f59e0b)"><i class="fas fa-ruler-combined"></i></div>
+      <span>الجرامر</span>
+    </a>
+    <a href="download.html" class="cl-more-item" data-page="download">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#be185d,#f43f5e)"><i class="fas fa-download"></i></div>
+      <span>تحميل</span>
+    </a>
+  </div>
+</div>
+
+<script>
+/* ── Bottom Nav Active State ──── */
+(function(){
+  var page = window.CL_PAGE || '';
+  document.querySelectorAll('.cl-bn-item[data-page], .cl-more-item[data-page]').forEach(function(el){
+    if(el.getAttribute('data-page') === page){
+      el.classList.add('active');
+    }
+  });
+})();
+
+function toggleMoreMenu(){
+  var menu    = document.getElementById('clMoreMenu');
+  var overlay = document.getElementById('clMoreOverlay');
+  var icon    = document.getElementById('clMoreIcon');
+  var isOpen  = menu.classList.contains('show');
+  if(isOpen){ closeMoreMenu(); }
+  else {
+    menu.classList.add('show');
+    overlay.classList.add('show');
+    icon.className = 'fas fa-times';
+    document.getElementById('clMoreBtn').classList.add('active');
+  }
+}
+function closeMoreMenu(){
+  document.getElementById('clMoreMenu').classList.remove('show');
+  document.getElementById('clMoreOverlay').classList.remove('show');
+  document.getElementById('clMoreIcon').className = 'fas fa-grid-2';
+  document.getElementById('clMoreBtn').classList.remove('active');
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMoreMenu(); });
+</script>
+
+</body>
+</html>

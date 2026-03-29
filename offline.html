@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لا يوجد اتصال - CineLingua</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cl-upgrade.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        p { font-size: 1.2rem; opacity: 0.9; line-height: 1.6; }
+        .icon { font-size: 5rem; margin-bottom: 2rem; }
+    </style>
+
+  <script>window.CL_PAGE="home";</script>
+
+  <style id="cl-bn-styles">
+/* ══════════════════════════════════════════════
+   BOTTOM NAVIGATION
+══════════════════════════════════════════════ */
+.cl-bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 900;
+  background: var(--cl-nav-bg, rgba(10,11,22,0.96));
+  backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid var(--cl-nav-border, rgba(79,70,229,0.15));
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  height: 66px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  user-select: none;
+}
+[data-theme="light"] .cl-bottom-nav {
+  background: rgba(240,242,255,0.97);
+  border-top-color: rgba(79,70,229,0.12);
+  box-shadow: 0 -4px 30px rgba(79,70,229,0.08);
+}
+.cl-bn-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--cl-nav-text, #8b90c4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 4px;
+  transition: color 0.2s;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.cl-bn-item.active, .cl-bn-item:hover {
+  color: #818cf8;
+}
+.cl-bn-icon {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+.cl-bn-item.active .cl-bn-icon {
+  background: rgba(79,70,229,0.15);
+  color: #818cf8;
+  transform: scale(1.15) translateY(-2px);
+}
+/* Active indicator dot */
+.cl-bn-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #818cf8;
+}
+.cl-bn-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  transition: opacity 0.2s;
+}
+.cl-bn-item.active .cl-bn-label { color: #818cf8; }
+
+/* AI special button */
+.cl-bn-ai-icon {
+  width: 40px !important; height: 40px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+  color: white !important;
+  font-size: 1.05rem !important;
+  box-shadow: 0 4px 18px rgba(79,70,229,0.55) !important;
+  animation: aiPulse 3s ease-in-out infinite;
+}
+@keyframes aiPulse {
+  0%,100%{box-shadow:0 4px 18px rgba(79,70,229,0.45)}
+  50%{box-shadow:0 6px 28px rgba(79,70,229,0.7)}
+}
+.cl-bn-ai.active .cl-bn-ai-icon,
+.cl-bn-ai:hover .cl-bn-ai-icon {
+  background: linear-gradient(135deg, #6366f1, #a78bfa) !important;
+  transform: scale(1.15) translateY(-4px) !important;
+}
+.cl-bn-ai::after { display: none !important; }
+
+/* MORE OVERLAY */
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cl-more-overlay {
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+}
+.cl-more-overlay.show { display: block; }
+.cl-more-menu {
+  position: fixed;
+  bottom: 70px; left: 12px; right: 12px;
+  z-index: 960;
+  background: var(--cl-menu-bg, rgba(13,15,26,0.98));
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(79,70,229,0.25);
+  border-radius: 24px;
+  padding: 1.2rem;
+  box-shadow: 0 -8px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,70,229,0.1);
+  display: none;
+  transform-origin: bottom center;
+}
+[data-theme="light"] .cl-more-menu {
+  background: rgba(255,255,255,0.98);
+  border-color: rgba(79,70,229,0.15);
+  box-shadow: 0 -8px 40px rgba(79,70,229,0.15);
+}
+.cl-more-menu.show {
+  display: block;
+  animation: menuIn 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.cl-more-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; padding-bottom: .75rem;
+  border-bottom: 1px solid rgba(79,70,229,0.12);
+}
+.cl-more-title {
+  font-size: .82rem; font-weight: 800;
+  color: var(--cl-text, #e8eaff);
+  letter-spacing: .02em;
+}
+[data-theme="light"] .cl-more-title { color: #0a0b1e; }
+.cl-more-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(79,70,229,0.1); border: 1px solid rgba(79,70,229,0.2);
+  color: #8b90c4; cursor: pointer; font-size: .75rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.cl-more-close:hover { background: rgba(79,70,229,0.2); color: white; transform: rotate(90deg); }
+.cl-more-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .65rem;
+}
+.cl-more-item {
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  text-decoration: none; color: var(--cl-text2, #8b90c4);
+  padding: .65rem .3rem; border-radius: 14px;
+  border: 1px solid transparent;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  font-size: .68rem; font-weight: 700; text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-theme="light"] .cl-more-item { color: #3d3f80; }
+.cl-more-item:hover, .cl-more-item.active {
+  background: rgba(79,70,229,0.08);
+  border-color: rgba(79,70,229,0.2);
+  transform: translateY(-3px);
+}
+.cl-more-item.active { border-color: rgba(79,70,229,0.35); }
+.cl-mi-icon {
+  width: 44px; height: 44px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cl-more-item:hover .cl-mi-icon { transform: scale(1.12) rotate(-5deg); }
+.cl-more-item.active .cl-mi-icon { transform: scale(1.1); }
+
+/* ── Body padding for bottom nav ─────────────── */
+body { padding-bottom: calc(66px + env(safe-area-inset-bottom, 0)) !important; }
+
+/* ── Hide bottom nav on desktop (>= 900px) ──── */
+@media (min-width: 900px) {
+  .cl-bottom-nav  { display: none !important; }
+  .cl-more-overlay,
+  .cl-more-menu   { display: none !important; }
+  body            { padding-bottom: 0 !important; }
+}
+
+/* ── Desktop: show all nav links in top navbar ─ */
+@media (min-width: 900px) {
+  .menu-toggle    { display: none !important; }
+  .nav-menu       { display: flex !important; }
+}
+
+/* ── Mobile: hide overflow hamburger nav ─────── */
+@media (max-width: 899px) {
+  .navbar .nav-menu  { display: none !important; }
+  .navbar .nav-links { display: none !important; }
+  .menu-toggle       { display: none !important; }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🔌</div>
+        <h1>لا يوجد اتصال</h1>
+        <p>حاول مرة أخرى عندما يتوفر الاتصال بالإنترنت</p>
+    </div>
+
+<!-- ══════════════════════════════════════════════
+     BOTTOM NAVIGATION (Shared)
+══════════════════════════════════════════════ -->
+<nav class="cl-bottom-nav" id="clBottomNav">
+  <a href="index.html"   class="cl-bn-item" data-page="home">
+    <div class="cl-bn-icon"><i class="fas fa-home"></i></div>
+    <span class="cl-bn-label">الرئيسية</span>
+  </a>
+  <a href="lessons.html" class="cl-bn-item" data-page="lessons">
+    <div class="cl-bn-icon"><i class="fas fa-book"></i></div>
+    <span class="cl-bn-label">الكلمات</span>
+  </a>
+  <a href="quiz.html"    class="cl-bn-item" data-page="quiz">
+    <div class="cl-bn-icon"><i class="fas fa-trophy"></i></div>
+    <span class="cl-bn-label">الاختبارات</span>
+  </a>
+  <a href="chat.html"    class="cl-bn-item cl-bn-ai" data-page="chat">
+    <div class="cl-bn-icon cl-bn-ai-icon">
+      <i class="fas fa-robot"></i>
+    </div>
+    <span class="cl-bn-label">William</span>
+  </a>
+  <button class="cl-bn-item" id="clMoreBtn" onclick="toggleMoreMenu()">
+    <div class="cl-bn-icon"><i class="fas fa-grid-2" id="clMoreIcon"></i></div>
+    <span class="cl-bn-label">المزيد</span>
+  </button>
+</nav>
+
+<!-- MORE MENU OVERLAY -->
+<div class="cl-more-overlay" id="clMoreOverlay" onclick="closeMoreMenu()"></div>
+<div class="cl-more-menu" id="clMoreMenu">
+  <div class="cl-more-header">
+    <span class="cl-more-title">صفحات CineLingua</span>
+    <button class="cl-more-close" onclick="closeMoreMenu()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cl-more-grid">
+    <a href="stories.html"  class="cl-more-item" data-page="stories">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)"><i class="fas fa-book-open"></i></div>
+      <span>القصص</span>
+    </a>
+    <a href="tenses.html"   class="cl-more-item" data-page="tenses">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#0891b2,#06b6d4)"><i class="fas fa-clock"></i></div>
+      <span>الأزمنة</span>
+    </a>
+    <a href="verbs.html"    class="cl-more-item" data-page="verbs">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#059669,#10b981)"><i class="fas fa-pencil-alt"></i></div>
+      <span>الأفعال</span>
+    </a>
+    <a href="grammar.html"  class="cl-more-item" data-page="grammar">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#b45309,#f59e0b)"><i class="fas fa-ruler-combined"></i></div>
+      <span>الجرامر</span>
+    </a>
+    <a href="download.html" class="cl-more-item" data-page="download">
+      <div class="cl-mi-icon" style="background:linear-gradient(135deg,#be185d,#f43f5e)"><i class="fas fa-download"></i></div>
+      <span>تحميل</span>
+    </a>
+  </div>
+</div>
+
+<script>
+/* ── Bottom Nav Active State ──── */
+(function(){
+  var page = window.CL_PAGE || '';
+  document.querySelectorAll('.cl-bn-item[data-page], .cl-more-item[data-page]').forEach(function(el){
+    if(el.getAttribute('data-page') === page){
+      el.classList.add('active');
+    }
+  });
+})();
+
+function toggleMoreMenu(){
+  var menu    = document.getElementById('clMoreMenu');
+  var overlay = document.getElementById('clMoreOverlay');
+  var icon    = document.getElementById('clMoreIcon');
+  var isOpen  = menu.classList.contains('show');
+  if(isOpen){ closeMoreMenu(); }
+  else {
+    menu.classList.add('show');
+    overlay.classList.add('show');
+    icon.className = 'fas fa-times';
+    document.getElementById('clMoreBtn').classList.add('active');
+  }
+}
+function closeMoreMenu(){
+  document.getElementById('clMoreMenu').classList.remove('show');
+  document.getElementById('clMoreOverlay').classList.remove('show');
+  document.getElementById('clMoreIcon').className = 'fas fa-grid-2';
+  document.getElementById('clMoreBtn').classList.remove('active');
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMoreMenu(); });
+</script>
+
+</body>
+</html>
